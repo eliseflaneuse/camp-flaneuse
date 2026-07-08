@@ -20,3 +20,6 @@ Thumbs.db
 
 # local Claude Code settings
 .claude/settings.local.json
+
+# wrangler (Cloudflare) local state
+.wrangler/

@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers config — static assets only, no server code.
+  // The name must match the existing Worker in the Cloudflare account.
+  "name": "camp-flaneuse",
+  "compatibility_date": "2026-07-08",
+  "assets": {
+    "directory": "./dist",
+    // Serve our own 404 page for unknown paths.
+    "not_found_handling": "404-page"
+  }
+}
