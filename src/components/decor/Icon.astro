@@ -13,7 +13,9 @@ export type IconName =
   | 'deer'
   | 'tent'
   | 'sun'
-  | 'paw';
+  | 'paw'
+  | 'book'
+  | 'brush';
 
 interface Props {
   name: IconName;
@@ -105,6 +107,20 @@ const { name, size = 22, color = 'currentColor', label } = Astro.props;
       <ellipse cx="12" cy="7" rx="1.6" ry="2" />
       <ellipse cx="16.8" cy="8.6" rx="1.6" ry="2" transform="rotate(18 16.8 8.6)" />
       <path d="M8.2 15.4 C9 12.8 15 12.8 15.8 15.4 C17.2 17.6 15.6 19.8 12 19.8 C8.4 19.8 6.8 17.6 8.2 15.4 Z" />
+    </>
+  )}
+  {name === 'book' && (
+    <>
+      <path d="M12 6.2 C10 4.6 7 4.4 4.5 5.4 L4.5 18 C7 17 10 17.2 12 18.6 C14 17.2 17 17 19.5 18 L19.5 5.4 C17 4.4 14 4.6 12 6.2 Z" />
+      <path d="M12 6.2 L12 18.6" stroke-width="1.3" />
+      <path d="M6.8 8.5 C8 8.2 9.3 8.3 10.3 8.8 M13.7 8.8 C14.7 8.3 16 8.2 17.2 8.5" stroke-width="1.2" />
+    </>
+  )}
+  {name === 'brush' && (
+    <>
+      <path d="M19.5 4.5 C17 6.6 14.7 8.9 12.6 11.4" />
+      <path d="M12.6 11.4 L10.4 13.8" stroke-width="1.9" />
+      <path d="M10.4 13.8 C8 13.4 6 15 5.4 17.4 C5.1 18.5 4.7 19.2 4 19.9 C6.8 20.3 9.3 19.7 10.5 18.4 C11.7 17.2 11.8 15.3 10.4 13.8 Z" />
     </>
   )}
 </svg>

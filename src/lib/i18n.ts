@@ -103,7 +103,9 @@ export type FieldNoteCategory =
   | 'studio'
   | 'camp'
   | 'weather'
-  | 'soft-footsteps';
+  | 'soft-footsteps'
+  | 'reading'
+  | 'art';
 
 /** Human-readable category labels, per language. */
 export const categoryLabels: Record<Lang, Record<FieldNoteCategory, string>> = {
@@ -114,6 +116,8 @@ export const categoryLabels: Record<Lang, Record<FieldNoteCategory, string>> = {
     camp: 'Camp Notes',
     weather: 'Weather Notes',
     'soft-footsteps': 'Soft Footsteps',
+    reading: 'Reading Notes',
+    art: 'Art Notes',
   },
   pt: {
     road: 'Notas de Estrada',
@@ -122,6 +126,8 @@ export const categoryLabels: Record<Lang, Record<FieldNoteCategory, string>> = {
     camp: 'Notas de Acampamento',
     weather: 'Notas de Tempo',
     'soft-footsteps': 'Passos Suaves',
+    reading: 'Notas de Leitura',
+    art: 'Notas de Arte',
   },
 };
 

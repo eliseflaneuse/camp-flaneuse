@@ -4,6 +4,15 @@ A moving camp for field notes, letters, soft rebellion, and wonder.
 
 This is the MVP website for **Camp Flaneuse** — part travel journal, part artist archive, part correspondence project, part tiny online camp. Built with [Astro](https://astro.build), TypeScript, and Markdown. Static, fast, no backend, no CMS — the first cabin, not the whole village.
 
+## Content rooms
+
+Camp Flaneuse is organized into a few small rooms:
+
+- **Field Notes** — observations from the road: places, weather, birds, museums, books, studio process, and strange parking lots.
+- **Correspondence** — letters from the road; slower and more intimate than posts.
+- **The Soft Footsteps Society** — a future correspondence/art project for attentive walkers.
+- **Flaneuse Studio** — small websites with soul for artists, writers, makers, and other sincere people.
+
 ## Commands
 
 | Command            | What it does                                            |
@@ -26,7 +35,7 @@ Create a Markdown file in `src/content/field-notes/en/` (or `pt/` for Portuguese
 title: "Road Note: Something You Noticed"
 date: "2026-07-15"
 location: "Wherever you were"
-category: "road"          # road | creature | studio | camp | weather | soft-footsteps
+category: "road"          # road | creature | studio | camp | weather | soft-footsteps | reading | art
 excerpt: "One or two sentences that appear on the card."
 tags: ["road life", "example"]
 language: "en"            # en | pt — must match the folder
