@@ -1,0 +1,95 @@
+---
+/**
+ * About — the keeper of the camp.
+ */
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import PageTitle from '../components/sections/PageTitle.astro';
+import ImagePlaceholder from '../components/content/ImagePlaceholder.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import { routes } from '../lib/i18n';
+---
+
+<BaseLayout
+  title="About the Camp"
+  description="The person behind Camp Flaneuse: Elai, a motorhome named Ember, a few cats, and the slow construction of a freer life on the road."
+  lang="en"
+  translationUrl={routes.about.pt}
+>
+  <PageTitle
+    overline="The keeper"
+    title="About the Camp"
+    lede="Every camp has someone who keeps the fire going and the notebooks dry. Here, that someone is Elai."
+  />
+
+  <article class="section about-body">
+    <div class="container">
+      <div class="prose">
+        <p>
+          Camp Flaneuse is kept by <strong>Elai</strong> — a person who writes, draws, watches
+          birds, and lives on the road in a motorhome named <strong>Ember</strong>, in the company
+          of cats who did not sign up for this but have adapted with dignity.
+        </p>
+
+        <p>
+          The short version: at some point the normal script — the job, the speed, the constant
+          proving — stopped making sense, and instead of optimizing the life that existed, it
+          seemed better to build a different one. Smaller. Slower. More attentive. With wheels.
+        </p>
+
+        <h2>Ember</h2>
+        <p>
+          Ember is the motorhome: house, studio, weather instrument, and occasional toaster. She is
+          not glamorous. She is dependable in the way old boats are dependable, which is to say:
+          mostly, and with character. Everything on this site was written or drawn inside her, or
+          just outside her, in a folding chair, under whatever sky was available.
+        </p>
+
+        <h2>The residents</h2>
+        <p>
+          The cats are the camp's permanent residents and its most honest critics. They review
+          every parking spot within minutes of arrival and their standards are unreasonable. They
+          appear in the notes from time to time, always without permission.
+        </p>
+
+        <ImagePlaceholder lang="en" note="A drawing of the camp — Ember, chairs, cats — will live here." />
+
+        <h2>What gets collected here</h2>
+        <p>
+          Field notes from roadsides, rivers, cities, forests, and strange parking lots. Letters.
+          Drawings. Bird sightings and other creature reports. Weather, both meteorological and
+          emotional. Notes on making things, and on making a living without losing the plot. The
+          slow record of a freer life being built in real time, mistakes included.
+        </p>
+
+        <h2>Why it exists</h2>
+        <p>
+          Because attention is a form of devotion, and wonder can be a practice. Because a small,
+          strange, sincere life can become a body of work. Because the internet has enough
+          platforms and not enough camps. And because — having gotten lost once inside a life that
+          looked correct from the outside — the keeper of this camp does not intend to lose herself
+          again, and writing it all down is part of how.
+        </p>
+
+        <p>
+          If any of this sounds like your kind of place: stay a while. Read the
+          <a href={routes.fieldNotes.en}>notes</a>, open a
+          <a href={routes.correspondence.en}>letter</a>, or — if you are building something of your
+          own and need a home for it — knock on the <a href={routes.studio.en}>studio</a> door.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <CTASection
+    overline="Say hello"
+    title="The camp receives visitors."
+    text="Questions, letters, bird reports, website projects — the contact page is the camp's mailbox."
+    cta={{ label: 'Go to contact', href: routes.contact.en }}
+  />
+</BaseLayout>
+
+<style>
+  .about-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+</style>

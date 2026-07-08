@@ -1,0 +1,81 @@
+---
+/**
+ * StudioPackageCard — one Flaneuse Studio offering,
+ * presented like a labeled folder, not a pricing table.
+ */
+interface Props {
+  name: string;
+  summary: string;
+  bestFor: string;
+  includes: string[];
+  /** e.g. "PRICE ON REQUEST" — clearly a placeholder for now. */
+  priceNote?: string;
+  labels?: { bestFor: string; includes: string };
+}
+
+const {
+  name,
+  summary,
+  bestFor,
+  includes,
+  priceNote,
+  labels = { bestFor: 'Good for', includes: 'Includes' },
+} = Astro.props;
+---
+
+<article class="panel package-card">
+  <h3>{name}</h3>
+  <p class="package-summary">{summary}</p>
+
+  <p class="label package-label">{labels.bestFor}</p>
+  <p class="package-bestfor">{bestFor}</p>
+
+  <p class="label package-label">{labels.includes}</p>
+  <ul class="package-includes">
+    {includes.map((item) => <li>{item}</li>)}
+  </ul>
+
+  {priceNote && <p class="label package-price">{priceNote}</p>}
+</article>
+
+<style>
+  .package-card {
+    padding: 1.7rem 1.7rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    border-top: 4px solid var(--color-olive);
+  }
+
+  h3 {
+    font-size: 1.35rem;
+  }
+
+  .package-summary {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .package-label {
+    margin-top: 0.7rem;
+    color: var(--color-moss);
+  }
+
+  .package-bestfor {
+    font-size: var(--text-sm);
+  }
+
+  .package-includes {
+    padding-left: 1.1rem;
+    font-size: var(--text-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .package-price {
+    margin-top: auto;
+    padding-top: 1rem;
+    color: var(--color-ink-faint);
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+/**
+ * TagList — small stamp-like labels, like tabs on archive folders.
+ */
+interface Props {
+  tags: string[];
+  label?: string;
+}
+
+const { tags, label } = Astro.props;
+---
+
+<div class="tag-list">
+  {label && <span class="label tag-label">{label}:</span>}
+  <ul>
+    {tags.map((tag) => <li>{tag}</li>)}
+  </ul>
+</div>
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tag-label {
+    color: var(--color-ink-faint);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 0.06em;
+    color: var(--color-ink-soft);
+    background: var(--color-paper-deep);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 0.15rem 0.55rem;
+  }
+</style>

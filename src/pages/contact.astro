@@ -1,0 +1,70 @@
+---
+/**
+ * Contact — the camp mailbox. A mailto link is enough for the MVP.
+ */
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import PageTitle from '../components/sections/PageTitle.astro';
+import { routes } from '../lib/i18n';
+
+/* Placeholder address — swap for the real one before going live. */
+const email = 'hello@campflaneuse.com';
+
+const topics = [
+  'Camp Flaneuse itself — questions, hellos, bird reports',
+  'Correspondence — letters, replies, future snail mail',
+  'The Soft Footsteps Society — early interest in enrollment',
+  'Flaneuse Studio — website projects, big or tiny',
+  'Collaborations and other kind schemes',
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Write to Camp Flaneuse — about the camp, the letters, the Soft Footsteps Society, or a website project for Flaneuse Studio."
+  lang="en"
+  translationUrl={routes.contact.pt}
+>
+  <PageTitle
+    overline="The mailbox"
+    title="Write to the camp"
+    lede="The camp receives visitors and letters. Both are answered — slowly, sincerely, in order of arrival, weather permitting."
+  />
+
+  <section class="section contact-body">
+    <div class="container">
+      <div class="prose">
+        <p>You are welcome to write about:</p>
+        <ul>
+          {topics.map((topic) => <li>{topic}</li>)}
+        </ul>
+        <p>
+          There is no form, no chatbot, and no funnel. There is an email address, which still
+          works remarkably well:
+        </p>
+      </div>
+
+      <p class="email-line">
+        <a class="button" href={`mailto:${email}`}>{email}</a>
+      </p>
+
+      <p class="email-note label">
+        (Placeholder address — the real mailbox is being installed.)
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .email-line {
+    margin-top: 2rem;
+  }
+
+  .email-note {
+    margin-top: 1rem;
+    color: var(--color-ink-faint);
+  }
+</style>

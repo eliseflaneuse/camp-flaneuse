@@ -1,0 +1,198 @@
+---
+/**
+ * Home — the camp entrance.
+ */
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import SectionIntro from '../components/sections/SectionIntro.astro';
+import ExploreCard from '../components/sections/ExploreCard.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import FieldNoteCard from '../components/content/FieldNoteCard.astro';
+import { routes } from '../lib/i18n';
+import { getFieldNotes } from '../lib/content';
+
+const latestNotes = (await getFieldNotes('en')).slice(0, 3);
+
+const exploreCards = [
+  {
+    roomLabel: 'The archive',
+    title: 'Field Notes',
+    description:
+      'The journal. Road notes, creature notes, weather reports, and other observations, filed with reasonable care.',
+    href: routes.fieldNotes.en,
+  },
+  {
+    roomLabel: 'The desk',
+    title: 'Correspondence',
+    description: 'Letters from the road. Some things arrive better in an envelope.',
+    href: routes.correspondence.en,
+  },
+  {
+    roomLabel: 'A future doorway',
+    title: 'The Soft Footsteps Society',
+    description:
+      'A society for attentive walkers, currently being founded. Enrollment not yet open. The desk is being built.',
+    href: routes.softFootsteps.en,
+  },
+  {
+    roomLabel: 'The workshop',
+    title: 'Flaneuse Studio',
+    description:
+      'Small websites with soul, made in the back of the camp for artists, writers, and other sincere people.',
+    href: routes.studio.en,
+  },
+  {
+    roomLabel: 'The keeper',
+    title: 'About the Camp',
+    description: 'The person, the motorhome, the cats, and why any of this exists.',
+    href: routes.about.en,
+  },
+];
+---
+
+<BaseLayout
+  title="Camp Flaneuse"
+  description="Camp Flaneuse is a moving camp for field notes, letters, drawings, creatures, road life, and soft rebellion — made from a motorhome named Ember, a few cats, and the belief that paying attention is a way of staying alive."
+  lang="en"
+  translationUrl={routes.home.pt}
+>
+  <Hero
+    overline="A small camp on the edge of the internet"
+    title="Camp Flaneuse"
+    tagline="A moving camp for field notes, letters, soft rebellion, and wonder."
+    intro="Made from a motorhome named Ember, a few cats, too many notebooks, and the belief that paying attention is a way of staying alive. It moves. It keeps notes. It leaves a light on for you."
+    primaryCta={{ label: 'Read the field notes', href: routes.fieldNotes.en }}
+    secondaryCta={{ label: 'Visit the studio', href: routes.studio.en }}
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionIntro
+        overline="What is this place?"
+        title="A travel journal, an artist camp, a letter project, a field archive."
+        lede="Camp Flaneuse is a record of building a freer life — slowly, on the road, with animals — and of everything noticed along the way: birds, rivers, strange parking lots, weather, small griefs, stranger joys. Nothing here is optimized. Things are noticed instead."
+      />
+      <p class="what-is-more">
+        This is a place for the things that do not fit neatly anywhere else: bird sightings, road
+        notes, letters, drawings, weather reports, and the slow construction of a life outside the
+        usual script.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--deep">
+    <div class="container">
+      <SectionIntro
+        overline="The map"
+        title="Explore the camp"
+        lede="The camp is small, but it has rooms. Each one collects a different kind of thing."
+      />
+      <div class="explore-grid">
+        {exploreCards.map((card) => <ExploreCard {...card} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionIntro
+        overline="Fresh from the road"
+        title="Latest field notes"
+      />
+      <div class="notes-grid">
+        {latestNotes.map((note) => <FieldNoteCard note={note} lang="en" />)}
+      </div>
+      <p class="all-notes-link">
+        <a href={routes.fieldNotes.en}>Browse the whole archive →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--note">
+    <div class="container">
+      <div class="road-note">
+        <p class="label road-note-label">A note from the road</p>
+        <p class="road-note-body">
+          Currently somewhere between heat, birds, cats, and the next place to park. The kettle
+          works. The awning is temperamental. A hoopoe was sighted on Tuesday and has been thought
+          about every day since.
+        </p>
+        <p class="road-note-sign">— E.</p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    overline="Flaneuse Studio"
+    title="Need a small website with a soul?"
+    text="In the back of the camp there is a studio. It makes quiet, practical websites for artists, writers, makers, and people building something outside the template."
+    cta={{ label: 'Visit the studio', href: routes.studio.en }}
+    secondaryCta={{ label: 'Read the first letter', href: `${routes.correspondence.en}no-001/` }}
+  />
+</BaseLayout>
+
+<style>
+  .section--deep {
+    background: color-mix(in srgb, var(--color-paper-deep) 55%, transparent);
+    border-block: 1px solid var(--color-line-soft);
+  }
+
+  .what-is-more {
+    max-width: 42rem;
+    color: var(--color-ink-soft);
+  }
+
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.2rem;
+  }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.2rem;
+  }
+
+  .all-notes-link {
+    margin-top: 1.8rem;
+    font-weight: 700;
+  }
+
+  .section--note {
+    padding-block: var(--space-block);
+  }
+
+  /* A handwritten-adjacent note pinned to the page — slightly tilted,
+     like something on a campsite noticeboard. */
+  .road-note {
+    max-width: 34rem;
+    margin-inline: auto;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-soft);
+    padding: 1.8rem 2rem;
+    transform: rotate(-0.6deg);
+  }
+
+  .road-note-label {
+    color: var(--color-clay);
+    margin-bottom: 0.8rem;
+  }
+
+  .road-note-body {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  .road-note-sign {
+    margin-top: 0.9rem;
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--color-ink-soft);
+    text-align: right;
+  }
+</style>

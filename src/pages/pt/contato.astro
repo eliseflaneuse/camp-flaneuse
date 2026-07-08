@@ -1,0 +1,70 @@
+---
+/**
+ * Contato — a caixa de correio do acampamento.
+ */
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import PageTitle from '../../components/sections/PageTitle.astro';
+import { routes } from '../../lib/i18n';
+
+/* Endereço provisório — trocar pelo real antes de publicar. */
+const email = 'hello@campflaneuse.com';
+
+const topics = [
+  'O próprio Camp Flaneuse — perguntas, olás, relatórios de pássaros',
+  'Correspondência — cartas, respostas, futuro correio de papel',
+  'A Sociedade dos Passos Suaves — interesse antecipado em se inscrever',
+  'Flaneuse Studio — projetos de site, grandes ou minúsculos',
+  'Colaborações e outros esquemas gentis',
+];
+---
+
+<BaseLayout
+  title="Contato"
+  description="Escreva para o Camp Flaneuse — sobre o acampamento, as cartas, a Sociedade dos Passos Suaves, ou um projeto de site para o Flaneuse Studio."
+  lang="pt"
+  translationUrl={routes.contact.en}
+>
+  <PageTitle
+    overline="A caixa de correio"
+    title="Escreva para o acampamento"
+    lede="O acampamento recebe visitas e cartas. As duas coisas são respondidas — devagar, com sinceridade, por ordem de chegada, se o tempo permitir."
+  />
+
+  <section class="section contact-body">
+    <div class="container">
+      <div class="prose">
+        <p>Você pode escrever sobre:</p>
+        <ul>
+          {topics.map((topic) => <li>{topic}</li>)}
+        </ul>
+        <p>
+          Não tem formulário, não tem chatbot, não tem funil. Tem um endereço de e-mail, que
+          continua funcionando admiravelmente bem:
+        </p>
+      </div>
+
+      <p class="email-line">
+        <a class="button" href={`mailto:${email}`}>{email}</a>
+      </p>
+
+      <p class="email-note label">
+        (Endereço provisório — a caixa de correio de verdade está sendo instalada.)
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .email-line {
+    margin-top: 2rem;
+  }
+
+  .email-note {
+    margin-top: 1rem;
+    color: var(--color-ink-faint);
+  }
+</style>

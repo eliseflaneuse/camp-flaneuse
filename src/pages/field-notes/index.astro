@@ -1,0 +1,73 @@
+---
+/**
+ * Field Notes index — the archive room.
+ */
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import PageTitle from '../../components/sections/PageTitle.astro';
+import FieldNoteCard from '../../components/content/FieldNoteCard.astro';
+import { categoryLabels, routes, type FieldNoteCategory } from '../../lib/i18n';
+import { getFieldNotes } from '../../lib/content';
+
+const notes = await getFieldNotes('en');
+
+/* Visual category index — not interactive filters yet, just the
+   drawer labels of the archive. Becomes functional in a later version. */
+const categories: FieldNoteCategory[] = ['road', 'creature', 'studio', 'camp', 'weather', 'soft-footsteps'];
+---
+
+<BaseLayout
+  title="Field Notes"
+  description="The Camp Flaneuse journal: road notes, creature notes, studio notes, camp notes, and weather reports from a moving life."
+  lang="en"
+  translationUrl={routes.fieldNotes.pt}
+>
+  <PageTitle
+    overline="The archive"
+    title="Field Notes"
+    lede="Observations from the road, filed with reasonable care. Some are about birds. Some are about parking lots. The archive does not judge."
+  />
+
+  <div class="container">
+    <ul class="category-index" aria-label="Categories in this archive">
+      {categories.map((cat) => (
+        <li class="label">{categoryLabels.en[cat]}</li>
+      ))}
+    </ul>
+  </div>
+
+  <section class="section notes-section">
+    <div class="container">
+      <div class="notes-grid">
+        {notes.map((note) => <FieldNoteCard note={note} lang="en" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .category-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.6rem;
+  }
+
+  .category-index li {
+    border: 1px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 0.75rem;
+    background: color-mix(in srgb, var(--color-card) 60%, transparent);
+  }
+
+  .notes-section {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.2rem;
+  }
+</style>

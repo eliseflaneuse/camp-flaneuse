@@ -1,0 +1,61 @@
+/* ============================================================
+   Camp Flaneuse — design tokens
+   A handmade field archive: paper, ink, moss, clay, river.
+   ============================================================ */
+
+:root {
+  /* ---- color: surfaces ---- */
+  --color-paper: #f2ecdd;        /* warm parchment page background */
+  --color-paper-deep: #e9dfc9;   /* slightly darker paper for alternating sections */
+  --color-card: #f9f5e9;         /* off-white card panels */
+
+  /* ---- color: ink ---- */
+  --color-ink: #2d2721;          /* deep ink brown — primary text */
+  --color-ink-soft: #5c5344;     /* secondary text, still readable */
+  --color-ink-faint: #8a7f6a;    /* decorative only — never body text */
+
+  /* ---- color: accents ---- */
+  --color-moss: #4b6141;         /* moss green — primary accent */
+  --color-moss-deep: #38492f;
+  --color-olive: #7c7852;        /* faded olive — decorative */
+  --color-clay: #a2543a;         /* dusty terracotta — links, small fires */
+  --color-clay-deep: #8a4630;
+  --color-river: #48707f;        /* muted river blue — quiet accent */
+  --color-forest: #243128;       /* dark forest — footer, dark panels */
+  --color-on-forest: #e9e0ca;    /* paper-toned text on forest */
+
+  /* ---- color: lines & edges ---- */
+  --color-line: #d5cab0;
+  --color-line-soft: #e2d9c3;
+
+  /* ---- typography ---- */
+  --font-heading: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-body: 'Karla Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-label: 'IBM Plex Mono', ui-monospace, 'Consolas', monospace;
+
+  --text-body: 1.0625rem;                          /* 17px — comfortable reading */
+  --text-sm: 0.9375rem;
+  --text-label: 0.75rem;                           /* mono field labels */
+  --text-h1: clamp(2.25rem, 5.5vw, 3.5rem);
+  --text-h2: clamp(1.6rem, 3.5vw, 2.15rem);
+  --text-h3: clamp(1.25rem, 2.5vw, 1.45rem);
+  --leading-body: 1.7;
+  --leading-heading: 1.15;
+
+  /* ---- layout ---- */
+  --content-width: 68rem;        /* page container */
+  --prose-width: 42rem;          /* long-form reading column */
+  --space-section: clamp(3.5rem, 8vw, 6rem);
+  --space-block: clamp(1.75rem, 4vw, 2.75rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* ---- edges & depth ---- */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --shadow-soft:
+    0 1px 2px rgba(45, 39, 33, 0.06),
+    0 6px 18px rgba(45, 39, 33, 0.06);
+  --shadow-lift:
+    0 2px 4px rgba(45, 39, 33, 0.08),
+    0 10px 26px rgba(45, 39, 33, 0.09);
+}

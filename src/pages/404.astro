@@ -1,0 +1,45 @@
+---
+/**
+ * 404 — off the path.
+ */
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { routes } from '../lib/i18n';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="This path does not lead anywhere — yet."
+  lang="en"
+>
+  <section class="section notfound">
+    <div class="container">
+      <p class="label">Field report · 404</p>
+      <h1>You have wandered off the path.</h1>
+      <p class="notfound-text">
+        This happens at the camp more often than you would think, and it is rarely a bad thing.
+        Still — the page you were looking for is not here. It may have moved, or it may not exist
+        yet, which at this camp is a real possibility.
+      </p>
+      <p>
+        <a class="button" href={routes.home.en}>Back to the camp entrance</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-block: var(--space-section);
+  }
+
+  .notfound .label {
+    color: var(--color-clay);
+    margin-bottom: 1rem;
+  }
+
+  .notfound-text {
+    max-width: 36rem;
+    margin-block: 1.2rem 2rem;
+    color: var(--color-ink-soft);
+  }
+</style>

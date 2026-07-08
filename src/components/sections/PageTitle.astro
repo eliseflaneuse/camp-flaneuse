@@ -1,0 +1,40 @@
+---
+/**
+ * PageTitle — standard opening block for interior pages:
+ * mono overline, serif h1, optional lede. Like the title
+ * card at the entrance of a room.
+ */
+interface Props {
+  overline?: string;
+  title: string;
+  lede?: string;
+}
+
+const { overline, title, lede } = Astro.props;
+---
+
+<header class="page-title">
+  <div class="container">
+    {overline && <p class="label pt-overline">{overline}</p>}
+    <h1>{title}</h1>
+    {lede && <p class="pt-lede">{lede}</p>}
+  </div>
+</header>
+
+<style>
+  .page-title {
+    padding-block: var(--space-block) 0;
+  }
+
+  .pt-overline {
+    color: var(--color-moss);
+    margin-bottom: 0.8rem;
+  }
+
+  .pt-lede {
+    margin-top: 1rem;
+    max-width: 42rem;
+    color: var(--color-ink-soft);
+    font-size: 1.1rem;
+  }
+</style>

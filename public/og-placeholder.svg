@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f2ecdd"/>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#d5cab0" stroke-width="2" stroke-dasharray="8 10" rx="8"/>
+  <g fill="none" stroke="#4b6141" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M600 150 L440 400 L560 400 L600 320 L640 400 L760 400 Z"/>
+    <path d="M600 150 L622 182"/>
+  </g>
+  <text x="600" y="480" text-anchor="middle" font-family="Georgia, serif" font-size="64" fill="#2d2721">Camp Flaneuse</text>
+  <text x="600" y="535" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="28" fill="#5c5344">A moving camp for field notes, letters, soft rebellion, and wonder.</text>
+</svg>

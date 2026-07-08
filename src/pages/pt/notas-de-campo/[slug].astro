@@ -1,0 +1,173 @@
+---
+/**
+ * Nota de campo individual — em português.
+ */
+import { render } from 'astro:content';
+import BaseLayout from '../../../components/layout/BaseLayout.astro';
+import MetadataLine from '../../../components/content/MetadataLine.astro';
+import TagList from '../../../components/content/TagList.astro';
+import ImagePlaceholder from '../../../components/content/ImagePlaceholder.astro';
+import { categoryLabels, detailPaths, formatDate, routes, ui } from '../../../lib/i18n';
+import {
+  findFieldNoteTranslation,
+  getFieldNotes,
+  slugFromId,
+  type FieldNote,
+} from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const notes = await getFieldNotes('pt');
+  return notes.map((note) => ({
+    params: { slug: slugFromId(note.id) },
+    props: { note },
+  }));
+}
+
+interface Props {
+  note: FieldNote;
+}
+
+const { note } = Astro.props;
+const t = ui.pt;
+const { Content } = await render(note);
+
+const all = (await getFieldNotes('pt')).sort(
+  (a, b) => a.data.date.valueOf() - b.data.date.valueOf(),
+);
+const index = all.findIndex((n) => n.id === note.id);
+const prev = index > 0 ? all[index - 1] : undefined;
+const next = index < all.length - 1 ? all[index + 1] : undefined;
+
+const translation = await findFieldNoteTranslation(note, 'en');
+const translationUrl = translation
+  ? `${detailPaths.fieldNotes.en}${slugFromId(translation.id)}/`
+  : undefined;
+---
+
+<BaseLayout
+  title={note.data.title}
+  description={note.data.excerpt}
+  lang="pt"
+  translationUrl={translationUrl}
+>
+  <article class="section note-article">
+    <div class="container">
+      <header class="note-header">
+        <p class="label note-category">
+          {t.filedUnder}: {categoryLabels.pt[note.data.category]}
+        </p>
+        <h1>{note.data.title}</h1>
+        <MetadataLine items={[formatDate(note.data.date, 'pt'), note.data.location]} />
+      </header>
+
+      <div class="prose note-body">
+        <Content />
+        <ImagePlaceholder lang="pt" />
+      </div>
+
+      {note.data.tags && note.data.tags.length > 0 && (
+        <div class="note-tags">
+          <TagList tags={note.data.tags} label={t.tags} />
+        </div>
+      )}
+
+      <nav class="note-nav" aria-label="Entre notas">
+        <div class="note-nav-item">
+          {prev && (
+            <>
+              <p class="label">← {t.previousNote}</p>
+              <a href={`${detailPaths.fieldNotes.pt}${slugFromId(prev.id)}/`}>{prev.data.title}</a>
+            </>
+          )}
+        </div>
+        <div class="note-nav-item note-nav-item--next">
+          {next && (
+            <>
+              <p class="label">{t.nextNote} →</p>
+              <a href={`${detailPaths.fieldNotes.pt}${slugFromId(next.id)}/`}>{next.data.title}</a>
+            </>
+          )}
+        </div>
+      </nav>
+
+      <p class="back-link">
+        <a href={routes.fieldNotes.pt}>← {t.backToFieldNotes}</a>
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .note-article {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .note-header {
+    max-width: var(--prose-width);
+    margin-bottom: var(--space-block);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .note-category {
+    color: var(--color-moss);
+  }
+
+  .note-body :global(.image-placeholder) {
+    margin-block: 2.5rem;
+  }
+
+  .note-tags {
+    max-width: var(--prose-width);
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--color-line);
+  }
+
+  .note-nav {
+    max-width: var(--prose-width);
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    padding-top: 1.5rem;
+  }
+
+  .note-nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .note-nav-item--next {
+    text-align: right;
+  }
+
+  .note-nav-item a {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .note-nav-item a:hover {
+    color: var(--color-clay-deep);
+  }
+
+  .back-link {
+    max-width: var(--prose-width);
+    margin-top: 2.5rem;
+    font-size: var(--text-sm);
+  }
+
+  @media (max-width: 560px) {
+    .note-nav {
+      grid-template-columns: 1fr;
+    }
+    .note-nav-item--next {
+      text-align: left;
+    }
+  }
+</style>

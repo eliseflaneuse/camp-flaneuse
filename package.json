@@ -1,0 +1,18 @@
+{
+  "name": "camp-flaneuse",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Camp Flaneuse — a moving camp for field notes, letters, soft rebellion, and wonder.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.5",
+    "@fontsource-variable/karla": "^5.2.5",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
+    "astro": "^5.12.0"
+  }
+}

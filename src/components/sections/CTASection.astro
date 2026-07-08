@@ -1,0 +1,59 @@
+---
+/**
+ * CTASection — a gentle invitation panel, never a billboard.
+ */
+interface Props {
+  overline?: string;
+  title: string;
+  text?: string;
+  cta: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}
+
+const { overline, title, text, cta, secondaryCta } = Astro.props;
+---
+
+<section class="cta-section">
+  <div class="container">
+    <div class="panel cta-panel">
+      {overline && <p class="label cta-overline">{overline}</p>}
+      <h2>{title}</h2>
+      {text && <p class="cta-text">{text}</p>}
+      <div class="cta-actions">
+        <a class="button" href={cta.href}>{cta.label}</a>
+        {secondaryCta && (
+          <a class="button button--quiet" href={secondaryCta.href}>{secondaryCta.label}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding-block: var(--space-block);
+  }
+
+  .cta-panel {
+    padding: clamp(1.8rem, 4vw, 2.8rem);
+    border-left: 4px solid var(--color-moss);
+  }
+
+  .cta-overline {
+    color: var(--color-moss);
+    margin-bottom: 0.7rem;
+  }
+
+  .cta-text {
+    margin-top: 0.9rem;
+    max-width: 38rem;
+    color: var(--color-ink-soft);
+  }
+
+  .cta-actions {
+    margin-top: 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+</style>

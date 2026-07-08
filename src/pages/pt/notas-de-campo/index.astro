@@ -1,0 +1,90 @@
+---
+/**
+ * Notas de Campo — o arquivo, em português.
+ * Nem toda nota tem tradução; o arquivo avisa com calma.
+ */
+import BaseLayout from '../../../components/layout/BaseLayout.astro';
+import PageTitle from '../../../components/sections/PageTitle.astro';
+import FieldNoteCard from '../../../components/content/FieldNoteCard.astro';
+import { categoryLabels, routes, type FieldNoteCategory } from '../../../lib/i18n';
+import { getFieldNotes } from '../../../lib/content';
+
+const notes = await getFieldNotes('pt');
+const enCount = (await getFieldNotes('en')).length;
+
+const categories: FieldNoteCategory[] = ['road', 'creature', 'studio', 'camp', 'weather', 'soft-footsteps'];
+---
+
+<BaseLayout
+  title="Notas de Campo"
+  description="O diário do Camp Flaneuse: notas de estrada, notas de criaturas, notas de estúdio, notas de acampamento e boletins do tempo de uma vida em movimento."
+  lang="pt"
+  translationUrl={routes.fieldNotes.en}
+>
+  <PageTitle
+    overline="O arquivo"
+    title="Notas de Campo"
+    lede="Observações da estrada, arquivadas com razoável cuidado. Algumas são sobre pássaros. Outras, sobre estacionamentos. O arquivo não julga."
+  />
+
+  <div class="container">
+    <ul class="category-index" aria-label="Categorias deste arquivo">
+      {categories.map((cat) => (
+        <li class="label">{categoryLabels.pt[cat]}</li>
+      ))}
+    </ul>
+  </div>
+
+  <section class="section notes-section">
+    <div class="container">
+      <div class="notes-grid">
+        {notes.map((note) => <FieldNoteCard note={note} lang="pt" />)}
+      </div>
+
+      {enCount > notes.length && (
+        <p class="translation-note">
+          Nem todas as notas foram traduzidas ainda — o arquivo completo, por enquanto, vive em
+          <a href={routes.fieldNotes.en}>inglês</a>. As traduções chegam no ritmo do acampamento:
+          devagar, mas chegam.
+        </p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .category-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.6rem;
+  }
+
+  .category-index li {
+    border: 1px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 0.75rem;
+    background: color-mix(in srgb, var(--color-card) 60%, transparent);
+  }
+
+  .notes-section {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.2rem;
+  }
+
+  .translation-note {
+    margin-top: var(--space-block);
+    max-width: var(--prose-width);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    border-top: 1px dashed var(--color-line);
+    padding-top: 1.2rem;
+  }
+</style>

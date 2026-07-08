@@ -1,0 +1,125 @@
+---
+/**
+ * Carta individual — desenhada como carta, não como post.
+ */
+import { render } from 'astro:content';
+import BaseLayout from '../../../components/layout/BaseLayout.astro';
+import ImagePlaceholder from '../../../components/content/ImagePlaceholder.astro';
+import { detailPaths, formatDate, routes, ui } from '../../../lib/i18n';
+import {
+  findLetterTranslation,
+  getLetters,
+  slugFromId,
+  type Letter,
+} from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const letters = await getLetters('pt');
+  return letters.map((letter) => ({
+    params: { slug: slugFromId(letter.id) },
+    props: { letter },
+  }));
+}
+
+interface Props {
+  letter: Letter;
+}
+
+const { letter } = Astro.props;
+const t = ui.pt;
+const { Content } = await render(letter);
+
+const translation = await findLetterTranslation(letter, 'en');
+const translationUrl = translation
+  ? `${detailPaths.correspondence.en}${slugFromId(translation.id)}/`
+  : undefined;
+---
+
+<BaseLayout
+  title={letter.data.title}
+  description={letter.data.excerpt}
+  lang="pt"
+  translationUrl={translationUrl}
+>
+  <div class="section letter-wrap">
+    <div class="container">
+      <article class="letter-sheet panel">
+        <header class="letter-head">
+          <p class="label letter-number">Correspondência · Nº {letter.data.number}</p>
+          <h1>{letter.data.title}</h1>
+          {letter.data.subtitle && <p class="letter-subtitle">{letter.data.subtitle}</p>}
+          <p class="label letter-dateline">
+            {letter.data.location} — {formatDate(letter.data.date, 'pt')}
+          </p>
+        </header>
+
+        <div class="prose letter-body">
+          <Content />
+        </div>
+
+        {letter.data.drawingPlaceholder && (
+          <div class="letter-drawing">
+            <ImagePlaceholder lang="pt" note="Um desenho viaja com esta carta. Ele ainda não chegou." />
+          </div>
+        )}
+      </article>
+
+      <p class="back-link">
+        <a href={routes.correspondence.pt}>← {t.backToCorrespondence}</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .letter-wrap {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .letter-sheet {
+    max-width: 46rem;
+    margin-inline: auto;
+    padding: clamp(2rem, 6vw, 4rem);
+    border-top: 3px double var(--color-line);
+  }
+
+  .letter-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2.2rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px dashed var(--color-line);
+  }
+
+  .letter-number {
+    color: var(--color-river);
+  }
+
+  .letter-subtitle {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-ink-soft);
+  }
+
+  .letter-dateline {
+    margin-top: 0.4rem;
+  }
+
+  .letter-body {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    line-height: 1.75;
+  }
+
+  .letter-drawing {
+    margin-top: 2.5rem;
+  }
+
+  .back-link {
+    max-width: 46rem;
+    margin: 2rem auto 0;
+    font-size: var(--text-sm);
+  }
+</style>

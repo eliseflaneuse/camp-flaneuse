@@ -1,0 +1,88 @@
+---
+/**
+ * LetterCard — an envelope in the correspondence drawer.
+ * Quieter than a field note card; numbered like an archive item.
+ */
+import MetadataLine from './MetadataLine.astro';
+import { detailPaths, formatDate, ui, type Lang } from '../../lib/i18n';
+import { slugFromId, type Letter } from '../../lib/content';
+
+interface Props {
+  letter: Letter;
+  lang: Lang;
+}
+
+const { letter, lang } = Astro.props;
+const t = ui[lang];
+const href = `${detailPaths.correspondence[lang]}${slugFromId(letter.id)}/`;
+---
+
+<article class="panel letter-card">
+  <p class="label letter-number">Nº {letter.data.number}</p>
+  <h3 class="letter-title">
+    <a href={href}>{letter.data.title}</a>
+  </h3>
+  {letter.data.subtitle && <p class="letter-subtitle">{letter.data.subtitle}</p>}
+  <MetadataLine items={[formatDate(letter.data.date, lang), letter.data.location]} />
+  <p class="letter-excerpt">{letter.data.excerpt}</p>
+  <p class="letter-link" aria-hidden="true">{t.readLetter} →</p>
+</article>
+
+<style>
+  .letter-card {
+    position: relative;
+    padding: 1.7rem 1.8rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    /* the faint double rule of an envelope edge */
+    border-top: 3px double var(--color-line);
+    transition: box-shadow 140ms ease, transform 140ms ease;
+  }
+
+  .letter-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .letter-number {
+    color: var(--color-river);
+  }
+
+  .letter-title {
+    font-size: 1.35rem;
+  }
+
+  .letter-title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .letter-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .letter-card:hover .letter-title a {
+    color: var(--color-clay-deep);
+  }
+
+  .letter-subtitle {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--color-ink-soft);
+  }
+
+  .letter-excerpt {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .letter-link {
+    margin-top: auto;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-clay-deep);
+  }
+</style>

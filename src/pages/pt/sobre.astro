@@ -1,0 +1,99 @@
+---
+/**
+ * Sobre — a guardiã do acampamento.
+ */
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import PageTitle from '../../components/sections/PageTitle.astro';
+import ImagePlaceholder from '../../components/content/ImagePlaceholder.astro';
+import CTASection from '../../components/sections/CTASection.astro';
+import { routes } from '../../lib/i18n';
+---
+
+<BaseLayout
+  title="Sobre o Acampamento"
+  description="A pessoa por trás do Camp Flaneuse: Elai, um motorhome chamado Ember, alguns gatos, e a lenta construção de uma vida mais livre na estrada."
+  lang="pt"
+  translationUrl={routes.about.en}
+>
+  <PageTitle
+    overline="A guardiã"
+    title="Sobre o Acampamento"
+    lede="Todo acampamento tem alguém que mantém o fogo aceso e os cadernos secos. Aqui, esse alguém é a Elai."
+  />
+
+  <article class="section about-body">
+    <div class="container">
+      <div class="prose">
+        <p>
+          O Camp Flaneuse é mantido por <strong>Elai</strong> — uma pessoa que escreve, desenha,
+          observa pássaros e vive na estrada num motorhome chamado <strong>Ember</strong>, na
+          companhia de gatos que não assinaram nenhum contrato para isso, mas se adaptaram com
+          dignidade.
+        </p>
+
+        <p>
+          A versão curta: em algum momento o roteiro normal — o emprego, a pressa, a necessidade
+          constante de provar alguma coisa — parou de fazer sentido, e em vez de otimizar a vida
+          que existia, pareceu melhor construir outra. Menor. Mais lenta. Mais atenta. Com rodas.
+        </p>
+
+        <h2>Ember</h2>
+        <p>
+          Ember é o motorhome: casa, estúdio, instrumento meteorológico e, ocasionalmente,
+          torradeira. Ela não é glamorosa. É confiável do jeito que barcos velhos são confiáveis,
+          ou seja: quase sempre, e com personalidade. Tudo neste site foi escrito ou desenhado
+          dentro dela, ou logo do lado de fora, numa cadeira dobrável, sob o céu que estivesse
+          disponível.
+        </p>
+
+        <h2>Os residentes</h2>
+        <p>
+          Os gatos são os residentes permanentes do acampamento e seus críticos mais honestos.
+          Eles avaliam cada lugar de estacionar minutos depois da chegada, e os padrões deles são
+          absurdos. Aparecem nas notas de vez em quando, sempre sem pedir licença.
+        </p>
+
+        <ImagePlaceholder lang="pt" note="Um desenho do acampamento — Ember, cadeiras, gatos — vai morar aqui." />
+
+        <h2>O que se coleciona aqui</h2>
+        <p>
+          Notas de campo de beiras de estrada, rios, cidades, florestas e estacionamentos
+          estranhos. Cartas. Desenhos. Avistamentos de pássaros e outros relatórios de criaturas.
+          O tempo, tanto o meteorológico quanto o emocional. Notas sobre fazer coisas, e sobre
+          ganhar a vida sem perder o fio. O registro lento de uma vida mais livre sendo construída
+          em tempo real, erros inclusos.
+        </p>
+
+        <h2>Por que isso existe</h2>
+        <p>
+          Porque atenção é uma forma de devoção, e o assombro pode ser uma prática. Porque uma
+          vida pequena, estranha e sincera pode virar uma obra. Porque a internet tem plataformas
+          demais e acampamentos de menos. E porque — tendo se perdido uma vez dentro de uma vida
+          que parecia correta vista de fora — a guardiã deste acampamento não pretende se perder
+          de novo, e escrever tudo isso é parte do como.
+        </p>
+
+        <p>
+          Se algo disso soa como o seu tipo de lugar: fique um pouco. Leia as
+          <a href={routes.fieldNotes.pt}>notas</a>, abra uma
+          <a href={routes.correspondence.pt}>carta</a>, ou — se você está construindo algo seu e
+          precisa de uma casa para isso — bata na porta do
+          <a href={routes.studio.pt}>estúdio</a>.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <CTASection
+    overline="Diga olá"
+    title="O acampamento recebe visitas."
+    text="Perguntas, cartas, relatórios de pássaros, projetos de site — a página de contato é a caixa de correio do acampamento."
+    cta={{ label: 'Ir para o contato', href: routes.contact.pt }}
+  />
+</BaseLayout>
+
+<style>
+  .about-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+</style>

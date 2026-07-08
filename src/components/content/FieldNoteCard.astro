@@ -1,0 +1,82 @@
+---
+/**
+ * FieldNoteCard — one journal entry as an archive card.
+ */
+import MetadataLine from './MetadataLine.astro';
+import { categoryLabels, detailPaths, formatDate, ui, type Lang } from '../../lib/i18n';
+import { slugFromId, type FieldNote } from '../../lib/content';
+
+interface Props {
+  note: FieldNote;
+  lang: Lang;
+}
+
+const { note, lang } = Astro.props;
+const t = ui[lang];
+const href = `${detailPaths.fieldNotes[lang]}${slugFromId(note.id)}/`;
+const category = categoryLabels[lang][note.data.category];
+---
+
+<article class="panel note-card">
+  <p class="label note-category">{category}</p>
+  <h3 class="note-title">
+    <a href={href}>{note.data.title}</a>
+  </h3>
+  <MetadataLine items={[formatDate(note.data.date, lang), note.data.location]} />
+  <p class="note-excerpt">{note.data.excerpt}</p>
+  <p class="note-link" aria-hidden="true">{t.readNote} →</p>
+</article>
+
+<style>
+  .note-card {
+    position: relative;
+    padding: 1.5rem 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    transition: box-shadow 140ms ease, transform 140ms ease;
+  }
+
+  .note-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .note-category {
+    color: var(--color-moss);
+  }
+
+  .note-title {
+    font-size: 1.3rem;
+    line-height: 1.25;
+  }
+
+  /* Whole card is clickable via the stretched title link;
+     text remains selectable elsewhere thanks to z-index layering. */
+  .note-title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .note-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .note-card:hover .note-title a {
+    color: var(--color-clay-deep);
+  }
+
+  .note-excerpt {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .note-link {
+    margin-top: auto;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-clay-deep);
+  }
+</style>

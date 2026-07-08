@@ -1,0 +1,121 @@
+---
+/**
+ * Footer — the dark forest edge of every page.
+ * Camp blurb, full map of rooms, and a small status line.
+ */
+import { routes, ui, type Lang } from '../../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const year = new Date().getFullYear();
+
+const mapItems = [
+  { href: routes.home[lang], label: t.nav.home },
+  { href: routes.fieldNotes[lang], label: t.nav.fieldNotes },
+  { href: routes.correspondence[lang], label: t.nav.correspondence },
+  { href: routes.softFootsteps[lang], label: t.nav.softFootsteps },
+  { href: routes.studio[lang], label: t.nav.studio },
+  { href: routes.about[lang], label: t.nav.about },
+  { href: routes.contact[lang], label: t.nav.contact },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-about">
+      <p class="footer-brand">Camp Flaneuse</p>
+      <p class="footer-tagline">{t.tagline}</p>
+      <p class="footer-status label">{t.footerNote}</p>
+    </div>
+
+    <nav aria-label={lang === 'pt' ? 'Mapa do acampamento' : 'Camp map'}>
+      <p class="label footer-map-title">{lang === 'pt' ? 'Mapa do acampamento' : 'Camp map'}</p>
+      <ul class="footer-map">
+        {mapItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} {t.allRightsReserved}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-section);
+    background: var(--color-forest);
+    color: var(--color-on-forest);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-block: 3rem 2rem;
+  }
+
+  .footer-brand {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 600;
+  }
+
+  .footer-tagline {
+    margin-top: 0.5rem;
+    max-width: 30rem;
+    color: color-mix(in srgb, var(--color-on-forest) 82%, transparent);
+  }
+
+  .footer-status {
+    margin-top: 1.4rem;
+    color: color-mix(in srgb, var(--color-on-forest) 60%, transparent);
+  }
+
+  .footer-map-title {
+    color: color-mix(in srgb, var(--color-on-forest) 60%, transparent);
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-map {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-map a {
+    color: var(--color-on-forest);
+    text-decoration: none;
+    font-size: var(--text-sm);
+  }
+
+  .footer-map a:hover {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid color-mix(in srgb, var(--color-on-forest) 18%, transparent);
+    padding-block: 1.2rem;
+    font-size: var(--text-label);
+    font-family: var(--font-label);
+    letter-spacing: 0.06em;
+    color: color-mix(in srgb, var(--color-on-forest) 55%, transparent);
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,181 @@
+---
+/**
+ * Flaneuse Studio — the practical room of the camp.
+ * Grounded, clear, still in the camp's voice.
+ */
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import PageTitle from '../components/sections/PageTitle.astro';
+import SectionIntro from '../components/sections/SectionIntro.astro';
+import StudioPackageCard from '../components/sections/StudioPackageCard.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import { routes } from '../lib/i18n';
+
+const whoFor = [
+  'Artists who need a portfolio that feels like their work, not like a template wearing their work',
+  'Writers who need a home for their words',
+  'Makers who want a simple presence now, and maybe a small shop later',
+  'Therapists and independent workers who need a calm, human website',
+  'Small creators who are allergic to corporate templates',
+  'People with too many ideas who need structure more than they need features',
+];
+
+const services = [
+  'One-page websites',
+  'Portfolio websites',
+  'Simple blogs and journals',
+  'Website structure and copy — for people who cannot explain themselves online (yet)',
+  'Visual direction',
+  'Gentle redesigns of existing sites',
+  'Personal creative archives',
+  'Small launch pages',
+];
+
+const packages = [
+  {
+    name: 'The Small Room',
+    summary: 'A one-page website for a person, project, or offer. Everything essential, nothing shouting.',
+    bestFor: 'Artists, creators, and tiny businesses starting out.',
+    includes: [
+      'One thoughtfully structured page',
+      'Copy help — your words, arranged',
+      'Visual direction to match your work',
+      'Mobile-friendly, fast, accessible',
+    ],
+    priceNote: 'Price on request — early-days rates',
+  },
+  {
+    name: 'The Field Archive',
+    summary: 'A simple multi-page website: portfolio, journal, about, contact. A place for ongoing work to accumulate.',
+    bestFor: 'Writers, artists, and people with a growing body of work.',
+    includes: [
+      'Up to five pages, clearly structured',
+      'A journal or portfolio you can update yourself',
+      'Copy and structure guidance',
+      'Room to grow — no rebuild needed later',
+    ],
+    priceNote: 'Price on request — early-days rates',
+  },
+  {
+    name: 'The Soft Launch',
+    summary: 'A focused landing page for one thing: a course, a project, a newsletter, a service, an idea ready to meet people.',
+    bestFor: 'Creators launching something specific and sincere.',
+    includes: [
+      'One focused, persuasive-but-honest page',
+      'Clear structure: what it is, who it is for, what to do next',
+      'Copy sharpening',
+      'Simple, dependable technical setup',
+    ],
+    priceNote: 'Price on request — early-days rates',
+  },
+];
+---
+
+<BaseLayout
+  title="Flaneuse Studio"
+  description="Flaneuse Studio makes small, thoughtful websites for artists, writers, makers, therapists, and independent creators. Not websites that shout — websites that gather, clarify, and give your work a place to live."
+  lang="en"
+  translationUrl={routes.studio.pt}
+>
+  <PageTitle
+    overline="The workshop"
+    title="Flaneuse Studio"
+    lede="Small websites with soul — poetic, practical, and built for people making a life or practice outside the template."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <p>
+          Flaneuse Studio makes small, thoughtful websites for artists, writers, makers,
+          therapists, and independent creators. Not websites that shout. Websites that gather,
+          clarify, and give your work a place to live.
+        </p>
+        <p>
+          The studio lives in the back of Camp Flaneuse, which means it is small on purpose, works
+          slowly and carefully, and believes a website should feel less like a business card and
+          more like a room someone can enter.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--deep">
+    <div class="container">
+      <SectionIntro overline="Who it is for" title="People building something tender, strange, useful, or true." />
+      <ul class="two-col-list">
+        {whoFor.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionIntro overline="What the studio does" title="What I can help with" />
+      <ul class="two-col-list">
+        {services.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--deep">
+    <div class="container">
+      <SectionIntro
+        overline="Ways to work together"
+        title="Three rooms, three sizes"
+        lede="These are starting shapes, not rigid boxes. Every project gets adjusted to fit the person inside it."
+      />
+      <div class="packages-grid">
+        {packages.map((pkg) => <StudioPackageCard {...pkg} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionIntro
+        overline="Why this studio exists"
+        title="Most creators do not need a loud website."
+        lede="They need a place that feels like them, explains their work clearly, and can grow slowly. Clear structure, gentle design, human copy, simple technical setup, room to grow — that is the whole philosophy, and it turns out to be rare."
+      />
+    </div>
+  </section>
+
+  <CTASection
+    overline="Start here"
+    title="Tell me about your project."
+    text="A few sentences is enough. What you make, what you need a home for, and where it should feel like entering."
+    cta={{ label: 'Write to the studio', href: routes.contact.en }}
+  />
+</BaseLayout>
+
+<style>
+  .section--deep {
+    background: color-mix(in srgb, var(--color-paper-deep) 55%, transparent);
+    border-block: 1px solid var(--color-line-soft);
+  }
+
+  .two-col-list {
+    max-width: 52rem;
+    columns: 2;
+    column-gap: 3rem;
+    padding-left: 1.2rem;
+    color: var(--color-ink-soft);
+  }
+
+  .two-col-list li {
+    margin-bottom: 0.7rem;
+    break-inside: avoid;
+  }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.2rem;
+  }
+
+  @media (max-width: 640px) {
+    .two-col-list {
+      columns: 1;
+    }
+  }
+</style>

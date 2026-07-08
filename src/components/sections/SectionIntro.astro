@@ -1,0 +1,38 @@
+---
+/**
+ * SectionIntro — a chapter heading: small mono overline,
+ * serif title, optional lede paragraph.
+ */
+interface Props {
+  overline?: string;
+  title: string;
+  lede?: string;
+  /** Heading level for the section title (default h2). */
+  as?: 'h1' | 'h2';
+}
+
+const { overline, title, lede, as: Heading = 'h2' } = Astro.props;
+---
+
+<div class="section-intro">
+  {overline && <p class="label intro-overline">{overline}</p>}
+  <Heading>{title}</Heading>
+  {lede && <p class="intro-lede">{lede}</p>}
+</div>
+
+<style>
+  .section-intro {
+    max-width: 42rem;
+    margin-bottom: var(--space-block);
+  }
+
+  .intro-overline {
+    color: var(--color-moss);
+    margin-bottom: 0.7rem;
+  }
+
+  .intro-lede {
+    margin-top: 0.9rem;
+    color: var(--color-ink-soft);
+  }
+</style>

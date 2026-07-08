@@ -1,0 +1,91 @@
+---
+/**
+ * Correspondence index — the desk drawer of letters.
+ * Quieter than the field notes archive.
+ */
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import PageTitle from '../../components/sections/PageTitle.astro';
+import LetterCard from '../../components/content/LetterCard.astro';
+import { routes } from '../../lib/i18n';
+import { getLetters } from '../../lib/content';
+
+const letters = await getLetters('en');
+---
+
+<BaseLayout
+  title="Correspondence"
+  description="Letters from the road: invitations, seasonal notes, and future snail-mail pieces from Camp Flaneuse."
+  lang="en"
+  translationUrl={routes.correspondence.pt}
+>
+  <PageTitle
+    overline="The desk"
+    title="Correspondence"
+    lede="Some notes are not posts. Some things arrive better as letters — slower, quieter, addressed to you."
+  />
+
+  <section class="section letters-section">
+    <div class="container">
+      <p class="letters-intro">
+        These are letters from the road: invitations, seasonal dispatches, small confessions, and —
+        eventually — pieces that will travel by actual mail, with stamps and everything. The drawer
+        is nearly empty for now. That is how drawers begin.
+      </p>
+
+      <div class="letters-grid">
+        {letters.map((letter) => <LetterCard letter={letter} lang="en" />)}
+      </div>
+
+      <aside class="society-hint panel">
+        <p class="label society-hint-label">A quiet announcement</p>
+        <p>
+          Some of these letters will one day be sent by
+          <strong>The Soft Footsteps Society</strong> — a small society for attentive walkers,
+          currently being founded at this very desk.
+        </p>
+        <p class="society-hint-link">
+          <a href={routes.softFootsteps.en}>Read about the Society →</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .letters-section {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .letters-intro {
+    max-width: var(--prose-width);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-block);
+  }
+
+  .letters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1.2rem;
+    max-width: 44rem;
+  }
+
+  .society-hint {
+    margin-top: var(--space-block);
+    max-width: var(--prose-width);
+    padding: 1.5rem 1.7rem;
+    border-left: 4px solid var(--color-river);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .society-hint-label {
+    color: var(--color-river);
+  }
+
+  .society-hint-link {
+    font-weight: 700;
+  }
+</style>

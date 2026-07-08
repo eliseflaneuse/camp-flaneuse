@@ -1,0 +1,64 @@
+---
+/**
+ * ExploreCard — a door to one room of the camp.
+ */
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  /** Small mono room label, e.g. "THE ARCHIVE". */
+  roomLabel?: string;
+}
+
+const { title, description, href, roomLabel } = Astro.props;
+---
+
+<article class="panel explore-card">
+  {roomLabel && <p class="label room-label">{roomLabel}</p>}
+  <h3><a href={href}>{title}</a></h3>
+  <p class="explore-description">{description}</p>
+</article>
+
+<style>
+  .explore-card {
+    position: relative;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition: box-shadow 140ms ease, transform 140ms ease;
+  }
+
+  .explore-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .room-label {
+    color: var(--color-river);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h3 a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .explore-card:hover h3 a {
+    color: var(--color-clay-deep);
+  }
+
+  .explore-description {
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+</style>

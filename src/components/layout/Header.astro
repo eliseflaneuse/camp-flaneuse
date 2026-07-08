@@ -1,0 +1,165 @@
+---
+/**
+ * Header — camp signpost.
+ * Site name, main navigation, language switcher.
+ * No JavaScript: on small screens the nav simply wraps.
+ */
+import { routes, ui, type Lang } from '../../lib/i18n';
+
+interface Props {
+  lang: Lang;
+  translationUrl?: string;
+}
+
+const { lang, translationUrl } = Astro.props;
+const t = ui[lang];
+const other: Lang = lang === 'en' ? 'pt' : 'en';
+const otherHome = routes.home[other];
+const switchUrl = translationUrl ?? otherHome;
+
+const navItems = [
+  { href: routes.fieldNotes[lang], label: t.nav.fieldNotes },
+  { href: routes.correspondence[lang], label: t.nav.correspondence },
+  { href: routes.studio[lang], label: t.nav.studio },
+  { href: routes.about[lang], label: t.nav.about },
+  { href: routes.contact[lang], label: t.nav.contact },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/?$/, '/');
+const isCurrent = (href: string) => currentPath === href || (href !== routes.home[lang] && currentPath.startsWith(href));
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={routes.home[lang]}>
+      <svg class="brand-tent" viewBox="0 0 32 24" width="26" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 3 L3 21 L13 21 L16 15.5 L19 21 L29 21 Z" />
+        <path d="M16 3 L17.8 5.5" />
+      </svg>
+      <span class="brand-name">Camp Flaneuse</span>
+    </a>
+
+    <nav aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'}>
+      <ul class="nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="lang-switch" aria-label={t.languageSwitch}>
+      <a href={lang === 'en' ? currentPath : switchUrl} aria-current={lang === 'en' ? 'true' : undefined} lang="en">EN</a>
+      <span aria-hidden="true">·</span>
+      <a href={lang === 'pt' ? currentPath : switchUrl} aria-current={lang === 'pt' ? 'true' : undefined} lang="pt">PT</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-line);
+    background: color-mix(in srgb, var(--color-card) 60%, transparent);
+  }
+
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.75rem;
+    padding-block: 1rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: var(--color-ink);
+    margin-right: auto;
+  }
+
+  .brand-tent {
+    color: var(--color-moss);
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.35rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .nav-list a {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-ink-soft);
+    padding-block: 0.25rem;
+  }
+
+  .nav-list a:hover {
+    color: var(--color-clay-deep);
+  }
+
+  .nav-list a[aria-current='page'] {
+    color: var(--color-ink);
+    border-bottom: 2px solid var(--color-clay);
+  }
+
+  .lang-switch {
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    color: var(--color-ink-faint);
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+  }
+
+  .lang-switch a {
+    text-decoration: none;
+    color: var(--color-ink-soft);
+    padding: 0.15rem 0.2rem;
+  }
+
+  .lang-switch a:hover {
+    color: var(--color-clay-deep);
+  }
+
+  .lang-switch a[aria-current='true'] {
+    color: var(--color-ink);
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--color-moss);
+  }
+
+  @media (max-width: 720px) {
+    .header-inner {
+      justify-content: space-between;
+    }
+    .brand {
+      margin-right: 0;
+    }
+    nav {
+      order: 3;
+      width: 100%;
+    }
+    .nav-list {
+      gap: 0.25rem 1.1rem;
+    }
+  }
+</style>
