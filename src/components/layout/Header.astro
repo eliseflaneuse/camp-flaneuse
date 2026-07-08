@@ -54,9 +54,17 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
     </nav>
 
     <div class="lang-switch" aria-label={t.languageSwitch}>
-      <a href={lang === 'en' ? currentPath : switchUrl} aria-current={lang === 'en' ? 'true' : undefined} lang="en">EN</a>
+      {lang === 'en' ? (
+        <span class="lang-current" aria-current="true" lang="en">EN</span>
+      ) : (
+        <a href={switchUrl} lang="en">EN</a>
+      )}
       <span aria-hidden="true">·</span>
-      <a href={lang === 'pt' ? currentPath : switchUrl} aria-current={lang === 'pt' ? 'true' : undefined} lang="pt">PT</a>
+      {lang === 'pt' ? (
+        <span class="lang-current" aria-current="true" lang="pt">PT</span>
+      ) : (
+        <a href={switchUrl} lang="pt">PT</a>
+      )}
     </div>
   </div>
 </header>
@@ -141,10 +149,11 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
     color: var(--color-clay-deep);
   }
 
-  .lang-switch a[aria-current='true'] {
+  .lang-current {
     color: var(--color-ink);
     font-weight: 500;
     border-bottom: 1.5px solid var(--color-moss);
+    padding: 0.15rem 0.2rem;
   }
 
   @media (max-width: 720px) {

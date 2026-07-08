@@ -25,6 +25,8 @@ interface Props {
   translationUrl?: string;
   /** Open Graph image path — placeholder until real art exists. */
   ogImage?: string;
+  /** Keep search engines away (404, drafts, utility pages). */
+  noindex?: boolean;
 }
 
 const {
@@ -33,12 +35,19 @@ const {
   lang = 'en',
   translationUrl,
   ogImage = '/og-placeholder.svg',
+  noindex = false,
 } = Astro.props;
 
 const t = ui[lang];
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const fullTitle =
   title === t.siteName ? `${t.siteName} — ${t.tagline}` : `${title} · ${t.siteName}`;
+
+/* hreflang alternates — only when this page has a counterpart in the
+   other language. English is the x-default. */
+const translationAbs = translationUrl ? new URL(translationUrl, Astro.site) : undefined;
+const hreflangEn = lang === 'en' ? canonicalUrl : translationAbs;
+const hreflangPt = lang === 'pt' ? canonicalUrl : translationAbs;
 ---
 
 <!doctype html>
@@ -50,13 +59,24 @@ const fullTitle =
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <link rel="canonical" href={canonicalUrl} />
+    )}
+    {!noindex && translationAbs && hreflangEn && hreflangPt && (
+      <>
+        <link rel="alternate" hreflang="en" href={hreflangEn} />
+        <link rel="alternate" hreflang="pt-BR" href={hreflangPt} />
+        <link rel="alternate" hreflang="x-default" href={hreflangEn} />
+      </>
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
+    {!noindex && <meta property="og:url" content={canonicalUrl} />}
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_GB'} />
   </head>

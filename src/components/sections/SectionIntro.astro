@@ -11,7 +11,7 @@ interface Props {
   as?: 'h1' | 'h2';
 }
 
-const { overline, title, lede, as: Heading = 'h2' } = Astro.props;
+const { overline, title, lede, as: Heading = 'h2' }: Props = Astro.props;
 ---
 
 <div class="section-intro">
