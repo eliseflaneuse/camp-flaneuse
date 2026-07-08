@@ -1,0 +1,410 @@
+---
+/**
+ * CampMap — a hand-drawn, clickable map of the camp.
+ *
+ * Style: colored-in field map. A sage land mass sits on the paper,
+ * cream roads are carved through it, the river crosses it, trees are
+ * solid little shapes, and each landmark is a small building — filled
+ * with its room color, outlined in ink, windows in paper — in the
+ * same hand as the site's icon set.
+ *
+ * Six landmarks are links (gate, archive, society, workshop, Ember,
+ * mailbox); the cat, the deer, the birds, and the strange parking
+ * lot are decoration and stay aria-hidden.
+ *
+ * The map hides below 700px: the Explore cards cover navigation on
+ * phones, where map tap-targets would be too small to be kind.
+ */
+import SectionIntro from './SectionIntro.astro';
+import { routes, type Lang } from '../../lib/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+
+const t =
+  lang === 'pt'
+    ? {
+        overline: 'Orientação',
+        title: 'Um mapa do acampamento',
+        lede: 'Desenhado à mão, fora de escala, ocasionalmente reorganizado pelo tempo. Clique numa construção para entrar.',
+        mapAria: 'Mapa do Camp Flaneuse',
+        gate: 'O PORTÃO',
+        gateAria: 'O Portão — entrada do acampamento (início)',
+        archive: 'O ARQUIVO',
+        archiveAria: 'O Arquivo — Notas de Campo',
+        society: 'A SOCIEDADE',
+        societySub: 'mesa de correspondência',
+        societyAria: 'A Sociedade dos Passos Suaves — cartas e correspondência',
+        workshop: 'A OFICINA',
+        workshopAria: 'A Oficina — Flaneuse Studio',
+        keeper: 'QUEM GUARDA',
+        keeperAria: 'Quem guarda — sobre o acampamento',
+        mailbox: 'A CAIXA DE CORREIO',
+        mailboxAria: 'A caixa de correio — contato',
+        youAreHere: 'você está aqui',
+        woods: 'O BOSQUE DO NORTE',
+        river: 'O RIO',
+        parking: 'ESTACIONAMENTO ESTRANHO',
+      }
+    : {
+        overline: 'Orientation',
+        title: 'A map of the camp',
+        lede: 'Hand-drawn, not to scale, occasionally rearranged by weather. Click a building to enter.',
+        mapAria: 'Map of Camp Flaneuse',
+        gate: 'THE GATE',
+        gateAria: 'The Gate — camp entrance (home)',
+        archive: 'THE ARCHIVE',
+        archiveAria: 'The Archive — Field Notes',
+        society: 'THE SOCIETY',
+        societySub: 'correspondence desk',
+        societyAria: 'The Soft Footsteps Society — letters and correspondence',
+        workshop: 'THE WORKSHOP',
+        workshopAria: 'The Workshop — Flaneuse Studio',
+        keeper: 'THE KEEPER',
+        keeperAria: 'The Keeper — about the camp',
+        mailbox: 'THE MAILBOX',
+        mailboxAria: 'The mailbox — contact',
+        youAreHere: 'you are here',
+        woods: 'THE NORTH WOODS',
+        river: 'THE RIVER',
+        parking: 'STRANGE PARKING LOT',
+      };
+---
+
+<section class="section camp-map-section">
+  <div class="container">
+    <SectionIntro overline={t.overline} title={t.title} lede={t.lede} />
+
+    <div class="map-frame panel">
+      <svg viewBox="0 0 1000 620" role="group" aria-label={t.mapAria} class="camp-map">
+        <title>{t.mapAria}</title>
+
+        <defs>
+          <g id="m-tree">
+            <circle cx="9" cy="9" r="8.5" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.3" />
+            <path d="M9 17.5 C9 21 9 24 9 28" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.6" stroke-linecap="round" />
+          </g>
+          <g id="m-conifer">
+            <path d="M10 1 L2 15 H5.5 L0.5 25 H19.5 L14.5 15 H18 Z" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.3" stroke-linejoin="round" />
+            <path d="M10 25 V29" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.6" stroke-linecap="round" />
+          </g>
+        </defs>
+
+        <!-- ======= the land ======= -->
+        <g aria-hidden="true">
+          <path
+            d="M135 478 C110 390 128 300 168 222 C200 152 280 82 400 56 C520 32 700 36 820 80 C898 110 948 200 938 300 C928 400 880 502 778 546 C660 590 430 592 298 566 C210 548 158 530 135 478 Z"
+            fill="#cbccb3"
+            stroke="var(--color-olive)"
+            stroke-width="1.6"
+            opacity="0.9"
+          />
+          <!-- gentle darker patches for variation -->
+          <ellipse cx="290" cy="120" rx="120" ry="45" fill="var(--color-moss)" opacity="0.1" />
+          <ellipse cx="640" cy="100" rx="130" ry="48" fill="var(--color-moss)" opacity="0.1" />
+          <ellipse cx="500" cy="420" rx="150" ry="60" fill="var(--color-olive)" opacity="0.08" />
+        </g>
+
+        <!-- ======= the river (crosses the land) ======= -->
+        <g aria-hidden="true" fill="none" stroke-linecap="round">
+          <path d="M205 35 C160 130 210 220 160 320 C120 400 190 480 150 585" stroke="var(--color-paper)" stroke-width="25" />
+          <path d="M205 35 C160 130 210 220 160 320 C120 400 190 480 150 585" stroke="var(--color-river)" stroke-width="15" opacity="0.5" />
+          <path d="M196 90 q3 -3 6 0 q3 3 6 0" stroke="var(--color-card)" stroke-width="1.5" opacity="0.9" />
+          <path d="M168 330 q3 -3 6 0 q3 3 6 0" stroke="var(--color-card)" stroke-width="1.5" opacity="0.9" />
+          <path d="M162 500 q3 -3 6 0 q3 3 6 0" stroke="var(--color-card)" stroke-width="1.5" opacity="0.9" />
+        </g>
+        <text class="map-terrain-label" transform="rotate(-75 130 268)" x="130" y="268" aria-hidden="true">{t.river}</text>
+
+        <!-- ======= roads carved out of the land ======= -->
+        <g aria-hidden="true" fill="none" stroke="var(--color-paper)" stroke-linecap="round">
+          <path d="M190 562 C180 534 186 516 196 500 C220 464 274 438 322 405 C352 388 332 330 302 291 C282 264 250 242 240 216 C268 187 360 173 465 169 C560 166 620 195 660 235 C672 248 676 262 678 278 C690 350 795 425 836 462" stroke-width="15" />
+          <path d="M240 216 C205 185 180 140 172 95" stroke-width="12" />
+          <path d="M660 235 C725 205 800 175 885 152" stroke-width="12" />
+          <path d="M598 452 C592 390 620 300 658 240" stroke-width="10" />
+        </g>
+        <!-- dashed centerline on the main road -->
+        <path
+          aria-hidden="true"
+          d="M190 562 C180 534 186 516 196 500 C220 464 274 438 322 405 C352 388 332 330 302 291 C282 264 250 242 240 216 C268 187 360 173 465 169 C560 166 620 195 660 235 C672 248 676 262 678 278 C690 350 795 425 836 462"
+          fill="none"
+          stroke="var(--color-clay)"
+          stroke-width="2.4"
+          stroke-dasharray="9 9"
+          stroke-linecap="round"
+          opacity="0.55"
+        />
+
+        <!-- ======= strange parking lot (a cleared rectangle, empty on purpose) ======= -->
+        <g aria-hidden="true">
+          <rect x="530" y="452" width="132" height="64" rx="4" fill="var(--color-paper)" />
+          <rect x="530" y="452" width="132" height="64" rx="4" fill="none" stroke="var(--color-ink-faint)" stroke-width="1.5" stroke-dasharray="7 7" />
+          <path d="M560 500 l3 -7 l3 7 M604 494 l3 -7 l3 7" fill="none" stroke="var(--color-moss)" stroke-width="1.3" stroke-linecap="round" />
+          <text class="map-sublabel map-sublabel--strong" x="596" y="536" text-anchor="middle">{t.parking}</text>
+        </g>
+
+        <!-- ======= the north woods ======= -->
+        <g aria-hidden="true">
+          <ellipse cx="270" cy="80" rx="95" ry="34" fill="var(--color-moss)" opacity="0.12" />
+          <ellipse cx="620" cy="72" rx="105" ry="36" fill="var(--color-moss)" opacity="0.12" />
+          <use href="#m-conifer" x="206" y="46" style="color: var(--color-moss)" />
+          <use href="#m-tree" x="248" y="44" style="color: var(--color-ochre)" />
+          <use href="#m-tree" x="288" y="56" style="color: var(--color-moss)" />
+          <use href="#m-conifer" x="330" y="60" style="color: var(--color-olive)" />
+          <use href="#m-tree" x="556" y="46" style="color: var(--color-moss)" />
+          <use href="#m-conifer" x="604" y="40" style="color: var(--color-moss)" />
+          <use href="#m-conifer" x="646" y="54" style="color: var(--color-ochre)" />
+          <use href="#m-tree" x="688" y="48" style="color: var(--color-olive)" />
+          <!-- the deer, half-hidden at the tree line -->
+          <g transform="translate(722, 50) scale(1.5)" fill="none" stroke="var(--color-ink-faint)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 9.5 C9 6.5 6.8 6.2 5.5 3.5 M9 9.5 C8.2 7.2 6.2 7.6 5.8 6" />
+            <path d="M15 9.5 C15 6.5 17.2 6.2 18.5 3.5 M15 9.5 C15.8 7.2 17.8 7.6 18.2 6" />
+            <path d="M9 9.5 C11 8.6 13 8.6 15 9.5 L13.7 16.5 C13.2 18.8 10.8 18.8 10.3 16.5 Z" />
+            <circle cx="10.8" cy="12.2" r="0.4" fill="var(--color-ink-faint)" stroke="none" />
+            <circle cx="13.2" cy="12.2" r="0.4" fill="var(--color-ink-faint)" stroke="none" />
+          </g>
+          <use href="#m-conifer" x="752" y="56" style="color: var(--color-moss)" />
+          <use href="#m-conifer" x="706" y="62" style="color: var(--color-olive)" />
+          <!-- scattered singles -->
+          <use href="#m-tree" x="196" y="330" style="color: var(--color-moss)" />
+          <use href="#m-conifer" x="798" y="262" style="color: var(--color-ochre)" />
+          <use href="#m-tree" x="856" y="336" style="color: var(--color-moss)" />
+        </g>
+        <text class="map-terrain-label" x="395" y="32" text-anchor="middle" aria-hidden="true">{t.woods}</text>
+
+        <!-- ======= birds ======= -->
+        <g aria-hidden="true" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.5" stroke-linecap="round">
+          <path d="M472 62 C474 59.5 476.5 59.5 478 61.5 C479.5 59.5 482 59.3 484 61.3" />
+          <path d="M508 48 C510 45.5 512.5 45.5 514 47.5 C515.5 45.5 518 45.3 520 47.3" />
+          <path d="M884 210 C885.6 208 887.6 208 888.8 209.6 C890 208 892 207.8 893.6 209.4" stroke-width="1.3" />
+        </g>
+
+        <!-- ======= compass ======= -->
+        <g aria-hidden="true" transform="translate(944, 60)">
+          <circle r="20" fill="none" stroke="var(--color-line)" stroke-width="1.4" stroke-dasharray="2 4" />
+          <path d="M0 -14 L4 8 L0 3 L-4 8 Z" fill="var(--color-clay)" stroke="none" />
+          <text class="map-sublabel" x="0" y="-28" text-anchor="middle">N</text>
+        </g>
+
+        <!-- ======= cat asleep on a rock (decorative) ======= -->
+        <g aria-hidden="true" transform="translate(408, 406)">
+          <ellipse cx="0" cy="12" rx="26" ry="11" fill="var(--color-paper-deep)" opacity="0.9" />
+          <path d="M-24 13 A24 11 0 0 1 24 13" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.5" stroke-linecap="round" />
+          <g fill="none" stroke="var(--color-ink-soft)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M-9 2 A 9 7.5 0 1 1 8.5 4" />
+            <path d="M-6 -4.5 L-8.5 -8.5 L-4 -7" />
+            <path d="M1 -5.5 L2.5 -9.5 L5.5 -6.5" />
+            <path d="M8.5 4 C13.5 6 15 2 11.5 -1" />
+            <path d="M-3 -1.5 q1.5 1.5 3 0" stroke-width="1.2" />
+          </g>
+        </g>
+
+        <!-- ======= paw trail to the society (decorative) ======= -->
+        <g aria-hidden="true" fill="var(--color-clay-deep)" opacity="0.75">
+          <circle cx="470" cy="207" r="2.2" />
+          <circle cx="482" cy="196" r="2.2" />
+          <circle cx="475" cy="184" r="2.2" />
+          <circle cx="489" cy="176" r="2.2" />
+        </g>
+
+        <!-- ======= you are here (decorative) ======= -->
+        <g aria-hidden="true" transform="translate(268, 542)">
+          <circle r="12" fill="none" stroke="var(--color-clay-deep)" stroke-width="1.6" stroke-dasharray="4 4" />
+          <circle r="4" fill="var(--color-clay-deep)" />
+          <text class="map-hand" x="20" y="7" transform="rotate(-3 20 7)">{t.youAreHere}</text>
+        </g>
+
+        <!-- ================= LANDMARKS (clickable buildings) ================= -->
+
+        <!-- 1 · THE GATE -->
+        <a href={routes.home[lang]} class="room" aria-label={t.gateAria} style="color: var(--color-moss)">
+          <g transform="translate(140, 466)">
+            <g class="room-art">
+              <path d="M4 32 L47 6 L90 32 Z" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.7" stroke-linejoin="round" />
+              <rect x="16" y="32" width="9" height="30" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.4" />
+              <rect x="69" y="32" width="9" height="30" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.4" />
+              <path d="M38 32 V40 M58 32 V40" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.4" />
+              <rect x="30" y="40" width="36" height="17" rx="2" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.4" />
+              <path d="M36 47 H60 M36 52 H52" fill="none" stroke="var(--color-ink-faint)" stroke-width="1.1" stroke-linecap="round" />
+              <path d="M47 6 V-6" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M47 -6 L58 -2.5 L47 1 Z" fill="var(--color-clay)" stroke="none" />
+              <ellipse cx="86" cy="46" rx="7" ry="8" fill="var(--color-ochre)" opacity="0.4" stroke="none" />
+              <path d="M78 36 h6" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.3" stroke-linecap="round" />
+              <rect x="82.5" y="41" width="7" height="10" rx="1.5" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.3" />
+            </g>
+            <text class="map-label room-label" x="47" y="84" text-anchor="middle">{t.gate}</text>
+          </g>
+        </a>
+
+        <!-- 2 · THE ARCHIVE (a cabinet that became a building) -->
+        <a href={routes.fieldNotes[lang]} class="room" aria-label={t.archiveAria} style="color: var(--color-olive)">
+          <g transform="translate(168, 118)">
+            <g class="room-art">
+              <rect x="6" y="14" width="74" height="56" rx="2" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.6" />
+              <path d="M0 14 L43 -8 L86 14 Z" fill="var(--color-moss-deep)" stroke="var(--color-ink-soft)" stroke-width="1.6" stroke-linejoin="round" />
+              <rect x="14" y="20" width="58" height="11" rx="2" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+              <rect x="14" y="36" width="58" height="11" rx="2" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+              <rect x="14" y="52" width="58" height="11" rx="2" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+              <circle cx="43" cy="25.5" r="1.5" fill="var(--color-ink-soft)" stroke="none" />
+              <circle cx="43" cy="41.5" r="1.5" fill="var(--color-ink-soft)" stroke="none" />
+              <circle cx="43" cy="57.5" r="1.5" fill="var(--color-ink-soft)" stroke="none" />
+              <path d="M50 -14 C52 -16.5 54.5 -16.5 56 -14.5 C57.5 -16.5 60 -16.7 62 -14.7" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.4" stroke-linecap="round" />
+            </g>
+            <text class="map-label room-label" x="43" y="90" text-anchor="middle">{t.archive}</text>
+          </g>
+        </a>
+
+        <!-- 3 · THE SOCIETY (house under construction, envelope window) -->
+        <a href={routes.softFootsteps[lang]} class="room" aria-label={t.societyAria} style="color: var(--color-river)">
+          <g transform="translate(452, 92)">
+            <g class="room-art">
+              <rect x="24" y="38" width="62" height="42" rx="2" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.6" />
+              <path d="M16 40 L55 10 L94 40" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.8" stroke-dasharray="5 5" stroke-linejoin="round" />
+              <path d="M16 40 L38 23 L38 40 Z" fill="currentColor" opacity="0.5" stroke="none" />
+              <rect x="34" y="46" width="28" height="18" rx="1.5" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.2" />
+              <path d="M35 48 L48 56 L61 48" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+              <rect x="68" y="64" width="12" height="16" rx="1" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+            </g>
+            <text class="map-label room-label" x="55" y="100" text-anchor="middle">{t.society}</text>
+            <text class="map-sublabel" x="55" y="115" text-anchor="middle">{t.societySub}</text>
+          </g>
+        </a>
+
+        <!-- 4 · THE WORKSHOP (tent with a lit window) -->
+        <a href={routes.studio[lang]} class="room" aria-label={t.workshopAria} style="color: var(--color-clay)">
+          <g transform="translate(690, 262)">
+            <g class="room-art">
+              <path d="M45 6 C35 22 24 40 14 62 L76 62 C66 40 55 22 45 6 Z" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.8" stroke-linejoin="round" />
+              <path d="M38 62 L45 47 L52 62 Z" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.2" stroke-linejoin="round" />
+              <ellipse cx="61" cy="44" rx="10" ry="8" fill="var(--color-ochre)" opacity="0.45" stroke="none" />
+              <rect x="56" y="39" width="11" height="10" rx="1.5" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+              <path d="M61.5 39 V49 M56 44 H67" fill="none" stroke="var(--color-ink-soft)" stroke-width="0.9" />
+              <path d="M45 6 V-4" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M45 -4 L54 -1 L45 2 Z" fill="var(--color-ochre)" stroke="none" />
+              <path d="M2 52 L13 41 M9 37 L17 45" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.6" stroke-linecap="round" />
+            </g>
+            <text class="map-label room-label" x="45" y="86" text-anchor="middle">{t.workshop}</text>
+          </g>
+        </a>
+
+        <!-- 5 · THE KEEPER (Ember under a tree) -->
+        <a href={routes.about[lang]} class="room" aria-label={t.keeperAria} style="color: var(--color-ochre)">
+          <g transform="translate(258, 296)">
+            <g class="room-art">
+              <circle cx="108" cy="8" r="20" fill="var(--color-moss)" stroke="var(--color-ink-soft)" stroke-width="1.4" />
+              <path d="M108 28 C107 38 107 44 108 52" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.6" stroke-linecap="round" />
+              <rect x="0" y="20" width="86" height="36" rx="8" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.7" />
+              <rect x="42" y="13" width="11" height="7" rx="1.5" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.2" />
+              <rect x="8" y="28" width="17" height="13" rx="2" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.2" />
+              <rect x="33" y="28" width="14" height="13" rx="2" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.2" />
+              <path d="M58 22 V54" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.2" />
+              <circle cx="62" cy="38" r="1.2" fill="var(--color-ink-soft)" stroke="none" />
+              <circle cx="20" cy="58" r="6.5" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.7" />
+              <circle cx="66" cy="58" r="6.5" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.7" />
+              <circle cx="20" cy="58" r="1.4" fill="var(--color-ink-soft)" stroke="none" />
+              <circle cx="66" cy="58" r="1.4" fill="var(--color-ink-soft)" stroke="none" />
+              <path d="M94 60 L106 42 M94 42 L106 60 M105 44 L111 32" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M116 60 a7 7 0 0 0 14 0 v-5 h-14 z M130 57 l6 -4 M119 54 a6 5 0 0 1 8 -2" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <text class="map-label room-label" x="62" y="86" text-anchor="middle">{t.keeper}</text>
+          </g>
+        </a>
+
+        <!-- 6 · THE MAILBOX -->
+        <a href={routes.contact[lang]} class="room" aria-label={t.mailboxAria} style="color: var(--color-clay-deep)">
+          <g transform="translate(806, 424)">
+            <g class="room-art">
+              <path d="M19 26 V60" fill="none" stroke="var(--color-ink-soft)" stroke-width="2" stroke-linecap="round" />
+              <rect x="0" y="6" width="38" height="20" rx="8" fill="currentColor" stroke="var(--color-ink-soft)" stroke-width="1.6" />
+              <path d="M8 6 C4 10 4 22 8 26" fill="none" stroke="var(--color-card)" stroke-width="1.5" />
+              <path d="M32 6 V-6" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M32 -6 L42 -3 L32 0 Z" fill="var(--color-clay)" stroke="none" />
+              <rect x="24" y="48" width="16" height="11" rx="1.5" fill="var(--color-card)" stroke="var(--color-ink-soft)" stroke-width="1.2" />
+              <path d="M25 50 L32 55.5 L39 50" fill="none" stroke="var(--color-ink-soft)" stroke-width="1.1" />
+            </g>
+            <g fill="none" stroke="var(--color-ink-soft)" stroke-width="1.3" stroke-linecap="round" opacity="0.8" aria-hidden="true">
+              <path d="M52 58 l3 -3 M52 58 l3 3 M52 58 h4.5" />
+              <path d="M63 53 l3 -3 M63 53 l3 3 M63 53 h4.5" />
+              <path d="M74 48 l3 -3 M74 48 l3 3 M74 48 h4.5" />
+            </g>
+            <text class="map-label room-label" x="19" y="86" text-anchor="middle">{t.mailbox}</text>
+          </g>
+        </a>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .map-frame {
+    padding: clamp(0.8rem, 2vw, 1.6rem);
+  }
+
+  .camp-map {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .map-label {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    fill: var(--color-ink);
+  }
+
+  .map-sublabel {
+    font-family: var(--font-label);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    fill: var(--color-ink-soft);
+  }
+
+  .map-sublabel--strong {
+    fill: var(--color-ink-soft);
+  }
+
+  .map-terrain-label {
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    fill: var(--color-ink-soft);
+  }
+
+  .map-hand {
+    font-family: var(--font-hand);
+    font-size: 21px;
+    fill: var(--color-clay-deep);
+  }
+
+  .room {
+    cursor: pointer;
+  }
+
+  .room:hover .room-label,
+  .room:focus-visible .room-label {
+    fill: var(--color-clay-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .room:hover .room-art,
+  .room:focus-visible .room-art {
+    filter: brightness(0.82) saturate(1.15);
+  }
+
+  .room:focus-visible {
+    outline: 2px solid var(--color-river);
+    outline-offset: 5px;
+    border-radius: 6px;
+  }
+
+  /* Phones navigate by the Explore cards; the map needs room to breathe. */
+  @media (max-width: 700px) {
+    .camp-map-section {
+      display: none;
+    }
+  }
+</style>
