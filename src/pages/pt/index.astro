@@ -155,25 +155,6 @@ const exploreCards = [
     gap: 1.2rem;
   }
 
-  /* Cards pinned to a noticeboard: each hangs a hair off-level. */
-  .explore-grid > :global(:nth-child(odd)) {
-    transform: rotate(-0.5deg);
-  }
-
-  .explore-grid > :global(:nth-child(even)) {
-    transform: rotate(0.4deg);
-  }
-
-  .explore-grid > :global(*:hover) {
-    transform: rotate(0deg) translateY(-2px);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .explore-grid > :global(*:hover) {
-      transform: none;
-    }
-  }
-
   .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
