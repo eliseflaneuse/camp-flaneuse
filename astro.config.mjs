@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // Placeholder domain — swap for the real one before going live.
-  site: 'https://campflaneuse.com',
+  // Live at Cloudflare Workers — swap for a custom domain when there is one.
+  site: 'https://camp-flaneuse.eliseflaneuse.workers.dev',
   trailingSlash: 'ignore',
   i18n: {
     defaultLocale: 'en',
