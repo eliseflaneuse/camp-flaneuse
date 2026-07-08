@@ -6,12 +6,14 @@ This is the MVP website for **Camp Flaneuse** — part travel journal, part arti
 
 ## Commands
 
-| Command           | What it does                                    |
-| ----------------- | ----------------------------------------------- |
-| `npm install`     | Install dependencies                            |
-| `npm run dev`     | Start the dev server at `http://localhost:4321` |
-| `npm run build`   | Build the static site into `dist/`              |
-| `npm run preview` | Preview the built site locally                  |
+| Command            | What it does                                            |
+| ------------------ | ------------------------------------------------------- |
+| `npm install`      | Install dependencies                                    |
+| `npm run dev`      | Start the dev server at `http://localhost:4321`         |
+| `npm run build`    | Build the static site into `dist/`                      |
+| `npm run preview`  | Preview the built site locally                          |
+| `npm run check`    | Type-check all pages and components                     |
+| `npm run validate` | Check + build — "is the camp structurally safe?" button |
 
 > Requires Node 18.17+ (Node 20+ recommended). If you use nvm-windows: `nvm use 24.18.0`.
 
@@ -79,33 +81,39 @@ src/
     layout/           ← BaseLayout, Header, Footer
     content/          ← FieldNoteCard, LetterCard, MetadataLine, TagList, ImagePlaceholder
     sections/         ← Hero, SectionIntro, ExploreCard, CTASection, StudioPackageCard, PageTitle
+    decor/            ← the handmade layer: LogoMark, Icon, DecorativeMarks, WelcomeGate
   lib/
     i18n.ts           ← languages, routes, UI strings, category labels
     content.ts        ← content collection helpers
   styles/
     tokens.css        ← the design system: colors, fonts, spacing (change the look here)
     global.css        ← base styles, prose, buttons, labels
+wrangler.jsonc        ← Cloudflare Workers config (static assets, 404 handling)
 ```
 
 ## Design system
 
-All colors, fonts, and spacing are CSS variables in `src/styles/tokens.css` — change them once, the whole site follows. Palette: warm paper, deep ink, moss, faded olive, dusty clay, river blue, dark forest. Fonts: Fraunces (headings), Karla (body), IBM Plex Mono (field labels) — self-hosted via Fontsource, no external requests.
+All colors, fonts, and spacing are CSS variables in `src/styles/tokens.css` — change them once, the whole site follows. Palette: warm paper, deep ink, moss, faded olive, dusty clay, river blue, dark forest — plus crayon mark colors (ochre, blush) for marginalia. Fonts: Fraunces (headings), Karla (body), IBM Plex Mono (field labels), Caveat (handwritten accents only) — all self-hosted via Fontsource, no external requests.
 
-## Before going live
+The handmade layer lives in `src/components/decor/`:
 
-A few placeholders to swap:
+- **LogoMark** — the tent-on-wheels camp sign; scales from header to welcome screen
+- **Icon** — monoline camp glyphs (bird, cat, envelope, notebook, pin, deer, tent, sun, paw)
+- **DecorativeMarks** — colored-pencil marks at the page edges; desktop-first, reduced to almost nothing on phones; `--mark-opacity` in tokens.css controls how loud they are
+- **WelcomeGate** — the once-per-session arrival screen; hidden without JavaScript, skippable by click or key, respects reduced motion, never blocks SEO
 
-- [ ] Real domain in `astro.config.mjs` (`site: 'https://campflaneuse.com'`)
-- [ ] Real email address in `src/pages/contact.astro` and `src/pages/pt/contato.astro`
-- [ ] Real Open Graph image (currently `public/og-placeholder.svg`)
-- [ ] Drawings for the `ImagePlaceholder` boxes, whenever the deer agrees to be drawn
+Everything decorative is `aria-hidden` and sits behind the content — remove any of these components from `BaseLayout.astro` and the site works fine without them.
 
 ## Deploying
 
-The site is fully static. Any of these work with zero configuration:
+The site is **live** at <https://camp-flaneuse.eliseflaneuse.workers.dev>, hosted on Cloudflare Workers (static assets only — see `wrangler.jsonc`). Every push to `main` triggers an automatic build and deploy via Cloudflare Workers Builds; it's live about 90 seconds after `git push`. Run `npm run validate` before pushing when you've touched components or config.
 
-- **Netlify / Vercel / Cloudflare Pages**: connect the repo, build command `npm run build`, output directory `dist`.
-- **GitHub Pages**: build and publish `dist/` (set `site` and `base` in `astro.config.mjs` if using a project page).
+## Remaining placeholders
+
+- [ ] Custom domain — attach it to the Worker in the Cloudflare dashboard, then update `site` in `astro.config.mjs`
+- [ ] Real email address in `src/pages/contact.astro` and `src/pages/pt/contato.astro` (currently `hello@campflaneuse.com`)
+- [ ] Real Open Graph image (currently `public/og-placeholder.svg`)
+- [ ] Drawings for the `ImagePlaceholder` boxes, whenever the deer agrees to be drawn
 
 ## Later (deliberately not built yet)
 
