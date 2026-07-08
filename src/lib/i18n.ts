@@ -67,7 +67,7 @@ export const ui = {
   },
   pt: {
     siteName: 'Camp Flaneuse',
-    tagline: 'Um acampamento em movimento para notas de campo, cartas, rebeldia mansa e assombro.',
+    tagline: 'Um acampamento em movimento para notas de campo, cartas, rebeldia mansa e espanto.',
     skipToContent: 'Pular para o conteúdo',
     nav: {
       fieldNotes: 'Notas de Campo',
