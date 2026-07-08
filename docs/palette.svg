@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="570" viewBox="0 0 940 570" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="940" height="570" fill="#f2ecdd" rx="10"/>
+  <rect x="6" y="6" width="928" height="558" fill="none" stroke="#d5cab0" stroke-width="1.5" stroke-dasharray="6 8" rx="8"/>
+
+  <text x="40" y="52" font-size="26" font-style="italic" fill="#2d2721">Camp Flaneuse — the colors of the camp</text>
+
+  <!-- ============ row 1: paper &amp; ink ============ -->
+  <text x="40" y="96" font-size="12" letter-spacing="2" fill="#8a7f6a" font-family="Consolas, monospace">PAPER &amp; INK</text>
+
+  <rect x="40" y="108" width="110" height="64" rx="6" fill="#f2ecdd" stroke="#d5cab0"/>
+  <text x="95" y="194" font-size="14" fill="#2d2721" text-anchor="middle">paper</text>
+  <text x="95" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#f2ecdd</text>
+
+  <rect x="166" y="108" width="110" height="64" rx="6" fill="#e9dfc9" stroke="#d5cab0"/>
+  <text x="221" y="194" font-size="14" fill="#2d2721" text-anchor="middle">paper deep</text>
+  <text x="221" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#e9dfc9</text>
+
+  <rect x="292" y="108" width="110" height="64" rx="6" fill="#f9f5e9" stroke="#d5cab0"/>
+  <text x="347" y="194" font-size="14" fill="#2d2721" text-anchor="middle">card</text>
+  <text x="347" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#f9f5e9</text>
+
+  <rect x="418" y="108" width="110" height="64" rx="6" fill="#d5cab0"/>
+  <text x="473" y="194" font-size="14" fill="#2d2721" text-anchor="middle">line</text>
+  <text x="473" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#d5cab0</text>
+
+  <rect x="544" y="108" width="110" height="64" rx="6" fill="#2d2721"/>
+  <text x="599" y="194" font-size="14" fill="#2d2721" text-anchor="middle">ink</text>
+  <text x="599" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#2d2721</text>
+
+  <rect x="670" y="108" width="110" height="64" rx="6" fill="#5c5344"/>
+  <text x="725" y="194" font-size="14" fill="#2d2721" text-anchor="middle">ink soft</text>
+  <text x="725" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#5c5344</text>
+
+  <rect x="796" y="108" width="110" height="64" rx="6" fill="#8a7f6a"/>
+  <text x="851" y="194" font-size="14" fill="#2d2721" text-anchor="middle">ink faint</text>
+  <text x="851" y="212" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#8a7f6a</text>
+
+  <!-- ============ row 2: camp accents ============ -->
+  <text x="40" y="262" font-size="12" letter-spacing="2" fill="#8a7f6a" font-family="Consolas, monospace">CAMP ACCENTS</text>
+
+  <rect x="40" y="274" width="110" height="64" rx="6" fill="#4b6141"/>
+  <text x="95" y="360" font-size="14" fill="#2d2721" text-anchor="middle">moss</text>
+  <text x="95" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#4b6141</text>
+
+  <rect x="166" y="274" width="110" height="64" rx="6" fill="#38492f"/>
+  <text x="221" y="360" font-size="14" fill="#2d2721" text-anchor="middle">moss deep</text>
+  <text x="221" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#38492f</text>
+
+  <rect x="292" y="274" width="110" height="64" rx="6" fill="#7c7852"/>
+  <text x="347" y="360" font-size="14" fill="#2d2721" text-anchor="middle">olive</text>
+  <text x="347" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#7c7852</text>
+
+  <rect x="418" y="274" width="110" height="64" rx="6" fill="#a2543a"/>
+  <text x="473" y="360" font-size="14" fill="#2d2721" text-anchor="middle">clay</text>
+  <text x="473" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#a2543a</text>
+
+  <rect x="544" y="274" width="110" height="64" rx="6" fill="#8a4630"/>
+  <text x="599" y="360" font-size="14" fill="#2d2721" text-anchor="middle">clay deep</text>
+  <text x="599" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#8a4630</text>
+
+  <rect x="670" y="274" width="110" height="64" rx="6" fill="#48707f"/>
+  <text x="725" y="360" font-size="14" fill="#2d2721" text-anchor="middle">river</text>
+  <text x="725" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#48707f</text>
+
+  <rect x="796" y="274" width="110" height="64" rx="6" fill="#243128"/>
+  <text x="851" y="360" font-size="14" fill="#2d2721" text-anchor="middle">forest</text>
+  <text x="851" y="378" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#243128</text>
+
+  <!-- ============ row 3: crayon marks ============ -->
+  <text x="40" y="428" font-size="12" letter-spacing="2" fill="#8a7f6a" font-family="Consolas, monospace">CRAYON MARKS</text>
+
+  <rect x="40" y="440" width="110" height="64" rx="6" fill="#c2933d"/>
+  <text x="95" y="526" font-size="14" fill="#2d2721" text-anchor="middle">ochre</text>
+  <text x="95" y="544" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#c2933d</text>
+
+  <rect x="166" y="440" width="110" height="64" rx="6" fill="#c4837a"/>
+  <text x="221" y="526" font-size="14" fill="#2d2721" text-anchor="middle">blush</text>
+  <text x="221" y="544" font-size="12" fill="#8a7f6a" text-anchor="middle" font-family="Consolas, monospace">#c4837a</text>
+
+  <!-- a little marginalia demonstration -->
+  <g fill="none" stroke-linecap="round" opacity="0.65">
+    <path d="M330 496 C342 478 352 466 366 454" stroke="#4b6141" stroke-width="3.5"/>
+    <path d="M350 502 C360 486 369 476 382 465" stroke="#c2933d" stroke-width="3"/>
+    <path d="M446 456 C462 460 468 472 460 484 C451 496 430 497 420 486 C411 476 417 462 431 458" stroke="#a2543a" stroke-width="2.6"/>
+    <path d="M510 452 L510 492 M490 472 L530 472 M496 458 L524 486 M524 458 L496 486" stroke="#c4837a" stroke-width="2.8"/>
+    <circle cx="560" cy="492" r="2.6" fill="#a2543a" stroke="none"/>
+    <circle cx="577" cy="483" r="2.4" fill="#a2543a" stroke="none"/>
+    <circle cx="594" cy="476" r="2.4" fill="#a2543a" stroke="none"/>
+  </g>
+  <text x="630" y="478" font-size="15" font-style="italic" fill="#5c5344">for marginalia only — never for text</text>
+</svg>

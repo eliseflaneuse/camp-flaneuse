@@ -104,6 +104,14 @@ The handmade layer lives in `src/components/decor/`:
 
 Everything decorative is `aria-hidden` and sits behind the content — remove any of these components from `BaseLayout.astro` and the site works fine without them.
 
+### The colors of the camp
+
+![Camp Flaneuse color palette — paper and ink neutrals, camp accents (moss, olive, clay, river, forest), and two crayon mark colors (ochre, blush) for marginalia only](docs/palette.svg)
+
+### The symbols of the camp
+
+![The camp symbols — the tent-on-wheels camp mark, plus nine monoline glyphs: bird, cat, envelope, notebook, pin, deer, tent, sun, and paw, each in its field-note category color](docs/symbols.svg)
+
 ## Deploying
 
 The site is **live** at <https://camp-flaneuse.eliseflaneuse.workers.dev>, hosted on Cloudflare Workers (static assets only — see `wrangler.jsonc`). Every push to `main` triggers an automatic build and deploy via Cloudflare Workers Builds; it's live about 90 seconds after `git push`. Run `npm run validate` before pushing when you've touched components or config.
