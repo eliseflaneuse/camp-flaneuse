@@ -25,16 +25,9 @@ const exploreCards = [
   {
     roomLabel: 'A escrivaninha',
     icon: 'envelope' as const,
-    title: 'Correspondência',
-    description: 'Cartas da estrada. Algumas coisas chegam melhor dentro de um envelope.',
-    href: routes.correspondence.pt,
-  },
-  {
-    roomLabel: 'Uma porta futura',
-    icon: 'paw' as const,
     title: 'Sociedade dos Passos Suaves',
     description:
-      'Uma sociedade para quem caminha com atenção, atualmente em fundação. Inscrições ainda fechadas. A escrivaninha está sendo construída.',
+      'A sala das cartas: correspondência da estrada, despachos sazonais e uma sociedade para quem caminha com atenção — atualmente em fundação.',
     href: routes.softFootsteps.pt,
   },
   {
@@ -134,7 +127,7 @@ const exploreCards = [
     title="Precisa de um site pequeno com alma?"
     text="Nos fundos do acampamento existe um estúdio. Ele faz sites calmos e práticos para artistas e para quem escreve, cria e constrói algo fora do template."
     cta={{ label: 'Visitar o estúdio', href: routes.studio.pt }}
-    secondaryCta={{ label: 'Ler a primeira carta', href: `${routes.correspondence.pt}no-001/` }}
+    secondaryCta={{ label: 'Ler a primeira carta', href: `${routes.softFootsteps.pt}no-001/` }}
   />
 </BaseLayout>
 

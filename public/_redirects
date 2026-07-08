@@ -1,0 +1,5 @@
+# The Correspondence Desk moved inside the Soft Footsteps Society.
+/correspondence/ /soft-footsteps-society/ 301
+/correspondence/* /soft-footsteps-society/:splat 301
+/pt/correspondencia/ /pt/sociedade-dos-passos-suaves/ 301
+/pt/correspondencia/* /pt/sociedade-dos-passos-suaves/:splat 301

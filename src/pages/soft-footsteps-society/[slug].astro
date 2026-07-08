@@ -1,20 +1,22 @@
 ---
 /**
- * Carta individual — desenhada como carta, não como post.
+ * Individual letter — a room inside the Society.
+ * Designed like a letter, not a blog post: a paper sheet,
+ * a dateline, a drawing, a signature.
  */
 import { render } from 'astro:content';
-import BaseLayout from '../../../components/layout/BaseLayout.astro';
-import ImagePlaceholder from '../../../components/content/ImagePlaceholder.astro';
-import { detailPaths, formatDate, routes, ui } from '../../../lib/i18n';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import ImagePlaceholder from '../../components/content/ImagePlaceholder.astro';
+import { detailPaths, formatDate, routes, ui } from '../../lib/i18n';
 import {
   findLetterTranslation,
   getLetters,
   slugFromId,
   type Letter,
-} from '../../../lib/content';
+} from '../../lib/content';
 
 export async function getStaticPaths() {
-  const letters = await getLetters('pt');
+  const letters = await getLetters('en');
   return letters.map((letter) => ({
     params: { slug: slugFromId(letter.id) },
     props: { letter },
@@ -26,30 +28,30 @@ interface Props {
 }
 
 const { letter } = Astro.props;
-const t = ui.pt;
+const t = ui.en;
 const { Content } = await render(letter);
 
-const translation = await findLetterTranslation(letter, 'en');
+const translation = await findLetterTranslation(letter, 'pt');
 const translationUrl = translation
-  ? `${detailPaths.correspondence.en}${slugFromId(translation.id)}/`
+  ? `${detailPaths.correspondence.pt}${slugFromId(translation.id)}/`
   : undefined;
 ---
 
 <BaseLayout
   title={letter.data.title}
   description={letter.data.excerpt}
-  lang="pt"
+  lang="en"
   translationUrl={translationUrl}
 >
   <div class="section letter-wrap">
     <div class="container">
       <article class="letter-sheet panel">
         <header class="letter-head">
-          <p class="label letter-number">Correspondência · Nº {letter.data.number}</p>
+          <p class="label letter-number">The Soft Footsteps Society · Nº {letter.data.number}</p>
           <h1>{letter.data.title}</h1>
           {letter.data.subtitle && <p class="letter-subtitle">{letter.data.subtitle}</p>}
           <p class="label letter-dateline">
-            {letter.data.location} — {formatDate(letter.data.date, 'pt')}
+            {letter.data.location} — {formatDate(letter.data.date, 'en')}
           </p>
         </header>
 
@@ -59,13 +61,13 @@ const translationUrl = translation
 
         {letter.data.drawingPlaceholder && (
           <div class="letter-drawing">
-            <ImagePlaceholder lang="pt" icon="deer" note="Um desenho viaja com esta carta. Ele ainda não chegou." />
+            <ImagePlaceholder lang="en" icon="deer" note="A drawing travels with this letter. It has not arrived yet." />
           </div>
         )}
       </article>
 
       <p class="back-link">
-        <a href={routes.correspondence.pt}>← {t.backToCorrespondence}</a>
+        <a href={routes.softFootsteps.en}>← {t.backToCorrespondence}</a>
       </p>
     </div>
   </div>
@@ -76,6 +78,8 @@ const translationUrl = translation
     padding-block: var(--space-block) var(--space-section);
   }
 
+  /* The sheet: a paper panel with generous margins, like unfolding
+     a letter at a table. */
   .letter-sheet {
     max-width: 46rem;
     margin-inline: auto;
@@ -107,6 +111,7 @@ const translationUrl = translation
     margin-top: 0.4rem;
   }
 
+  /* Letters read a touch more like manuscript: serif body. */
   .letter-body {
     font-family: var(--font-heading);
     font-size: 1.1rem;

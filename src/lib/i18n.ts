@@ -22,7 +22,8 @@ export const routes = {
   home: { en: '/', pt: '/pt/' },
   about: { en: '/about/', pt: '/pt/sobre/' },
   fieldNotes: { en: '/field-notes/', pt: '/pt/notas-de-campo/' },
-  correspondence: { en: '/correspondence/', pt: '/pt/correspondencia/' },
+  /* The Correspondence Desk lives inside the Society — letters are
+     rooms within it, at /soft-footsteps-society/no-001 etc. */
   softFootsteps: {
     en: '/soft-footsteps-society/',
     pt: '/pt/sociedade-dos-passos-suaves/',
@@ -41,7 +42,6 @@ export const ui = {
     skipToContent: 'Skip to content',
     nav: {
       fieldNotes: 'Field Notes',
-      correspondence: 'Correspondence',
       studio: 'Studio',
       about: 'About',
       contact: 'Contact',
@@ -71,7 +71,6 @@ export const ui = {
     skipToContent: 'Pular para o conteúdo',
     nav: {
       fieldNotes: 'Notas de Campo',
-      correspondence: 'Correspondência',
       studio: 'Estúdio',
       about: 'Sobre',
       contact: 'Contato',
@@ -103,7 +102,6 @@ export type FieldNoteCategory =
   | 'studio'
   | 'camp'
   | 'weather'
-  | 'soft-footsteps'
   | 'reading'
   | 'art';
 
@@ -115,7 +113,6 @@ export const categoryLabels: Record<Lang, Record<FieldNoteCategory, string>> = {
     studio: 'Studio Notes',
     camp: 'Camp Notes',
     weather: 'Weather Notes',
-    'soft-footsteps': 'Soft Footsteps',
     reading: 'Reading Notes',
     art: 'Art Notes',
   },
@@ -125,7 +122,6 @@ export const categoryLabels: Record<Lang, Record<FieldNoteCategory, string>> = {
     studio: 'Notas de Estúdio',
     camp: 'Notas de Acampamento',
     weather: 'Notas de Tempo',
-    'soft-footsteps': 'Passos Suaves',
     reading: 'Notas de Leitura',
     art: 'Notas de Arte',
   },
@@ -143,5 +139,8 @@ export function formatDate(date: Date, lang: Lang): string {
 /** Base path for a field note / letter detail page, per language. */
 export const detailPaths = {
   fieldNotes: { en: '/field-notes/', pt: '/pt/notas-de-campo/' },
-  correspondence: { en: '/correspondence/', pt: '/pt/correspondencia/' },
+  correspondence: {
+    en: '/soft-footsteps-society/',
+    pt: '/pt/sociedade-dos-passos-suaves/',
+  },
 } as const;

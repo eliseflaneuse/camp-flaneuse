@@ -11,7 +11,7 @@ const fieldNotes = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     location: z.string().optional(),
-    category: z.enum(['road', 'creature', 'studio', 'camp', 'weather', 'soft-footsteps', 'reading', 'art']),
+    category: z.enum(['road', 'creature', 'studio', 'camp', 'weather', 'reading', 'art']),
     excerpt: z.string(),
     tags: z.array(z.string()).optional(),
     language: z.enum(['en', 'pt']),

@@ -8,10 +8,9 @@ This is the MVP website for **Camp Flaneuse** — part travel journal, part arti
 
 Camp Flaneuse is organized into a few small rooms:
 
-- **Field Notes** — observations from the road: places, weather, birds, museums, books, studio process, and strange parking lots.
-- **Correspondence** — letters from the road; slower and more intimate than posts.
-- **The Soft Footsteps Society** — a future correspondence/art project for attentive walkers.
-- **Flaneuse Studio** — small websites with soul for artists, writers, makers, and other sincere people.
+- **Field Notes** — observations from the road: places, weather, birds, museums, books, studio process, and strange parking lots. *Things you notice.*
+- **The Soft Footsteps Society** — the letters room: the Correspondence Desk, letters from the road, and a future correspondence/art project for attentive walkers. *Things you send.*
+- **Flaneuse Studio** — small websites with soul for artists, writers, makers, and other sincere people. *Things you make for others.*
 
 ## Commands
 
@@ -35,7 +34,7 @@ Create a Markdown file in `src/content/field-notes/en/` (or `pt/` for Portuguese
 title: "Road Note: Something You Noticed"
 date: "2026-07-15"
 location: "Wherever you were"
-category: "road"          # road | creature | studio | camp | weather | soft-footsteps | reading | art
+category: "road"          # road | creature | studio | camp | weather | reading | art
 excerpt: "One or two sentences that appear on the card."
 tags: ["road life", "example"]
 language: "en"            # en | pt — must match the folder
@@ -48,9 +47,9 @@ The note itself, in Markdown. Paragraphs, lists, *emphasis*, headings — all wo
 
 That's it. The archive page, homepage cards, prev/next navigation, and metadata all update automatically on the next build.
 
-## How to add a letter (Correspondence)
+## How to add a letter (the Soft Footsteps Society)
 
-Same idea, in `src/content/correspondence/en/` or `pt/`:
+Same idea, in `src/content/correspondence/en/` or `pt/` (the folder keeps its name; the pages publish under `/soft-footsteps-society/<slug>`):
 
 ```yaml
 ---
