@@ -27,4 +27,4 @@ Não existe um grande plano. Existe uma direção, o que é melhor. O plano, se 
 
 Algumas notas vão ser sobre pássaros. Outras, sobre estacionamentos. Um número surpreendente provavelmente vai ser sobre os dois, porque os pássaros não respeitam essa diferença e eu, a essa altura, também não.
 
-Se você encontrou este lugar: bem-vinda, bem-vindo. O acampamento é pequeno, mas pretende ficar aceso.
+Se você encontrou este lugar: as boas-vindas são suas. O acampamento é pequeno, mas pretende ficar aceso.
