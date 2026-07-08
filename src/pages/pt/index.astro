@@ -16,6 +16,7 @@ const latestNotes = (await getFieldNotes('pt')).slice(0, 3);
 const exploreCards = [
   {
     roomLabel: 'O arquivo',
+    icon: 'notebook' as const,
     title: 'Notas de Campo',
     description:
       'O diário. Notas de estrada, notas de criaturas, boletins do tempo e outras observações, arquivadas com razoável cuidado.',
@@ -23,12 +24,14 @@ const exploreCards = [
   },
   {
     roomLabel: 'A escrivaninha',
+    icon: 'envelope' as const,
     title: 'Correspondência',
     description: 'Cartas da estrada. Algumas coisas chegam melhor dentro de um envelope.',
     href: routes.correspondence.pt,
   },
   {
     roomLabel: 'Uma porta futura',
+    icon: 'paw' as const,
     title: 'Sociedade dos Passos Suaves',
     description:
       'Uma sociedade para quem caminha com atenção, atualmente sendo fundada. Inscrições ainda fechadas. A escrivaninha está sendo construída.',
@@ -36,6 +39,7 @@ const exploreCards = [
   },
   {
     roomLabel: 'A oficina',
+    icon: 'tent' as const,
     title: 'Flaneuse Studio',
     description:
       'Sites pequenos com alma, feitos nos fundos do acampamento para artistas, para quem escreve e para outras pessoas sinceras.',
@@ -43,6 +47,7 @@ const exploreCards = [
   },
   {
     roomLabel: 'Quem guarda',
+    icon: 'cat' as const,
     title: 'Sobre o Acampamento',
     description: 'A pessoa, o motorhome, os gatos, e por que tudo isso existe.',
     href: routes.about.pt,
@@ -63,6 +68,7 @@ const exploreCards = [
     intro="Feito de um motorhome chamado Ember, alguns gatos, cadernos demais, e a crença de que prestar atenção é um jeito de continuar aqui. Ele se move. Ele toma notas. Ele deixa uma luz acesa para você."
     primaryCta={{ label: 'Ler as notas de campo', href: routes.fieldNotes.pt }}
     secondaryCta={{ label: 'Visitar o estúdio', href: routes.studio.pt }}
+    archiveLine="Arquivo de campo · fundado na estrada · sempre em leve movimento"
   />
 
   <section class="section">
@@ -149,6 +155,25 @@ const exploreCards = [
     gap: 1.2rem;
   }
 
+  /* Cards pinned to a noticeboard: each hangs a hair off-level. */
+  .explore-grid > :global(:nth-child(odd)) {
+    transform: rotate(-0.5deg);
+  }
+
+  .explore-grid > :global(:nth-child(even)) {
+    transform: rotate(0.4deg);
+  }
+
+  .explore-grid > :global(*:hover) {
+    transform: rotate(0deg) translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .explore-grid > :global(*:hover) {
+      transform: none;
+    }
+  }
+
   .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
@@ -181,16 +206,16 @@ const exploreCards = [
   }
 
   .road-note-body {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.6;
+    font-family: var(--font-hand);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.45;
   }
 
   .road-note-sign {
     margin-top: 0.9rem;
-    font-family: var(--font-heading);
-    font-style: italic;
+    font-family: var(--font-hand);
+    font-size: 1.35rem;
     color: var(--color-ink-soft);
     text-align: right;
   }

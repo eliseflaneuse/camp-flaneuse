@@ -4,6 +4,7 @@
  * Site name, main navigation, language switcher.
  * No JavaScript: on small screens the nav simply wraps.
  */
+import LogoMark from '../decor/LogoMark.astro';
 import { routes, ui, type Lang } from '../../lib/i18n';
 
 interface Props {
@@ -32,10 +33,7 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href={routes.home[lang]}>
-      <svg class="brand-tent" viewBox="0 0 32 24" width="26" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M16 3 L3 21 L13 21 L16 15.5 L19 21 L29 21 Z" />
-        <path d="M16 3 L17.8 5.5" />
-      </svg>
+      <span class="brand-mark"><LogoMark size={34} /></span>
       <span class="brand-name">Camp Flaneuse</span>
     </a>
 
@@ -70,9 +68,20 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
 </header>
 
 <style>
+  /* A camp sign: solid line over a stitch line. */
   .site-header {
     border-bottom: 1px solid var(--color-line);
     background: color-mix(in srgb, var(--color-card) 60%, transparent);
+    position: relative;
+  }
+
+  .site-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    border-bottom: 1.5px dashed var(--color-line);
   }
 
   .header-inner {
@@ -92,9 +101,20 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
     margin-right: auto;
   }
 
-  .brand-tent {
-    color: var(--color-moss);
+  .brand-mark {
+    display: inline-flex;
     flex-shrink: 0;
+    transition: transform 160ms ease;
+  }
+
+  .brand:hover .brand-mark {
+    transform: rotate(-3deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-mark {
+      transition: none;
+    }
   }
 
   .brand-name {

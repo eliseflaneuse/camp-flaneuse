@@ -16,6 +16,7 @@ const latestNotes = (await getFieldNotes('en')).slice(0, 3);
 const exploreCards = [
   {
     roomLabel: 'The archive',
+    icon: 'notebook' as const,
     title: 'Field Notes',
     description:
       'The journal. Road notes, creature notes, weather reports, and other observations, filed with reasonable care.',
@@ -23,12 +24,14 @@ const exploreCards = [
   },
   {
     roomLabel: 'The desk',
+    icon: 'envelope' as const,
     title: 'Correspondence',
     description: 'Letters from the road. Some things arrive better in an envelope.',
     href: routes.correspondence.en,
   },
   {
     roomLabel: 'A future doorway',
+    icon: 'paw' as const,
     title: 'The Soft Footsteps Society',
     description:
       'A society for attentive walkers, currently being founded. Enrollment not yet open. The desk is being built.',
@@ -36,6 +39,7 @@ const exploreCards = [
   },
   {
     roomLabel: 'The workshop',
+    icon: 'tent' as const,
     title: 'Flaneuse Studio',
     description:
       'Small websites with soul, made in the back of the camp for artists, writers, and other sincere people.',
@@ -43,6 +47,7 @@ const exploreCards = [
   },
   {
     roomLabel: 'The keeper',
+    icon: 'cat' as const,
     title: 'About the Camp',
     description: 'The person, the motorhome, the cats, and why any of this exists.',
     href: routes.about.en,
@@ -63,6 +68,7 @@ const exploreCards = [
     intro="Made from a motorhome named Ember, a few cats, too many notebooks, and the belief that paying attention is a way of staying alive. It moves. It keeps notes. It leaves a light on for you."
     primaryCta={{ label: 'Read the field notes', href: routes.fieldNotes.en }}
     secondaryCta={{ label: 'Visit the studio', href: routes.studio.en }}
+    archiveLine="Field archive · est. on the road · always slightly in motion"
   />
 
   <section class="section">
@@ -148,6 +154,25 @@ const exploreCards = [
     gap: 1.2rem;
   }
 
+  /* Cards pinned to a noticeboard: each hangs a hair off-level. */
+  .explore-grid > :global(:nth-child(odd)) {
+    transform: rotate(-0.5deg);
+  }
+
+  .explore-grid > :global(:nth-child(even)) {
+    transform: rotate(0.4deg);
+  }
+
+  .explore-grid > :global(*:hover) {
+    transform: rotate(0deg) translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .explore-grid > :global(*:hover) {
+      transform: none;
+    }
+  }
+
   .notes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
@@ -182,16 +207,16 @@ const exploreCards = [
   }
 
   .road-note-body {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.6;
+    font-family: var(--font-hand);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.45;
   }
 
   .road-note-sign {
     margin-top: 0.9rem;
-    font-family: var(--font-heading);
-    font-style: italic;
+    font-family: var(--font-hand);
+    font-size: 1.35rem;
     color: var(--color-ink-soft);
     text-align: right;
   }

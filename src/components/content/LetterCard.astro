@@ -4,6 +4,7 @@
  * Quieter than a field note card; numbered like an archive item.
  */
 import MetadataLine from './MetadataLine.astro';
+import Icon from '../decor/Icon.astro';
 import { detailPaths, formatDate, ui, type Lang } from '../../lib/i18n';
 import { slugFromId, type Letter } from '../../lib/content';
 
@@ -18,6 +19,9 @@ const href = `${detailPaths.correspondence[lang]}${slugFromId(letter.id)}/`;
 ---
 
 <article class="panel letter-card">
+  <span class="letter-stamp" aria-hidden="true">
+    <Icon name="bird" size={20} />
+  </span>
   <p class="label letter-number">Nº {letter.data.number}</p>
   <h3 class="letter-title">
     <a href={href}>{letter.data.title}</a>
@@ -43,6 +47,20 @@ const href = `${detailPaths.correspondence[lang]}${slugFromId(letter.id)}/`;
   .letter-card:hover {
     box-shadow: var(--shadow-lift);
     transform: translateY(-2px);
+  }
+
+  /* A stamp in the corner of the envelope, waiting for its postmark. */
+  .letter-stamp {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    display: inline-flex;
+    padding: 0.45rem;
+    border: 1.5px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+    color: var(--color-river);
+    background: color-mix(in srgb, var(--color-paper-deep) 40%, transparent);
+    transform: rotate(2.5deg);
   }
 
   .letter-number {

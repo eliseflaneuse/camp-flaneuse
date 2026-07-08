@@ -1,0 +1,115 @@
+---
+/**
+ * DecorativeMarks — colored-pencil marginalia at the page edges.
+ *
+ * Fixed at the viewport edges, z-index -1: above the paper
+ * background (which lives on <html>), below every piece of content.
+ * Pointer-events off, aria-hidden, and progressively removed on
+ * smaller screens so phones stay clean.
+ *
+ * Sparse on purpose. The margins of a notebook, not a sticker album.
+ */
+---
+
+<div class="decor-marks" aria-hidden="true">
+  <!-- top-left: three crayon slashes, moss -->
+  <svg class="mark mark-tl" viewBox="0 0 90 70" width="90" height="70" fill="none" stroke-linecap="round">
+    <path d="M12 52 C22 38 30 28 42 16" stroke="var(--color-moss)" stroke-width="3.5" />
+    <path d="M26 58 C35 46 42 37 52 27" stroke="var(--color-moss)" stroke-width="3" />
+    <path d="M42 62 C49 53 54 47 61 39" stroke="var(--color-ochre)" stroke-width="3" />
+  </svg>
+
+  <!-- top-right: a loose pencil circle and two dots, clay/ochre -->
+  <svg class="mark mark-tr" viewBox="0 0 110 90" width="110" height="90" fill="none" stroke-linecap="round">
+    <path d="M78 18 C94 22 100 38 90 52 C80 66 56 68 44 56 C32 44 38 24 56 18 C62 16 68 15.5 73 16.5" stroke="var(--color-clay)" stroke-width="2.6" />
+    <circle cx="22" cy="70" r="2.6" fill="var(--color-ochre)" />
+    <circle cx="34" cy="78" r="1.8" fill="var(--color-ochre)" />
+  </svg>
+
+  <!-- left edge, mid-page: a small zigzag stitch, river -->
+  <svg class="mark mark-ml" viewBox="0 0 40 120" width="40" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 8 L10 26 L26 42 L12 60 L26 78 L14 96 L22 112" stroke="var(--color-river)" stroke-width="2.8" />
+  </svg>
+
+  <!-- right edge, lower: an asterisk-star and a dash, blush -->
+  <svg class="mark mark-mr" viewBox="0 0 70 80" width="70" height="80" fill="none" stroke-linecap="round">
+    <path d="M35 12 L35 36 M23 24 L47 24 M27 15 L43 33 M43 15 L27 33" stroke="var(--color-blush)" stroke-width="2.8" />
+    <path d="M18 62 C28 58 40 58 52 61" stroke="var(--color-olive)" stroke-width="3.2" />
+  </svg>
+
+  <!-- bottom-left: a dotted walking trail, clay -->
+  <svg class="mark mark-bl" viewBox="0 0 130 60" width="130" height="60" fill="none">
+    <circle cx="12" cy="46" r="2.4" fill="var(--color-clay)" />
+    <circle cx="34" cy="38" r="2.4" fill="var(--color-clay)" />
+    <circle cx="58" cy="34" r="2.4" fill="var(--color-clay)" />
+    <circle cx="82" cy="26" r="2.4" fill="var(--color-clay)" />
+    <circle cx="106" cy="16" r="2.4" fill="var(--color-clay)" />
+  </svg>
+</div>
+
+<style>
+  .decor-marks {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .mark {
+    position: absolute;
+    opacity: var(--mark-opacity);
+  }
+
+  .mark-tl {
+    top: 4.5rem;
+    left: 0.8rem;
+  }
+
+  .mark-tr {
+    top: 6rem;
+    right: 1rem;
+  }
+
+  .mark-ml {
+    top: 42%;
+    left: 1.2rem;
+  }
+
+  .mark-mr {
+    top: 58%;
+    right: 1.6rem;
+  }
+
+  .mark-bl {
+    bottom: 2.5rem;
+    left: 1.5rem;
+  }
+
+  /* Tablet: corners only — the content column needs the room. */
+  @media (max-width: 1280px) {
+    .mark-ml,
+    .mark-mr,
+    .mark-bl {
+      display: none;
+    }
+    .mark-tl,
+    .mark-tr {
+      transform: scale(0.75);
+      transform-origin: top left;
+    }
+    .mark-tr {
+      transform-origin: top right;
+    }
+  }
+
+  /* Phones: one quiet mark, top corner, and nothing else. */
+  @media (max-width: 720px) {
+    .mark-tr {
+      display: none;
+    }
+    .mark-tl {
+      transform: scale(0.55);
+      opacity: calc(var(--mark-opacity) * 0.8);
+    }
+  }
+</style>

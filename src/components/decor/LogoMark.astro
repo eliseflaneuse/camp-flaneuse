@@ -1,0 +1,51 @@
+---
+/**
+ * LogoMark — the Camp Flaneuse sign: a tent on wheels with a
+ * pennant, and a small bird keeping its distance. Monoline,
+ * slightly wobbly on purpose. Scales from header (28px) to
+ * welcome screen (96px+).
+ *
+ * Decorative by default (aria-hidden); pass a `label` to make it
+ * meaningful for screen readers.
+ */
+interface Props {
+  /** Rendered width in px; height follows the 64:54 ratio. */
+  size?: number;
+  /** Accessible name. Omit for decorative use. */
+  label?: string;
+  /** Stroke color; defaults to moss. */
+  color?: string;
+}
+
+const { size = 40, label, color = 'var(--color-moss)' } = Astro.props;
+const height = Math.round((size * 54) / 64);
+---
+
+<svg
+  viewBox="0 0 64 54"
+  width={size}
+  height={height}
+  fill="none"
+  stroke={color}
+  stroke-width="2.4"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={label ? undefined : 'true'}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+>
+  <!-- pennant -->
+  <path d="M32 10.5 C32.2 8 32 5.5 32 3.2" />
+  <path d="M32 3.2 C34.8 3.6 37 4.4 39.2 5.6 C36.8 6.5 34.6 7.2 32.2 7.6" stroke-width="2" />
+  <!-- tent, hand-wobbled -->
+  <path d="M32 10.5 C26 19.5 19.5 28.5 13.5 38.5 L26.5 38.3 L31.8 27.8 L37.3 38.4 L50.5 38.5 C44.5 28.6 38 19.4 32 10.5 Z" />
+  <!-- door seam -->
+  <path d="M31.8 27.8 C31.6 31.4 31.7 35 31.9 38.3" stroke-width="1.8" />
+  <!-- wheels -->
+  <circle cx="22.5" cy="43.5" r="3.7" stroke-width="2" />
+  <circle cx="41.5" cy="43.5" r="3.7" stroke-width="2" />
+  <!-- the road -->
+  <path d="M7 50 C24 49.4 40 49.6 57 50" stroke-width="1.8" stroke-dasharray="4.5 5.5" />
+  <!-- a bird, keeping its distance -->
+  <path d="M48 11 C49.5 9.2 51.5 9.2 52.5 10.6 C53.5 9 55.5 8.8 57 10.2" stroke-width="1.7" />
+</svg>

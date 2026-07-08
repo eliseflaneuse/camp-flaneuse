@@ -1,9 +1,12 @@
 ---
 /**
- * FieldNoteCard — one journal entry as an archive card.
+ * FieldNoteCard — one journal entry as an archive card: a colored
+ * category tab on the spine, a small glyph, and a ruled line at
+ * the bottom like the edge of an index card.
  */
 import MetadataLine from './MetadataLine.astro';
-import { categoryLabels, detailPaths, formatDate, ui, type Lang } from '../../lib/i18n';
+import Icon, { type IconName } from '../decor/Icon.astro';
+import { categoryLabels, detailPaths, formatDate, ui, type Lang, type FieldNoteCategory } from '../../lib/i18n';
 import { slugFromId, type FieldNote } from '../../lib/content';
 
 interface Props {
@@ -15,10 +18,25 @@ const { note, lang } = Astro.props;
 const t = ui[lang];
 const href = `${detailPaths.fieldNotes[lang]}${slugFromId(note.id)}/`;
 const category = categoryLabels[lang][note.data.category];
+
+/* Each drawer of the archive has its own color and glyph. */
+const categoryStyle: Record<FieldNoteCategory, { color: string; icon: IconName }> = {
+  road: { color: 'var(--color-clay)', icon: 'pin' },
+  creature: { color: 'var(--color-river)', icon: 'bird' },
+  studio: { color: 'var(--color-olive)', icon: 'notebook' },
+  camp: { color: 'var(--color-moss)', icon: 'tent' },
+  weather: { color: 'var(--color-ochre)', icon: 'sun' },
+  'soft-footsteps': { color: 'var(--color-blush)', icon: 'paw' },
+};
+
+const { color, icon } = categoryStyle[note.data.category];
 ---
 
-<article class="panel note-card">
-  <p class="label note-category">{category}</p>
+<article class="panel note-card" style={`--category-color: ${color}`}>
+  <div class="note-head">
+    <span class="note-icon"><Icon name={icon} size={19} /></span>
+    <p class="label note-category">{category}</p>
+  </div>
   <h3 class="note-title">
     <a href={href}>{note.data.title}</a>
   </h3>
@@ -30,10 +48,11 @@ const category = categoryLabels[lang][note.data.category];
 <style>
   .note-card {
     position: relative;
-    padding: 1.5rem 1.6rem 1.4rem;
+    padding: 1.5rem 1.6rem 1.3rem;
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
+    border-left: 4px solid var(--category-color);
     transition: box-shadow 140ms ease, transform 140ms ease;
   }
 
@@ -42,8 +61,20 @@ const category = categoryLabels[lang][note.data.category];
     transform: translateY(-2px);
   }
 
+  .note-head {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .note-icon {
+    display: inline-flex;
+    color: var(--category-color);
+  }
+
   .note-category {
-    color: var(--color-moss);
+    color: var(--category-color);
+    filter: brightness(0.82); /* keep small text readable on paper */
   }
 
   .note-title {
@@ -51,8 +82,7 @@ const category = categoryLabels[lang][note.data.category];
     line-height: 1.25;
   }
 
-  /* Whole card is clickable via the stretched title link;
-     text remains selectable elsewhere thanks to z-index layering. */
+  /* Whole card is clickable via the stretched title link. */
   .note-title a {
     color: var(--color-ink);
     text-decoration: none;
@@ -75,6 +105,8 @@ const category = categoryLabels[lang][note.data.category];
 
   .note-link {
     margin-top: auto;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--color-line-soft);
     font-size: var(--text-sm);
     font-weight: 700;
     color: var(--color-clay-deep);

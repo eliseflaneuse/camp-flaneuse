@@ -24,6 +24,11 @@
   --color-forest: #243128;       /* dark forest — footer, dark panels */
   --color-on-forest: #e9e0ca;    /* paper-toned text on forest */
 
+  /* ---- color: crayon marks (decorative only, never text) ---- */
+  --color-ochre: #c2933d;        /* dried-grass yellow */
+  --color-blush: #c4837a;        /* soft pressed-flower pink */
+  --mark-opacity: 0.5;           /* how loud the marginalia is */
+
   /* ---- color: lines & edges ---- */
   --color-line: #d5cab0;
   --color-line-soft: #e2d9c3;
@@ -32,6 +37,7 @@
   --font-heading: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-body: 'Karla Variable', 'Segoe UI', system-ui, sans-serif;
   --font-label: 'IBM Plex Mono', ui-monospace, 'Consolas', monospace;
+  --font-hand: 'Caveat Variable', 'Segoe Script', cursive; /* marginalia only */
 
   --text-body: 1.0625rem;                          /* 17px — comfortable reading */
   --text-sm: 0.9375rem;

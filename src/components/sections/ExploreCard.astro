@@ -1,20 +1,28 @@
 ---
 /**
- * ExploreCard — a door to one room of the camp.
+ * ExploreCard — a door to one room of the camp, with a small
+ * monoline glyph like a sign next to the door.
  */
+import Icon, { type IconName } from '../decor/Icon.astro';
+
 interface Props {
   title: string;
   description: string;
   href: string;
   /** Small mono room label, e.g. "THE ARCHIVE". */
   roomLabel?: string;
+  /** Camp glyph shown above the title. */
+  icon?: IconName;
 }
 
-const { title, description, href, roomLabel } = Astro.props;
+const { title, description, href, roomLabel, icon } = Astro.props;
 ---
 
 <article class="panel explore-card">
-  {roomLabel && <p class="label room-label">{roomLabel}</p>}
+  <div class="explore-top">
+    {icon && <span class="explore-icon"><Icon name={icon} size={26} /></span>}
+    {roomLabel && <p class="label room-label">{roomLabel}</p>}
+  </div>
   <h3><a href={href}>{title}</a></h3>
   <p class="explore-description">{description}</p>
 </article>
@@ -32,6 +40,17 @@ const { title, description, href, roomLabel } = Astro.props;
   .explore-card:hover {
     box-shadow: var(--shadow-lift);
     transform: translateY(-2px);
+  }
+
+  .explore-top {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .explore-icon {
+    display: inline-flex;
+    color: var(--color-clay);
   }
 
   .room-label {

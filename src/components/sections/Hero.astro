@@ -1,8 +1,11 @@
 ---
 /**
- * Hero — the camp entrance. Big serif title, one strong tagline,
- * an intro paragraph, and up to two calls to action.
+ * Hero — the camp entrance. The mark hangs over the gate, the name
+ * below it like a carved sign, crayon marks in the margins, and an
+ * archive line at the bottom like a stamp on the first page.
  */
+import LogoMark from '../decor/LogoMark.astro';
+
 interface Props {
   title: string;
   tagline: string;
@@ -11,13 +14,30 @@ interface Props {
   secondaryCta?: { label: string; href: string };
   /** Small mono line above the title, e.g. "EST. ON THE ROAD". */
   overline?: string;
+  /** Mono archive line under the hero, e.g. "FIELD ARCHIVE · Nº 001". */
+  archiveLine?: string;
 }
 
-const { title, tagline, intro, primaryCta, secondaryCta, overline } = Astro.props;
+const { title, tagline, intro, primaryCta, secondaryCta, overline, archiveLine } = Astro.props;
 ---
 
 <section class="hero">
+  <!-- marginalia around the entrance — decorative, desktop-first -->
+  <svg class="hero-mark-left" viewBox="0 0 90 120" width="90" height="120" fill="none" stroke-linecap="round" aria-hidden="true">
+    <path d="M60 14 C48 34 40 52 34 74" stroke="var(--color-ochre)" stroke-width="3.2" />
+    <path d="M74 22 C63 40 56 56 51 76" stroke="var(--color-moss)" stroke-width="2.8" />
+    <circle cx="28" cy="96" r="2.5" fill="var(--color-clay)" />
+    <circle cx="42" cy="104" r="2" fill="var(--color-clay)" />
+  </svg>
+  <svg class="hero-mark-right" viewBox="0 0 100 130" width="100" height="130" fill="none" stroke-linecap="round" aria-hidden="true">
+    <path d="M30 30 C46 24 62 30 66 44 C70 58 58 70 44 68 C32 66 28 54 36 46" stroke="var(--color-river)" stroke-width="2.6" />
+    <path d="M52 96 L52 116 M42 106 L62 106 M45 99 L59 113 M59 99 L45 113" stroke="var(--color-blush)" stroke-width="2.6" />
+  </svg>
+
   <div class="container hero-inner">
+    <div class="hero-sign">
+      <LogoMark size={92} />
+    </div>
     {overline && <p class="label hero-overline">{overline}</p>}
     <h1>{title}</h1>
     <p class="hero-tagline">{tagline}</p>
@@ -38,22 +58,50 @@ const { title, tagline, intro, primaryCta, secondaryCta, overline } = Astro.prop
         </div>
       )
     }
+    {archiveLine && <p class="label hero-archive-line">{archiveLine}</p>}
   </div>
 </section>
 
 <style>
   .hero {
-    padding-block: var(--space-section);
+    position: relative;
+    padding-block: calc(var(--space-section) * 0.85) var(--space-section);
     border-bottom: 1px solid var(--color-line-soft);
+    overflow: hidden;
+  }
+
+  .hero-mark-left,
+  .hero-mark-right {
+    position: absolute;
+    opacity: var(--mark-opacity);
+    pointer-events: none;
+  }
+
+  .hero-mark-left {
+    left: max(1rem, calc(50% - 34rem));
+    top: 18%;
+  }
+
+  .hero-mark-right {
+    right: max(1rem, calc(50% - 34rem));
+    bottom: 14%;
   }
 
   .hero-inner {
     max-width: 46rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-sign {
+    margin-bottom: 1.4rem;
   }
 
   .hero-overline {
     color: var(--color-moss);
-    margin-bottom: 1.1rem;
+    margin-bottom: 1rem;
   }
 
   .hero-tagline {
@@ -67,13 +115,30 @@ const { title, tagline, intro, primaryCta, secondaryCta, overline } = Astro.prop
 
   .hero-intro {
     margin-top: 1.3rem;
-    max-width: 38rem;
+    max-width: 36rem;
   }
 
   .hero-ctas {
     margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.8rem;
+  }
+
+  /* The stamp at the bottom of the first page. */
+  .hero-archive-line {
+    margin-top: 2.6rem;
+    padding: 0.4rem 1rem;
+    border: 1.5px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-faint);
+  }
+
+  @media (max-width: 900px) {
+    .hero-mark-left,
+    .hero-mark-right {
+      display: none;
+    }
   }
 </style>
