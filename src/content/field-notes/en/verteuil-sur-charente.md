@@ -46,6 +46,8 @@ It is small, quiet, practical, and beautiful in the exact way I needed.
 
 ## The practical part
 
+![Ember parked in the shade of big lime trees at the Verteuil motorhome aire, awning out, with the dry summer grass of the park in front](./verteuil-aire-ember.jpg)
+
 There is a free public parking area suitable for motorhomes, inside a park that leads directly to the river. It has space for around six motorhomes comfortably, though it could probably fit eight.
 
 The parking is super flat. I did not need to put leveling blocks under Ember, which always feels like a small miracle. The ground is gravel, so it is also very easy to get the motorhome floor dirty, because apparently every paradise requires a small tax.
@@ -77,6 +79,8 @@ Mobile signal was good enough for working and internet.
 
 The river walk, first and always.
 
+![The Charente river at Verteuil, slow and green between big willows, with the stone bridge and the castle towers rising behind the trees](./verteuil-river-castle.jpg)
+
 The Charente here is slow and green and completely unbothered, and there is a path that follows it past the castle, under big trees, along gardens that seem to be competing quietly and politely.
 
 The motorhome parking is close enough to the river that the whole stop feels connected to the water. Not "parking near a nice place," but "parking inside the quiet edge of the nice place."
@@ -84,6 +88,8 @@ The motorhome parking is close enough to the river that the whole stop feels con
 I even got into the river with the cats, which was ridiculous and perfect.
 
 ## The village
+
+![A narrow lane in Verteuil village, stone walls on both sides, hollyhocks and wildflowers growing along the walls under a deep blue sky](./verteuil-village-lane.jpg)
 
 The village is about 10 minutes away on foot. You cross the park and the river, and suddenly you are there.
 
@@ -134,5 +140,3 @@ This is the kind of stop that recalibrates what you think you need from a place.
 ## Small beautiful thing noticed
 
 After 17h, the sun finally slipped behind the trees and the whole parking changed species. What had been gravel, heat, extension cables, and open windows became suddenly softer: a camp again, with the river just beyond the path and the cats moving through the evening like they had always belonged there.
-
-Drawing to be added here.

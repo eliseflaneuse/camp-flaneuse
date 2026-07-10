@@ -229,6 +229,20 @@ a:hover {
   margin-block: 2.5em;
 }
 
+/* Photos in notes sit like prints taped into the field notebook:
+   smaller than the text column, mounted on card, dashed frame. */
+.prose img {
+  display: block;
+  max-width: min(100%, 28rem);
+  margin-inline: auto;
+  margin-block: 1.8em;
+  padding: 0.5rem;
+  background: var(--color-card);
+  border: 1.5px dashed var(--color-line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+}
+
 .prose li + li {
   margin-top: 0.4em;
 }
