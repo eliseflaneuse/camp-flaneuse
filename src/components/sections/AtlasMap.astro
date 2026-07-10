@@ -1,0 +1,200 @@
+---
+/**
+ * AtlasMap — the real-geography map of the Road Atlas.
+ *
+ * A small client-side Leaflet island: the page is static HTML and
+ * the map only wakes up in the browser. OpenStreetMap tiles with
+ * visible attribution (per OSM tile policy). Pins are our own —
+ * a clay teardrop in the camp's hand, dashed when the location is
+ * deliberately approximate.
+ *
+ * The map is never the only way in: the full list of places lives
+ * below it as regular cards.
+ */
+interface MapPlace {
+  lat: number;
+  lng: number;
+  title: string;
+  url: string;
+  placeLabel: string;
+  locationLine: string;
+  exactPin: boolean;
+  approximateLabel: string;
+}
+
+interface Props {
+  places: MapPlace[];
+  ariaLabel: string;
+}
+
+const { places, ariaLabel } = Astro.props;
+---
+
+<div
+  id="atlas-map"
+  class="atlas-map panel"
+  role="region"
+  aria-label={ariaLabel}
+  data-places={JSON.stringify(places)}
+>
+</div>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  interface MapPlace {
+    lat: number;
+    lng: number;
+    title: string;
+    url: string;
+    placeLabel: string;
+    locationLine: string;
+    exactPin: boolean;
+    approximateLabel: string;
+  }
+
+  const el = document.getElementById('atlas-map');
+  if (el) {
+    const places: MapPlace[] = JSON.parse(el.dataset.places ?? '[]');
+
+    const map = L.map(el, {
+      scrollWheelZoom: false, // don't trap page scrolling
+      worldCopyJump: true,
+    });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    /* Our own pin — a clay teardrop with a paper center; a dashed
+       outline when the pin marks an area rather than a spot. */
+    const pinSvg = (exact: boolean) => `
+      <svg viewBox="0 0 30 38" width="30" height="38" aria-hidden="true">
+        <path
+          d="M15 36.5 C8 27.5 3.5 21.5 3.5 14.5 A11.5 11.5 0 1 1 26.5 14.5 C26.5 21.5 22 27.5 15 36.5 Z"
+          fill="#a2543a" ${exact ? '' : 'fill-opacity="0.75" stroke-dasharray="4 3"'}
+          stroke="#2d2721" stroke-width="1.5"
+        />
+        <circle cx="15" cy="14.5" r="4.5" fill="#f9f5e9" stroke="#2d2721" stroke-width="1.1" />
+      </svg>`;
+
+    const makeIcon = (exact: boolean) =>
+      L.divIcon({
+        className: 'atlas-pin',
+        html: pinSvg(exact),
+        iconSize: [30, 38],
+        iconAnchor: [15, 36],
+        popupAnchor: [0, -32],
+      });
+
+    const bounds = L.latLngBounds([]);
+
+    for (const place of places) {
+      const marker = L.marker([place.lat, place.lng], {
+        icon: makeIcon(place.exactPin),
+        alt: place.title,
+      }).addTo(map);
+
+      const approxLine = place.exactPin
+        ? ''
+        : `<p class="atlas-popup-approx">${place.approximateLabel}</p>`;
+
+      marker.bindPopup(
+        `<article class="atlas-popup-inner">
+          <p class="atlas-popup-type">${place.placeLabel}</p>
+          <h3><a href="${place.url}">${place.title}</a></h3>
+          <p class="atlas-popup-location">${place.locationLine}</p>
+          ${approxLine}
+        </article>`,
+        { className: 'atlas-popup', maxWidth: 260 },
+      );
+
+      bounds.extend([place.lat, place.lng]);
+    }
+
+    if (places.length > 0) {
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 11 });
+    } else {
+      map.setView([46.0, 2.0], 5); // an empty atlas still opens somewhere
+    }
+  }
+</script>
+
+<style>
+  .atlas-map {
+    height: clamp(320px, 55vh, 480px);
+    width: 100%;
+    overflow: hidden;
+    /* Leaflet panes stack above page content unless contained. */
+    position: relative;
+    z-index: 0;
+  }
+</style>
+
+<style is:global>
+  /* Popup dressed in camp paper — global because Leaflet renders
+     outside this component's scope. */
+  .atlas-popup .leaflet-popup-content-wrapper {
+    background: var(--color-card);
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .atlas-popup .leaflet-popup-tip {
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+  }
+
+  .atlas-popup .leaflet-popup-content {
+    margin: 0.9rem 1.1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .atlas-popup-type {
+    font-family: var(--font-label);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-moss);
+    margin: 0 0 0.3rem;
+  }
+
+  .atlas-popup-inner h3 {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .atlas-popup-inner h3 a {
+    color: var(--color-clay-deep);
+  }
+
+  .atlas-popup-location {
+    color: var(--color-ink-soft);
+    margin: 0;
+  }
+
+  .atlas-popup-approx {
+    font-family: var(--font-label);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-faint);
+    margin: 0.4rem 0 0;
+  }
+
+  .atlas-pin {
+    background: none;
+    border: none;
+  }
+
+  .atlas-pin svg {
+    filter: drop-shadow(0 2px 2px rgba(45, 39, 33, 0.25));
+  }
+</style>

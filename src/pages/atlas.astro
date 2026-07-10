@@ -1,0 +1,86 @@
+---
+/**
+ * The Road Atlas — real geography, unlike the hand-drawn camp map.
+ * Every non-draft field note with atlas coordinates appears here
+ * as a pin and as a place card.
+ */
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import PageTitle from '../components/sections/PageTitle.astro';
+import AtlasMap from '../components/sections/AtlasMap.astro';
+import AtlasCard from '../components/content/AtlasCard.astro';
+import { routes } from '../lib/i18n';
+import { badgeLabels, getAtlasNotes, noteUrl, placeTypeLabels } from '../lib/atlas';
+
+const notes = await getAtlasNotes('en');
+
+const mapPlaces = notes.map((note) => {
+  const atlas = note.data.atlas!;
+  return {
+    lat: atlas.lat,
+    lng: atlas.lng,
+    title: atlas.town ?? note.data.title,
+    url: noteUrl(note),
+    placeLabel: placeTypeLabels.en[atlas.placeType],
+    locationLine: [atlas.region, atlas.country].filter(Boolean).join(', '),
+    exactPin: atlas.exactPin,
+    approximateLabel: badgeLabels.en.approximate,
+  };
+});
+---
+
+<BaseLayout
+  title="The Road Atlas"
+  description="Places where the camp has stopped, wandered, looked twice, or wanted to return — motorhome stops, museums, walks, rivers, and towns, pinned on a real map."
+  lang="en"
+  translationUrl={routes.atlas.pt}
+>
+  <PageTitle
+    overline="Real geography"
+    title="The Road Atlas"
+    lede="Places where the camp has stopped, wandered, looked twice, or wanted to return."
+  />
+
+  <section class="section atlas-body">
+    <div class="container">
+      <p class="atlas-intro">
+        Not every field note belongs only to time. Some belong to place. This atlas gathers
+        motorhome stops, museums, walks, rivers, towns, and useful little coordinates from the
+        road.
+      </p>
+
+      <AtlasMap places={mapPlaces} ariaLabel="Interactive map of places the camp has visited" />
+
+      <p class="atlas-safety label">
+        Pins are sometimes approximate, especially when they mark places where the camp slept.
+      </p>
+
+      <div class="atlas-grid">
+        {notes.map((note) => <AtlasCard note={note} lang="en" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .atlas-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .atlas-intro {
+    max-width: var(--prose-width);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-block);
+  }
+
+  .atlas-safety {
+    margin-top: 0.9rem;
+    color: var(--color-ink-faint);
+  }
+
+  .atlas-grid {
+    margin-top: var(--space-block);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1.2rem;
+  }
+</style>

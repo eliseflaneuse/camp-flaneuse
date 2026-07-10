@@ -20,6 +20,44 @@ const fieldNotes = defineCollection({
     coverImage: z.string().optional(),
     coverAlt: z.string().optional(),
     draft: z.boolean().default(false),
+    /** 1–5 lanterns. Optional; mostly for road/place notes. */
+    rating: z.number().min(1).max(5).optional(),
+    /**
+     * Road Atlas metadata — real geography, optional.
+     * A note with atlas.lat/lng appears on /atlas as a pin and a card.
+     * exactPin defaults to false: pin the town, not the sleeping spot.
+     */
+    atlas: z
+      .object({
+        lat: z.number(),
+        lng: z.number(),
+        placeType: z.enum([
+          'motorhome-stop',
+          'campsite',
+          'nature',
+          'museum',
+          'town',
+          'walk',
+          'food',
+          'bookshop',
+          'viewpoint',
+          'other',
+        ]),
+        country: z.string().optional(),
+        region: z.string().optional(),
+        town: z.string().optional(),
+        /** Year-month, e.g. "2026-07". */
+        visited: z.string().optional(),
+        overnight: z.boolean().optional(),
+        free: z.boolean().optional(),
+        favorite: z.boolean().optional(),
+        wouldReturn: z.boolean().optional(),
+        catFriendly: z.boolean().optional(),
+        publicParking: z.boolean().optional(),
+        exactPin: z.boolean().default(false),
+        tips: z.array(z.string()).optional(),
+      })
+      .optional(),
   }),
 });
 

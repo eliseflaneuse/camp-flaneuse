@@ -22,6 +22,7 @@ export const routes = {
   home: { en: '/', pt: '/pt/' },
   about: { en: '/about/', pt: '/pt/sobre/' },
   fieldNotes: { en: '/field-notes/', pt: '/pt/notas-de-campo/' },
+  atlas: { en: '/atlas/', pt: '/pt/atlas/' },
   /* The Correspondence Desk lives inside the Society — letters are
      rooms within it, at /soft-footsteps-society/no-001 etc. */
   softFootsteps: {
@@ -42,6 +43,7 @@ export const ui = {
     skipToContent: 'Skip to content',
     nav: {
       fieldNotes: 'Field Notes',
+      atlas: 'Atlas',
       studio: 'Studio',
       about: 'About',
       contact: 'Contact',
@@ -71,6 +73,7 @@ export const ui = {
     skipToContent: 'Pular para o conteúdo',
     nav: {
       fieldNotes: 'Notas de Campo',
+      atlas: 'Atlas',
       studio: 'Estúdio',
       about: 'Sobre',
       contact: 'Contato',

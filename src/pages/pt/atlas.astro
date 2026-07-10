@@ -1,0 +1,87 @@
+---
+/**
+ * O Atlas da Estrada — geografia real, ao contrário do mapa
+ * desenhado do acampamento. Toda nota de campo com coordenadas
+ * aparece aqui como pin e como cartão de lugar.
+ */
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import PageTitle from '../../components/sections/PageTitle.astro';
+import AtlasMap from '../../components/sections/AtlasMap.astro';
+import AtlasCard from '../../components/content/AtlasCard.astro';
+import { routes } from '../../lib/i18n';
+import { badgeLabels, getAtlasNotes, noteUrl, placeTypeLabels } from '../../lib/atlas';
+
+const notes = await getAtlasNotes('pt');
+
+const mapPlaces = notes.map((note) => {
+  const atlas = note.data.atlas!;
+  return {
+    lat: atlas.lat,
+    lng: atlas.lng,
+    title: atlas.town ?? note.data.title,
+    url: noteUrl(note),
+    placeLabel: placeTypeLabels.pt[atlas.placeType],
+    locationLine: [atlas.region, atlas.country].filter(Boolean).join(', '),
+    exactPin: atlas.exactPin,
+    approximateLabel: badgeLabels.pt.approximate,
+  };
+});
+---
+
+<BaseLayout
+  title="O Atlas da Estrada"
+  description="Lugares onde o acampamento parou, vagou, olhou duas vezes ou quis voltar — paradas de motorhome, museus, caminhadas, rios e vilarejos, marcados num mapa de verdade."
+  lang="pt"
+  translationUrl={routes.atlas.en}
+>
+  <PageTitle
+    overline="Geografia real"
+    title="O Atlas da Estrada"
+    lede="Lugares onde o acampamento parou, vagou, olhou duas vezes ou quis voltar."
+  />
+
+  <section class="section atlas-body">
+    <div class="container">
+      <p class="atlas-intro">
+        Nem toda nota de campo pertence só ao tempo. Algumas pertencem ao lugar. Este atlas reúne
+        paradas de motorhome, museus, caminhadas, rios, vilarejos e pequenas coordenadas úteis da
+        estrada.
+      </p>
+
+      <AtlasMap places={mapPlaces} ariaLabel="Mapa interativo dos lugares visitados pelo acampamento" />
+
+      <p class="atlas-safety label">
+        Os pins às vezes são aproximados, principalmente quando marcam lugares onde o acampamento
+        dormiu.
+      </p>
+
+      <div class="atlas-grid">
+        {notes.map((note) => <AtlasCard note={note} lang="pt" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .atlas-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .atlas-intro {
+    max-width: var(--prose-width);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-block);
+  }
+
+  .atlas-safety {
+    margin-top: 0.9rem;
+    color: var(--color-ink-faint);
+  }
+
+  .atlas-grid {
+    margin-top: var(--space-block);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1.2rem;
+  }
+</style>

@@ -1,0 +1,194 @@
+---
+/**
+ * AtlasCard — one place from the Road Atlas, as an archive card:
+ * where it is, what kind of place, the useful badges, and the door
+ * to the field note that remembers it.
+ */
+import Icon from '../decor/Icon.astro';
+import { ui, type Lang } from '../../lib/i18n';
+import type { FieldNote } from '../../lib/content';
+import { badgeLabels, formatVisited, noteUrl, placeTypeLabels } from '../../lib/atlas';
+
+interface Props {
+  note: FieldNote;
+  lang: Lang;
+}
+
+const { note, lang } = Astro.props;
+const atlas = note.data.atlas!;
+const s = badgeLabels[lang];
+const href = noteUrl(note);
+
+const locationLine = [atlas.country, atlas.region].filter(Boolean).join(' · ');
+const placeLabel = placeTypeLabels[lang][atlas.placeType];
+
+const badges: { label: string; kind?: 'favorite' | 'approx' }[] = [];
+if (atlas.favorite) badges.push({ label: s.favorite, kind: 'favorite' });
+if (atlas.free) badges.push({ label: s.free });
+if (atlas.overnight) badges.push({ label: s.overnight });
+if (atlas.wouldReturn) badges.push({ label: s.wouldReturn });
+if (atlas.catFriendly) badges.push({ label: s.catFriendly });
+if (atlas.publicParking) badges.push({ label: s.publicParking });
+if (!atlas.exactPin) badges.push({ label: s.approximate, kind: 'approx' });
+
+const foreignNote = note.data.language !== lang;
+---
+
+<article class="panel atlas-card">
+  <div class="atlas-card-head">
+    <span class="atlas-card-icon"><Icon name="pin" size={19} /></span>
+    <p class="label atlas-card-type">{placeLabel}</p>
+    {atlas.visited && (
+      <p class="label atlas-card-visited">{s.visited} {formatVisited(atlas.visited, lang)}</p>
+    )}
+  </div>
+
+  <h3 class="atlas-card-title">
+    <a href={href}>{atlas.town ?? note.data.title}</a>
+  </h3>
+  {locationLine && <p class="label atlas-card-location">{locationLine}</p>}
+
+  {badges.length > 0 && (
+    <ul class="atlas-card-badges">
+      {badges.map((badge) => (
+        <li class:list={[badge.kind && `badge--${badge.kind}`]}>{badge.label}</li>
+      ))}
+    </ul>
+  )}
+
+  <p class="atlas-card-excerpt">{note.data.excerpt}</p>
+
+  {atlas.tips && atlas.tips.length > 0 && (
+    <p class="atlas-card-tips">
+      <span class="label">{s.goodFor}:</span>
+      {atlas.tips.join(' · ')}
+    </p>
+  )}
+
+  <p class="atlas-card-link" aria-hidden="true">
+    {ui[lang].readNote} →{foreignNote && <span class="atlas-card-foreign"> ({s.inOtherLanguage})</span>}
+  </p>
+</article>
+
+<style>
+  .atlas-card {
+    position: relative;
+    padding: 1.5rem 1.6rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    border-left: 4px solid var(--color-river);
+    transition: box-shadow 140ms ease, transform 140ms ease;
+  }
+
+  .atlas-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .atlas-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .atlas-card-icon {
+    display: inline-flex;
+    color: var(--color-clay);
+  }
+
+  .atlas-card-type {
+    color: var(--color-moss);
+  }
+
+  .atlas-card-visited {
+    margin-left: auto;
+    color: var(--color-ink-faint);
+  }
+
+  .atlas-card-title {
+    font-size: 1.3rem;
+    line-height: 1.25;
+  }
+
+  .atlas-card-title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .atlas-card-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .atlas-card:hover .atlas-card-title a {
+    color: var(--color-clay-deep);
+  }
+
+  .atlas-card-location {
+    color: var(--color-ink-soft);
+  }
+
+  .atlas-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 0.2rem;
+  }
+
+  .atlas-card-badges li {
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 0.05em;
+    color: var(--color-ink-soft);
+    background: var(--color-paper-deep);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 0.14rem 0.5rem;
+  }
+
+  .atlas-card-badges li.badge--favorite {
+    color: var(--color-clay-deep);
+    border-color: var(--color-clay);
+    background: color-mix(in srgb, var(--color-clay) 10%, transparent);
+  }
+
+  .atlas-card-badges li.badge--approx {
+    color: var(--color-ink-faint);
+    border-style: dashed;
+    background: transparent;
+  }
+
+  .atlas-card-excerpt {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .atlas-card-tips {
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .atlas-card-tips .label {
+    color: var(--color-moss);
+    margin-right: 0.35rem;
+  }
+
+  .atlas-card-link {
+    margin-top: auto;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--color-line-soft);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-clay-deep);
+  }
+
+  .atlas-card-foreign {
+    font-weight: 400;
+    color: var(--color-ink-faint);
+  }
+</style>
