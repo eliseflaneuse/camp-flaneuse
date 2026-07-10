@@ -47,6 +47,8 @@ The note itself, in Markdown. Paragraphs, lists, *emphasis*, headings — all wo
 
 That's it. The archive page, homepage cards, prev/next navigation, and metadata all update automatically on the next build.
 
+**Photos** live in `src/content/field-notes/photos/`. Reference them from a note as `../photos/name.jpg` — in the body as a normal Markdown image, and/or as `coverImage: "../photos/name.jpg"` in the frontmatter to put a little photo stamp on the note's card. Astro resizes and optimizes them at build time. 
+
 ## How to add a letter (the Soft Footsteps Society)
 
 Same idea, in `src/content/correspondence/en/` or `pt/` (the folder keeps its name; the pages publish under `/soft-footsteps-society/<slug>`):

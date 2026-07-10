@@ -9,6 +9,8 @@ language: "en"
 translationKey: "verteuil-sur-charente"
 draft: false
 rating: 5
+coverImage: "../photos/verteuil-aire-ember.jpg"
+coverAlt: "Ember parked under the lime trees at the Verteuil aire"
 atlas:
   lat: 45.981
   lng: 0.229
@@ -46,7 +48,7 @@ It is small, quiet, practical, and beautiful in the exact way I needed.
 
 ## The practical part
 
-![Ember parked in the shade of big lime trees at the Verteuil motorhome aire, awning out, with the dry summer grass of the park in front](./verteuil-aire-ember.jpg)
+![Ember parked in the shade of big lime trees at the Verteuil motorhome aire, awning out, with the dry summer grass of the park in front](../photos/verteuil-aire-ember.jpg)
 
 There is a free public parking area suitable for motorhomes, inside a park that leads directly to the river. It has space for around six motorhomes comfortably, though it could probably fit eight.
 
@@ -79,7 +81,7 @@ Mobile signal was good enough for working and internet.
 
 The river walk, first and always.
 
-![The Charente river at Verteuil, slow and green between big willows, with the stone bridge and the castle towers rising behind the trees](./verteuil-river-castle.jpg)
+![The Charente river at Verteuil, slow and green between big willows, with the stone bridge and the castle towers rising behind the trees](../photos/verteuil-river-castle.jpg)
 
 The Charente here is slow and green and completely unbothered, and there is a path that follows it past the castle, under big trees, along gardens that seem to be competing quietly and politely.
 
@@ -89,7 +91,7 @@ I even got into the river with the cats, which was ridiculous and perfect.
 
 ## The village
 
-![A narrow lane in Verteuil village, stone walls on both sides, hollyhocks and wildflowers growing along the walls under a deep blue sky](./verteuil-village-lane.jpg)
+![A narrow lane in Verteuil village, stone walls on both sides, hollyhocks and wildflowers growing along the walls under a deep blue sky](../photos/verteuil-village-lane.jpg)
 
 The village is about 10 minutes away on foot. You cross the park and the river, and suddenly you are there.
 

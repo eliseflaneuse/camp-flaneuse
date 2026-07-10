@@ -7,7 +7,8 @@ import { glob } from 'astro/loaders';
  */
 const fieldNotes = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/field-notes' }),
-  schema: z.object({
+  schema: ({ image }) =>
+    z.object({
     title: z.string(),
     date: z.coerce.date(),
     location: z.string().optional(),
@@ -17,7 +18,8 @@ const fieldNotes = defineCollection({
     language: z.enum(['en', 'pt']),
     /** Connects translations of the same note across languages. */
     translationKey: z.string().optional(),
-    coverImage: z.string().optional(),
+    /** Small photo shown as a stamp on the note's card. Relative path, e.g. "./verteuil-aire-ember.jpg" */
+    coverImage: image().optional(),
     coverAlt: z.string().optional(),
     draft: z.boolean().default(false),
     /** 1–5 lanterns. Optional; mostly for road/place notes. */

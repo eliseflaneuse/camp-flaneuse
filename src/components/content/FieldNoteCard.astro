@@ -4,6 +4,7 @@
  * category tab on the spine, a small glyph, and a ruled line at
  * the bottom like the edge of an index card.
  */
+import { Image } from 'astro:assets';
 import MetadataLine from './MetadataLine.astro';
 import Icon, { type IconName } from '../decor/Icon.astro';
 import { categoryLabels, detailPaths, formatDate, ui, type Lang, type FieldNoteCategory } from '../../lib/i18n';
@@ -33,7 +34,21 @@ const categoryStyle: Record<FieldNoteCategory, { color: string; icon: IconName }
 const { color, icon } = categoryStyle[note.data.category];
 ---
 
-<article class="panel note-card" style={`--category-color: ${color}`}>
+<article
+  class:list={['panel', 'note-card', note.data.coverImage && 'note-card--stamped']}
+  style={`--category-color: ${color}`}
+>
+  {note.data.coverImage && (
+    <span class="note-stamp" aria-hidden="true">
+      <Image
+        src={note.data.coverImage}
+        alt=""
+        width={160}
+        height={160}
+        class="note-stamp-img"
+      />
+    </span>
+  )}
   <div class="note-head">
     <span class="note-icon"><Icon name={icon} size={19} /></span>
     <p class="label note-category">{category}</p>
@@ -66,6 +81,35 @@ const { color, icon } = categoryStyle[note.data.category];
     display: flex;
     align-items: center;
     gap: 0.55rem;
+  }
+
+  /* A little photo stamp in the corner, like on the letters. */
+  .note-stamp {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    padding: 0.3rem;
+    background: var(--color-card);
+    border: 1.5px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-soft);
+    transform: rotate(2.5deg);
+    pointer-events: none; /* clicks pass through to the card link */
+  }
+
+  .note-stamp :global(.note-stamp-img) {
+    display: block;
+    width: 58px;
+    height: 58px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  /* Keep the text from running under the stamp. */
+  .note-card--stamped .note-head,
+  .note-card--stamped .note-title {
+    padding-right: 5rem;
   }
 
   .note-icon {
