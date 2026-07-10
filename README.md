@@ -135,4 +135,6 @@ The site is **live** at <https://camp-flaneuse.eliseflaneuse.workers.dev>, hoste
 
 ## Later (deliberately not built yet)
 
-Newsletter, snail-mail subscriptions, shop, member area, map navigation, full bilingual parity, Obsidian workflow. The structure leaves room for all of it — content collections can grow, routes are language-aware, and nothing here needs to be torn down first.
+- [ ] **Atlas ratings in map popups** — when a note has a `rating`, show it in the pin popup (and probably the place card): `★★★★★ — 5/5 lanterns`. The field already exists in the schema; this is display only.
+
+Also: newsletter, snail-mail subscriptions, shop, member area, full bilingual parity, Obsidian workflow. The structure leaves room for all of it — content collections can grow, routes are language-aware, and nothing here needs to be torn down first.
