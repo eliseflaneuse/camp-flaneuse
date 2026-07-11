@@ -23,7 +23,7 @@ Camp Flaneuse is organized into a few small rooms:
 | `npm run check`    | Type-check all pages and components                     |
 | `npm run validate` | Check + build — "is the camp structurally safe?" button |
 
-> Requires Node 18.17+ (Node 20+ recommended). If you use nvm-windows: `nvm use 24.18.0`.
+> Requires Node 22.12.0 or newer (Astro 7's minimum). The project standard is **Node 24.18.0**, pinned in `.nvmrc` — with nvm-windows run `nvm use 24.18.0`. Cloudflare's build machines read `.nvmrc` too, so local and production use the same version.
 
 ## How to add a field note
 
