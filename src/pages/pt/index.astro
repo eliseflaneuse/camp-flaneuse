@@ -6,7 +6,6 @@ import BaseLayout from '../../components/layout/BaseLayout.astro';
 import Hero from '../../components/sections/Hero.astro';
 import SectionIntro from '../../components/sections/SectionIntro.astro';
 import ExploreCard from '../../components/sections/ExploreCard.astro';
-import CampMap from '../../components/sections/CampMap.astro';
 import CTASection from '../../components/sections/CTASection.astro';
 import FieldNoteCard from '../../components/content/FieldNoteCard.astro';
 import { routes } from '../../lib/i18n';
@@ -93,7 +92,8 @@ const exploreCards = [
     </div>
   </section>
 
-  <CampMap lang="pt" />
+  {/* CampMap (o mapa desenhado clicável) está descansando por enquanto —
+      para trazer de volta: import CampMap + <CampMap lang="pt" /> */}
 
   <section class="section">
     <div class="container">

@@ -66,6 +66,8 @@ interface AtlasStrings {
   goodFor: string;
   visited: string;
   inOtherLanguage: string;
+  lantern: string;
+  lanterns: string;
 }
 
 export const badgeLabels: Record<Lang, AtlasStrings> = {
@@ -80,6 +82,8 @@ export const badgeLabels: Record<Lang, AtlasStrings> = {
     goodFor: 'Tips',
     visited: 'Visited',
     inOtherLanguage: 'note in Portuguese',
+    lantern: 'lantern',
+    lanterns: 'lanterns',
   },
   pt: {
     free: 'Grátis',
@@ -92,8 +96,17 @@ export const badgeLabels: Record<Lang, AtlasStrings> = {
     goodFor: 'Dicas',
     visited: 'Visitado em',
     inOtherLanguage: 'nota em inglês',
+    lantern: 'lanterna',
+    lanterns: 'lanternas',
   },
 };
+
+/** "★★★★★ · 5 lanterns" — for atlas cards and map popups. */
+export function ratingLine(rating: number, lang: Lang): string {
+  const s = badgeLabels[lang];
+  const word = rating === 1 ? s.lantern : s.lanterns;
+  return `${'★'.repeat(rating)} · ${rating} ${word}`;
+}
 
 /** "2026-07" → "July 2026" / "julho de 2026" */
 export function formatVisited(visited: string, lang: Lang): string {

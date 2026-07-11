@@ -4,10 +4,8 @@
  */
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import PageTitle from '../components/sections/PageTitle.astro';
+import Icon from '../components/decor/Icon.astro';
 import { routes } from '../lib/i18n';
-
-/* Placeholder address — swap for the real one before going live. */
-const email = 'hello@campflaneuse.com';
 
 const topics = [
   'Camp Flaneuse itself — questions, hellos, bird reports',
@@ -38,18 +36,19 @@ const topics = [
           {topics.map((topic) => <li>{topic}</li>)}
         </ul>
         <p>
-          There is no form, no chatbot, and no funnel. There is an email address, which still
-          works remarkably well:
+          There is no form, no chatbot, and no funnel. There will be an email address — a real
+          one — as soon as the camp finishes installing its mailbox:
         </p>
       </div>
 
-      <p class="email-line">
-        <a class="button" href={`mailto:${email}`}>{email}</a>
-      </p>
-
-      <p class="email-note label">
-        (Placeholder address — the real mailbox is being installed.)
-      </p>
+      <div class="mailbox-closed panel">
+        <span class="mailbox-icon"><Icon name="envelope" size={26} /></span>
+        <p class="mailbox-line">The mailbox is not open yet.</p>
+        <p class="email-note label">
+          (A real address arrives together with the camp's own domain. Until then, nothing you
+          send can get lost, because nothing can be sent.)
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -59,12 +58,28 @@ const topics = [
     padding-block: var(--space-block) var(--space-section);
   }
 
-  .email-line {
+  .mailbox-closed {
     margin-top: 2rem;
+    max-width: 30rem;
+    padding: 1.6rem 1.8rem;
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mailbox-icon {
+    display: inline-flex;
+    color: var(--color-clay);
+  }
+
+  .mailbox-line {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
   }
 
   .email-note {
-    margin-top: 1rem;
     color: var(--color-ink-faint);
   }
 </style>

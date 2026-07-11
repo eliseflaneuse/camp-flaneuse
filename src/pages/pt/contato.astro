@@ -4,10 +4,8 @@
  */
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import PageTitle from '../../components/sections/PageTitle.astro';
+import Icon from '../../components/decor/Icon.astro';
 import { routes } from '../../lib/i18n';
-
-/* Endereço provisório — trocar pelo real antes de publicar. */
-const email = 'hello@campflaneuse.com';
 
 const topics = [
   'O próprio Camp Flaneuse — perguntas, olás, relatórios de pássaros',
@@ -38,18 +36,19 @@ const topics = [
           {topics.map((topic) => <li>{topic}</li>)}
         </ul>
         <p>
-          Não tem formulário, não tem chatbot, não tem funil. Tem um endereço de e-mail, que
-          continua funcionando admiravelmente bem:
+          Não tem formulário, não tem chatbot, não tem funil. Vai ter um endereço de e-mail — de
+          verdade — assim que o acampamento terminar de instalar a caixa de correio:
         </p>
       </div>
 
-      <p class="email-line">
-        <a class="button" href={`mailto:${email}`}>{email}</a>
-      </p>
-
-      <p class="email-note label">
-        (Endereço provisório — a caixa de correio de verdade está sendo instalada.)
-      </p>
+      <div class="mailbox-closed panel">
+        <span class="mailbox-icon"><Icon name="envelope" size={26} /></span>
+        <p class="mailbox-line">A caixa de correio ainda não está aberta.</p>
+        <p class="email-note label">
+          (Um endereço de verdade chega junto com o domínio próprio do acampamento. Até lá, nada
+          do que você mandar pode se perder, porque nada pode ser mandado.)
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -59,12 +58,28 @@ const topics = [
     padding-block: var(--space-block) var(--space-section);
   }
 
-  .email-line {
+  .mailbox-closed {
     margin-top: 2rem;
+    max-width: 30rem;
+    padding: 1.6rem 1.8rem;
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mailbox-icon {
+    display: inline-flex;
+    color: var(--color-clay);
+  }
+
+  .mailbox-line {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
   }
 
   .email-note {
-    margin-top: 1rem;
     color: var(--color-ink-faint);
   }
 </style>

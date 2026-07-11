@@ -18,6 +18,8 @@ interface MapPlace {
   url: string;
   placeLabel: string;
   locationLine: string;
+  /** "★★★★★ · 5 lanterns", or empty when the note has no rating. */
+  ratingLine: string;
   exactPin: boolean;
   approximateLabel: string;
 }
@@ -50,6 +52,8 @@ const { places, ariaLabel } = Astro.props;
     url: string;
     placeLabel: string;
     locationLine: string;
+    /** "★★★★★ · 5 lanterns", or empty when the note has no rating. */
+    ratingLine: string;
     exactPin: boolean;
     approximateLabel: string;
   }
@@ -101,12 +105,16 @@ const { places, ariaLabel } = Astro.props;
       const approxLine = place.exactPin
         ? ''
         : `<p class="atlas-popup-approx">${place.approximateLabel}</p>`;
+      const ratingHtml = place.ratingLine
+        ? `<p class="atlas-popup-rating">${place.ratingLine}</p>`
+        : '';
 
       marker.bindPopup(
         `<article class="atlas-popup-inner">
           <p class="atlas-popup-type">${place.placeLabel}</p>
           <h3><a href="${place.url}">${place.title}</a></h3>
           <p class="atlas-popup-location">${place.locationLine}</p>
+          ${ratingHtml}
           ${approxLine}
         </article>`,
         { className: 'atlas-popup', maxWidth: 260 },
@@ -187,6 +195,14 @@ const { places, ariaLabel } = Astro.props;
     letter-spacing: 0.06em;
     color: var(--color-ink-faint);
     margin: 0.4rem 0 0;
+  }
+
+  .atlas-popup-rating {
+    font-family: var(--font-label);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--color-clay-deep);
+    margin: 0.35rem 0 0;
   }
 
   .atlas-pin {

@@ -9,7 +9,7 @@ import PageTitle from '../components/sections/PageTitle.astro';
 import AtlasMap from '../components/sections/AtlasMap.astro';
 import AtlasCard from '../components/content/AtlasCard.astro';
 import { routes } from '../lib/i18n';
-import { badgeLabels, getAtlasNotes, noteUrl, placeTypeLabels } from '../lib/atlas';
+import { badgeLabels, getAtlasNotes, noteUrl, placeTypeLabels, ratingLine } from '../lib/atlas';
 
 const notes = await getAtlasNotes('en');
 
@@ -22,6 +22,7 @@ const mapPlaces = notes.map((note) => {
     url: noteUrl(note),
     placeLabel: placeTypeLabels.en[atlas.placeType],
     locationLine: [atlas.region, atlas.country].filter(Boolean).join(', '),
+    ratingLine: note.data.rating ? ratingLine(note.data.rating, 'en') : '',
     exactPin: atlas.exactPin,
     approximateLabel: badgeLabels.en.approximate,
   };

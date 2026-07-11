@@ -7,7 +7,7 @@
 import Icon from '../decor/Icon.astro';
 import { ui, type Lang } from '../../lib/i18n';
 import type { FieldNote } from '../../lib/content';
-import { badgeLabels, formatVisited, noteUrl, placeTypeLabels } from '../../lib/atlas';
+import { badgeLabels, formatVisited, noteUrl, placeTypeLabels, ratingLine } from '../../lib/atlas';
 
 interface Props {
   note: FieldNote;
@@ -47,6 +47,9 @@ const foreignNote = note.data.language !== lang;
     <a href={href}>{atlas.town ?? note.data.title}</a>
   </h3>
   {locationLine && <p class="label atlas-card-location">{locationLine}</p>}
+  {note.data.rating && (
+    <p class="atlas-card-rating">{ratingLine(note.data.rating, lang)}</p>
+  )}
 
   {badges.length > 0 && (
     <ul class="atlas-card-badges">
@@ -61,7 +64,8 @@ const foreignNote = note.data.language !== lang;
   {atlas.tips && atlas.tips.length > 0 && (
     <p class="atlas-card-tips">
       <span class="label">{s.goodFor}:</span>
-      {atlas.tips.join(' · ')}
+      {/* Three quick facts on the card; the full advice lives in the note. */}
+      {atlas.tips.slice(0, 3).join(' · ')}
     </p>
   )}
 
@@ -129,6 +133,13 @@ const foreignNote = note.data.language !== lang;
 
   .atlas-card-location {
     color: var(--color-ink-soft);
+  }
+
+  .atlas-card-rating {
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    letter-spacing: 0.06em;
+    color: var(--color-clay-deep);
   }
 
   .atlas-card-badges {

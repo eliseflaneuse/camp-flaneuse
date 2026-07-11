@@ -129,12 +129,12 @@ The site is **live** at <https://camp-flaneuse.eliseflaneuse.workers.dev>, hoste
 ## Remaining placeholders
 
 - [ ] Custom domain — attach it to the Worker in the Cloudflare dashboard, then update `site` in `astro.config.mjs`
-- [ ] Real email address in `src/pages/contact.astro` and `src/pages/pt/contato.astro` (currently `hello@campflaneuse.com`)
 - [ ] Real Open Graph image (currently `public/og-placeholder.svg`)
 - [ ] Drawings for the `ImagePlaceholder` boxes, whenever the deer agrees to be drawn
 
 ## Later (deliberately not built yet)
 
-- [ ] **Atlas ratings in map popups** — when a note has a `rating`, show it in the pin popup (and probably the place card): `★★★★★ — 5/5 lanterns`. The field already exists in the schema; this is display only.
+- [ ] **Camp map's return** — the hand-drawn clickable map (`src/components/sections/CampMap.astro`) is currently unmounted from both homepages; bring it back when it earns its place.
+- [ ] **Real contact email** — the contact pages show a charming closed mailbox until the domain (and a real address) exist.
 
 Also: newsletter, snail-mail subscriptions, shop, member area, full bilingual parity, Obsidian workflow. The structure leaves room for all of it — content collections can grow, routes are language-aware, and nothing here needs to be torn down first.
