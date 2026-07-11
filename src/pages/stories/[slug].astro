@@ -1,0 +1,126 @@
+---
+/**
+ * A single campfire story — read slowly. Serif body like the
+ * letters (stories are told, not posted), with room for a drawing.
+ */
+import { render } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import ImagePlaceholder from '../../components/content/ImagePlaceholder.astro';
+import { detailPaths, formatDate, routes, storyTypeLabels, ui } from '../../lib/i18n';
+import { findStoryTranslation, getStories, slugFromId, type Story } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const stories = await getStories('en');
+  return stories.map((story) => ({
+    params: { slug: slugFromId(story.id) },
+    props: { story },
+  }));
+}
+
+interface Props {
+  story: Story;
+}
+
+const { story } = Astro.props;
+const t = ui.en;
+const { Content } = await render(story);
+
+const translation = await findStoryTranslation(story, 'pt');
+const translationUrl = translation
+  ? `${detailPaths.stories.pt}${slugFromId(translation.id)}/`
+  : undefined;
+
+const typeLabel = storyTypeLabels.en[story.data.storyType];
+const partLabel = story.data.part !== undefined ? `Part ${story.data.part}` : undefined;
+---
+
+<BaseLayout
+  title={story.data.title}
+  description={story.data.excerpt}
+  lang="en"
+  translationUrl={translationUrl}
+>
+  <div class="section story-wrap">
+    <div class="container">
+      <article class="story-sheet panel">
+        <header class="story-head">
+          <p class="label story-type">
+            {typeLabel}{partLabel && ` · ${partLabel}`}
+          </p>
+          <h1>{story.data.title}</h1>
+          {story.data.subtitle && <p class="story-subtitle">{story.data.subtitle}</p>}
+          <p class="label story-dateline">{formatDate(story.data.date, 'en')}</p>
+        </header>
+
+        <div class="prose story-body">
+          <Content />
+        </div>
+
+        {story.data.drawingPlaceholder && (
+          <div class="story-drawing">
+            <ImagePlaceholder lang="en" icon="deer" note="A drawing belongs to this story. It has not stepped out of the trees yet." />
+          </div>
+        )}
+      </article>
+
+      <p class="back-link">
+        <a href={routes.stories.en}>← {t.backToStories}</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .story-wrap {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  /* A page read by firelight: paper sheet, forest edge on top. */
+  .story-sheet {
+    max-width: 46rem;
+    margin-inline: auto;
+    padding: clamp(2rem, 6vw, 4rem);
+    border-top: 3px solid var(--color-forest);
+  }
+
+  .story-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2.2rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px dashed var(--color-line);
+  }
+
+  .story-type {
+    color: var(--color-forest);
+  }
+
+  .story-subtitle {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-ink-soft);
+  }
+
+  .story-dateline {
+    margin-top: 0.4rem;
+  }
+
+  /* Stories are told in serif, a little larger, a little slower. */
+  .story-body {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .story-drawing {
+    margin-top: 2.5rem;
+  }
+
+  .back-link {
+    max-width: 46rem;
+    margin: 2rem auto 0;
+    font-size: var(--text-sm);
+  }
+</style>

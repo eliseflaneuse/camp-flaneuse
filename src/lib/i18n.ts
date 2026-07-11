@@ -23,6 +23,7 @@ export const routes = {
   about: { en: '/about/', pt: '/pt/sobre/' },
   fieldNotes: { en: '/field-notes/', pt: '/pt/notas-de-campo/' },
   atlas: { en: '/atlas/', pt: '/pt/atlas/' },
+  stories: { en: '/stories/', pt: '/pt/historias/' },
   /* The Correspondence Desk lives inside the Society — letters are
      rooms within it, at /soft-footsteps-society/no-001 etc. */
   softFootsteps: {
@@ -44,6 +45,7 @@ export const ui = {
     nav: {
       fieldNotes: 'Field Notes',
       atlas: 'Atlas',
+      stories: 'Stories',
       studio: 'Studio',
       about: 'About',
       contact: 'Contact',
@@ -52,6 +54,9 @@ export const ui = {
     },
     readNote: 'Read the note',
     readLetter: 'Read the letter',
+    readStory: 'Read the story',
+    backToStories: 'Back to the campfire',
+    enclosed: 'Enclosed with this correspondence',
     filedUnder: 'Filed under',
     location: 'Location',
     date: 'Date',
@@ -74,6 +79,7 @@ export const ui = {
     nav: {
       fieldNotes: 'Notas de Campo',
       atlas: 'Atlas',
+      stories: 'Histórias',
       studio: 'Estúdio',
       about: 'Sobre',
       contact: 'Contato',
@@ -82,6 +88,9 @@ export const ui = {
     },
     readNote: 'Ler a nota',
     readLetter: 'Ler a carta',
+    readStory: 'Ler a história',
+    backToStories: 'Voltar à fogueira',
+    enclosed: 'Junto com esta correspondência',
     filedUnder: 'Arquivado em',
     location: 'Local',
     date: 'Data',
@@ -130,6 +139,26 @@ export const categoryLabels: Record<Lang, Record<FieldNoteCategory, string>> = {
   },
 };
 
+export type StoryType = 'myth' | 'ghost-story' | 'fable' | 'fragment' | 'road-folklore';
+
+/** Human-readable story-type labels, per language. */
+export const storyTypeLabels: Record<Lang, Record<StoryType, string>> = {
+  en: {
+    myth: 'Myth',
+    'ghost-story': 'Ghost story',
+    fable: 'Fable',
+    fragment: 'Fragment',
+    'road-folklore': 'Road folklore',
+  },
+  pt: {
+    myth: 'Mito',
+    'ghost-story': 'História de fantasma',
+    fable: 'Fábula',
+    fragment: 'Fragmento',
+    'road-folklore': 'Folclore da estrada',
+  },
+};
+
 /** "8 July 2026" / "8 de julho de 2026" */
 export function formatDate(date: Date, lang: Lang): string {
   return new Intl.DateTimeFormat(lang === 'pt' ? 'pt-BR' : 'en-GB', {
@@ -139,9 +168,10 @@ export function formatDate(date: Date, lang: Lang): string {
   }).format(date);
 }
 
-/** Base path for a field note / letter detail page, per language. */
+/** Base path for a field note / letter / story detail page, per language. */
 export const detailPaths = {
   fieldNotes: { en: '/field-notes/', pt: '/pt/notas-de-campo/' },
+  stories: { en: '/stories/', pt: '/pt/historias/' },
   correspondence: {
     en: '/soft-footsteps-society/',
     pt: '/pt/sociedade-dos-passos-suaves/',

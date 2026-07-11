@@ -9,7 +9,9 @@ This is the MVP website for **Camp Flaneuse** — part travel journal, part arti
 Camp Flaneuse is organized into a few small rooms:
 
 - **Field Notes** — observations from the road: places, weather, birds, museums, books, studio process, and strange parking lots. *Things you notice.*
-- **The Soft Footsteps Society** — the letters room: the Correspondence Desk, letters from the road, and a future correspondence/art project for attentive walkers. *Things you send.*
+- **The Road Atlas** — real geography: motorhome stops, museums, walks, and towns, pinned on a map. *Where things happened.*
+- **Campfire Stories** — myths, ghost stories, fables, fragments, and road folklore. *Things that did not happen exactly, but may still be true.*
+- **The Soft Footsteps Society** — the letters room: the Correspondence Desk, letters from the road, and a future correspondence/art project for attentive walkers. *Things you send.* (A letter can carry a story as an `enclosure` — the Society sends the letter, the fire keeps the story.)
 - **Flaneuse Studio** — small websites with soul for artists, writers, makers, and other sincere people. *Things you make for others.*
 
 ## Commands
@@ -82,8 +84,9 @@ Dear reader, ...
 
 ```
 src/
-  content/            ← all posts and letters (Markdown) — edit here most often
-    field-notes/{en,pt}/
+  content/            ← all posts, stories, and letters (Markdown) — edit here most often
+    field-notes/{en,pt,photos}/
+    stories/{en,pt}/
     correspondence/{en,pt}/
   content.config.ts   ← content schemas (frontmatter validation)
   pages/              ← one file per page; pt/ mirrors the English pages

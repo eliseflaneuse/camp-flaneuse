@@ -1,0 +1,66 @@
+---
+/**
+ * Campfire Stories — the fire of the camp.
+ * Myths, ghost stories, fables, fragments, and road folklore.
+ */
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import PageTitle from '../../components/sections/PageTitle.astro';
+import StoryCard from '../../components/content/StoryCard.astro';
+import { routes } from '../../lib/i18n';
+import { getStories } from '../../lib/content';
+
+const stories = await getStories('en');
+---
+
+<BaseLayout
+  title="Campfire Stories"
+  description="Myths, ghost stories, fables, fragments, and road folklore from Camp Flaneuse. Some stories did not happen exactly, but they may still be true."
+  lang="en"
+  translationUrl={routes.stories.pt}
+>
+  <PageTitle
+    overline="The fire"
+    title="Campfire Stories"
+    lede="Some stories did not happen exactly, but they may still be true."
+  />
+
+  <section class="section stories-body">
+    <div class="container">
+      <div class="prose stories-intro">
+        <p>
+          Campfire Stories is where Camp Flaneuse keeps its myths, ghost stories, fables,
+          fragments, and pieces of road folklore: the deer that appears at the edge of the trees,
+          the woman who lost her shadow, and the things the cats may or may not have said when no
+          one was listening.
+        </p>
+        <p>
+          Here live the stories that passed through dream, memory, fear, longing, and the old
+          machinery of myth.
+        </p>
+        <p>The fire keeps the meanings.</p>
+      </div>
+
+      <div class="stories-grid">
+        {stories.map((story) => <StoryCard story={story} lang="en" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stories-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .stories-intro {
+    margin-bottom: var(--space-block);
+    color: var(--color-ink-soft);
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1.2rem;
+    max-width: 44rem;
+  }
+</style>

@@ -12,6 +12,7 @@ import type { Lang } from './i18n';
 
 export type FieldNote = CollectionEntry<'field-notes'>;
 export type Letter = CollectionEntry<'correspondence'>;
+export type Story = CollectionEntry<'stories'>;
 
 /** `en/the-camp-begins` → `the-camp-begins` */
 export function slugFromId(id: string): string {
@@ -34,6 +35,30 @@ export async function getLetters(lang: Lang): Promise<Letter[]> {
     ({ data }) => data.language === lang && !data.draft,
   );
   return letters.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
+/** All published campfire stories for a language, newest first. */
+export async function getStories(lang: Lang): Promise<Story[]> {
+  const stories = await getCollection(
+    'stories',
+    ({ data }) => data.language === lang && !data.draft,
+  );
+  return stories.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
+export async function findStoryTranslation(
+  story: Story,
+  targetLang: Lang,
+): Promise<Story | undefined> {
+  if (!story.data.translationKey) return undefined;
+  const candidates = await getCollection(
+    'stories',
+    ({ data }) =>
+      data.language === targetLang &&
+      data.translationKey === story.data.translationKey &&
+      !data.draft,
+  );
+  return candidates[0];
 }
 
 /**

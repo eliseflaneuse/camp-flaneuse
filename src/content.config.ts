@@ -65,6 +65,31 @@ const fieldNotes = defineCollection({
 });
 
 /**
+ * Campfire Stories — myths, ghost stories, fables, fragments,
+ * and road folklore. Some stories did not happen exactly, but
+ * they may still be true.
+ * Files live in src/content/stories/<lang>/<slug>.md
+ */
+const stories = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/stories' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    date: z.coerce.date(),
+    excerpt: z.string(),
+    storyType: z.enum(['myth', 'ghost-story', 'fable', 'fragment', 'road-folklore']),
+    language: z.enum(['en', 'pt']),
+    translationKey: z.string().optional(),
+    /** Stories can arrive in parts: series groups them, part orders them. */
+    series: z.string().optional(),
+    part: z.number().int().positive().optional(),
+    tags: z.array(z.string()).optional(),
+    drawingPlaceholder: z.boolean().default(false),
+    draft: z.boolean().default(false),
+  }),
+});
+
+/**
  * Correspondence — letters from the road.
  * Files live in src/content/correspondence/<lang>/<slug>.md
  */
@@ -81,10 +106,22 @@ const correspondence = defineCollection({
     translationKey: z.string().optional(),
     drawingPlaceholder: z.boolean().default(false),
     draft: z.boolean().default(false),
+    /**
+     * A letter can carry a story (or anything else) as an enclosure —
+     * the Society sends the letter, the fire keeps the story.
+     */
+    enclosure: z
+      .object({
+        title: z.string(),
+        subtitle: z.string().optional(),
+        url: z.string(),
+      })
+      .optional(),
   }),
 });
 
 export const collections = {
   'field-notes': fieldNotes,
+  stories: stories,
   correspondence: correspondence,
 };

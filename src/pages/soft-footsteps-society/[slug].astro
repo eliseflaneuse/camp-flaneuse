@@ -64,6 +64,21 @@ const translationUrl = translation
             <ImagePlaceholder lang="en" icon="deer" note="A drawing travels with this letter. It has not arrived yet." />
           </div>
         )}
+
+        {letter.data.enclosure && (
+          <aside class="letter-enclosure">
+            <p class="label enclosure-label">{t.enclosed}</p>
+            <h2 class="enclosure-title">
+              <a href={letter.data.enclosure.url}>{letter.data.enclosure.title}</a>
+            </h2>
+            {letter.data.enclosure.subtitle && (
+              <p class="enclosure-subtitle">{letter.data.enclosure.subtitle}</p>
+            )}
+            <p class="enclosure-link">
+              <a href={letter.data.enclosure.url}>{t.readStory} →</a>
+            </p>
+          </aside>
+        )}
       </article>
 
       <p class="back-link">
@@ -120,6 +135,47 @@ const translationUrl = translation
 
   .letter-drawing {
     margin-top: 2.5rem;
+  }
+
+  /* Something folded inside the letter. */
+  .letter-enclosure {
+    margin-top: 2.5rem;
+    padding: 1.5rem 1.7rem;
+    border: 1.5px dashed var(--color-line);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-paper-deep) 40%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .enclosure-label {
+    color: var(--color-forest);
+  }
+
+  .enclosure-title {
+    font-size: 1.25rem;
+  }
+
+  .enclosure-title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .enclosure-title a:hover {
+    color: var(--color-clay-deep);
+  }
+
+  .enclosure-subtitle {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .enclosure-link {
+    font-size: var(--text-sm);
+    font-weight: 700;
   }
 
   .back-link {

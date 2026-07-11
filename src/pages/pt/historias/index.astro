@@ -1,0 +1,84 @@
+---
+/**
+ * Histórias de Fogueira — o fogo do acampamento.
+ * Mitos, histórias de fantasma, fábulas, fragmentos e folclore da estrada.
+ */
+import BaseLayout from '../../../components/layout/BaseLayout.astro';
+import PageTitle from '../../../components/sections/PageTitle.astro';
+import StoryCard from '../../../components/content/StoryCard.astro';
+import { routes } from '../../../lib/i18n';
+import { getStories } from '../../../lib/content';
+
+const stories = await getStories('pt');
+const enCount = (await getStories('en')).length;
+---
+
+<BaseLayout
+  title="Histórias de Fogueira"
+  description="Mitos, histórias de fantasma, fábulas, fragmentos e folclore da estrada do Camp Flaneuse. Algumas histórias não aconteceram exatamente, mas talvez ainda sejam verdade."
+  lang="pt"
+  translationUrl={routes.stories.en}
+>
+  <PageTitle
+    overline="O fogo"
+    title="Histórias de Fogueira"
+    lede="Algumas histórias não aconteceram exatamente, mas talvez ainda sejam verdade."
+  />
+
+  <section class="section stories-body">
+    <div class="container">
+      <div class="prose stories-intro">
+        <p>
+          Histórias de Fogueira é onde Camp Flaneuse guarda seus mitos, histórias de fantasma,
+          fábulas, fragmentos e pedaços do folclore da estrada: o cervo que aparece à beira das
+          árvores, a mulher que perdeu a própria sombra e as coisas que os gatos talvez tenham
+          dito quando ninguém estava ouvindo.
+        </p>
+        <p>
+          Aqui vivem as histórias que passaram pelo sonho, pela memória, pelo medo, pelo desejo e
+          pela velha maquinaria do mito.
+        </p>
+        <p>O fogo guarda os sentidos.</p>
+      </div>
+
+      <div class="stories-grid">
+        {stories.map((story) => <StoryCard story={story} lang="pt" />)}
+      </div>
+
+      {enCount > stories.length && (
+        <p class="translation-note">
+          Nem todas as histórias foram contadas em português ainda — por enquanto, a fogueira
+          completa arde em <a href={routes.stories.en}>inglês</a>. As traduções chegam no ritmo do
+          acampamento: devagar, mas chegam.
+        </p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stories-body {
+    padding-block: var(--space-block) var(--space-section);
+  }
+
+  .stories-intro {
+    margin-bottom: var(--space-block);
+    color: var(--color-ink-soft);
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1.2rem;
+    max-width: 44rem;
+  }
+
+  .translation-note {
+    margin-top: var(--space-block);
+    max-width: var(--prose-width);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    border-top: 1px dashed var(--color-line);
+    padding-top: 1.2rem;
+  }
+</style>
