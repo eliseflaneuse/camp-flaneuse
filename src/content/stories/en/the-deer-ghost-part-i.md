@@ -207,7 +207,7 @@ The man reaches us.
 
 I imagine the knife before I see one.
 
-I see the body opened. Hands entering where no hands have ever been. I see myself divided into pieces small enough to belong to anyone.
+I see the body opened. Hands entering where no hands have ever been.
 
 I imagine my head taken.
 
@@ -471,17 +471,9 @@ I stay beside it, looking at the pale inside of myself.
 
 Then they bring in another body.
 
-It has my size.
-
-My legs.
-
-The slope of my back.
-
-It has never breathed.
-
 Foam. Wire. Wood.
 
-Nothing in it has known rain, hunger, fear, or the need to run.
+It has never breathed. Nothing in it has known rain, hunger, fear, or the need to run.
 
 They begin to dress it in me.
 
@@ -533,7 +525,7 @@ Ready forever.
 
 Unable to leave.
 
-They have removed everything that might sag, tremble, decay, or change. Everything that might make the body difficult. Everything that proved the body had ever been alive.
+They have removed everything that might sag, tremble, decay, or change. Everything that might make the body difficult. Everything that proved I had once existed inside the skin.
 
 What remains is graceful, calm, and obedient: a deer with no will left to inconvenience anyone.
 
@@ -550,6 +542,8 @@ He means this version.
 The version that cannot flinch.
 
 The version that cannot run.
+
+The version that cannot object.
 
 For the first time, I wish they had eaten me.
 
@@ -597,9 +591,7 @@ That complicates matters considerably.
 
 I had assumed death would carry me farther than this. Instead, I seem to have remained where they left my body, which is inconvenient and, after some consideration, possibly useful.
 
-I remember stories then, half-heard things passed between animals at night. The kind sensible creatures dismiss because sensible creatures are often just creatures who have not yet been given contrary evidence.
-
-Ghosts that lingered near trees. Ghosts that followed bones. Ghosts that needed something solid to keep them close to the world.
+I remember stories then, half-heard things passed between animals at night, the kind sensible creatures dismiss because sensible creatures are often just creatures who have not yet been given contrary evidence: ghosts that lingered near trees, followed bones, or needed something solid to keep them close to the world.
 
 In retrospect, I may have dismissed these stories too quickly.
 
