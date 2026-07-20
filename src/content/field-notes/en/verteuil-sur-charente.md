@@ -111,9 +111,7 @@ Everyone I met was genuinely friendly in the way that makes a place feel softer 
 
 ## Things to do
 
-You can book a kayak descent with Base Canoë-Kayak de Ruffec Rejallant for €20.
-
-I am doing this on Sunday, so this section will be updated after I find out whether I survive with dignity.
+A canoe and kayak base operates nearby at Rejallant, although I did not try it during this stay.
 
 ## Cat and motorhome notes
 
