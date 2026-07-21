@@ -1,6 +1,8 @@
 ---
 /**
  * About — the keeper of the camp.
+ * Each topic sits on its own band, alternating background like the
+ * homepage's sections.
  */
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import PageTitle from '../components/sections/PageTitle.astro';
@@ -11,86 +13,227 @@ import { routes } from '../lib/i18n';
 
 <BaseLayout
   title="About the Camp"
-  description="The person behind Camp Flaneuse: Elai, a motorhome named Ember, a few cats, and the slow construction of a freer life on the road."
+  description="The person behind Camp Flaneuse: Elai, a motorhome named Ember, two elderly cats, and the slow construction of a freer life on the road."
   lang="en"
   translationUrl={routes.about.pt}
 >
-  <PageTitle
-    overline="The keeper"
-    title="About the Camp"
-    lede="Every camp has someone who keeps the fire going and the notebooks dry. Here, that someone is Elai."
-  />
+  <PageTitle overline="The keeper" title="About the Camp" />
 
-  <article class="section about-body">
+  <section class="section about-intro">
     <div class="container">
       <div class="prose">
         <p>
-          Camp Flaneuse is kept by <strong>Elai</strong> — a person who writes, draws, watches
-          birds, and lives on the road in a motorhome named <strong>Ember</strong>, in the company
-          of cats who did not sign up for this but have adapted with dignity.
+          I'm Elai. I write, draw, build websites, watch birds, and live on the road in a
+          motorhome named <strong>Ember</strong> with two elderly cats who did not sign the consent
+          forms for any of this but have adapted with considerable dignity.
         </p>
-
+        <p>Camp Flaneuse began with a refusal.</p>
         <p>
-          The short version: Camp Flaneuse began with a refusal of the version of life that put
-          work at the center of everything — the speed, the constant proving, the feeling that
-          rest had to be earned and attention had to be useful. Instead of optimizing that life,
-          it seemed better to build a different one. Smaller. Slower. More attentive. With wheels.
+          I had spent too much of my life inside a version of living that placed work at the center
+          of everything: the speed, the constant proving, the feeling that rest had to be earned
+          and attention had to be useful.
         </p>
+        <p>
+          For a long time, I thought the answer was to become better at that life. More
+          disciplined. More efficient. Better organized. Perhaps equipped with the correct
+          notebook.
+        </p>
+        <p>Eventually, I realized I did not want to optimize it.</p>
+        <p>I wanted to build another one.</p>
+        <p>
+          Something smaller, slower, and more attentive. A life with enough space for making
+          things, wandering, noticing animals, reading books, changing my mind, and occasionally
+          spending far too long looking at a bird I cannot identify.
+        </p>
+        <p>Apparently, it also needed wheels.</p>
+      </div>
+    </div>
+  </section>
 
+  <section class="section section--deep">
+    <div class="container">
+      <div class="prose">
         <h2>Ember</h2>
         <p>
-          Ember is the motorhome: house, studio, weather instrument, and occasional toaster. She is
-          not glamorous. She is dependable in the way old boats are dependable, which is to say:
-          mostly, and with character. This site is being written and built from inside her —
-          between workdays, road days, cat negotiations, and whatever the weather allows.
+          Ember is my motorhome: house, studio, weather instrument, cat transport, and recurring
+          electrical argument.
         </p>
+        <p>
+          She is old, stubborn, surprisingly capable, and dependable in the way old boats are
+          dependable — which is to say: mostly, and with character.
+        </p>
+        <p>
+          She has carried me through countries, heat waves, mechanical mysteries, very beautiful
+          mistakes, and parking places of wildly inconsistent quality.
+        </p>
+        <p>
+          This site is being written and built from inside her, between workdays, road days,
+          repairs, cat negotiations, and whatever the weather permits.
+        </p>
+        <p>Sometimes the desk is a desk.</p>
+        <p>Sometimes it is the bed with a laptop balanced badly on one knee.</p>
+        <p>The archive has learned not to be precious about its working conditions.</p>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="prose">
         <h2>The residents</h2>
+        <p>Thor and Momo are the camp's permanent residents and its most honest critics.</p>
         <p>
-          The cats are the camp's permanent residents and its most honest critics. They review
-          every parking spot within minutes of arrival and their standards are unreasonable. They
-          appear in the notes from time to time, always without permission.
+          They inspect every new parking place within minutes of arrival. Their standards are
+          unreasonable, their complaints are immediate, and their approval usually depends on
+          shade, silence, temperature, and whether I have correctly understood the snack situation.
         </p>
+        <p>They appear throughout the notes without having granted editorial permission.</p>
+        <p>This has not stopped me.</p>
+        <ImagePlaceholder
+          lang="en"
+          icon="cat"
+          note="A drawing of the camp — Ember, chairs, cats, and whatever I forgot to bring inside — will live here."
+        />
+      </div>
+    </div>
+  </section>
 
-        <ImagePlaceholder lang="en" note="A drawing of the camp — Ember, chairs, cats — will live here." />
-
-        <h2>What gets collected here</h2>
+  <section class="section section--deep">
+    <div class="container">
+      <div class="prose">
+        <h2>What I collect</h2>
         <p>
-          Field notes from roadsides, rivers, cities, forests, and strange parking lots. Letters.
-          Drawings. Bird sightings and other creature reports. Weather, both meteorological and
-          emotional. Notes on making things, and on making a living without losing the plot. The
-          slow record of a freer life being built in real time, mistakes included.
+          I collect field notes from roadsides, rivers, cities, forests, museums, campsites, and
+          strange parking lots.
         </p>
+        <p>
+          I collect letters, drawings, bird sightings, creature reports, overheard sentences,
+          weather both meteorological and emotional, and small things that seem useless until they
+          refuse to leave me alone.
+        </p>
+        <p>
+          I write about making things and about making a living without allowing work to consume
+          the life it is supposed to support.
+        </p>
+        <p>
+          I keep records of beauty, discomfort, failure, repair, fear, freedom, and the slow
+          construction of a life that feels more like mine.
+        </p>
+        <p>The mistakes remain in the archive.</p>
+        <p>They were part of the journey too, and some of them were extremely expensive.</p>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="prose">
         <h2>Why it exists</h2>
         <p>
-          Because attention is a form of devotion, and wonder can be a practice. Because a small,
-          strange, sincere life can become a body of work. Because the internet has enough
-          platforms and not enough camps. And because — having gotten lost once inside a life that
-          looked correct from the outside — the keeper of this camp does not intend to lose themself
-          again, and writing it all down is part of how.
+          Because attention is a form of devotion, and wonder is something that can be practised.
         </p>
-
+        <p>Because a small, strange, sincere life can become a body of work.</p>
+        <p>Because the internet has enough platforms and not enough camps.</p>
         <p>
-          If any of this sounds like your kind of place: stay a while. Read the
-          <a href={routes.fieldNotes.en}>notes</a>, open a
-          <a href={routes.softFootsteps.en}>letter</a>, or — if you are building something of your
-          own and need a home for it — knock on the <a href={routes.studio.en}>studio</a> door.
+          I know what it is to disappear inside a life that looked correct from the outside. I do
+          not intend to do that again.
+        </p>
+        <p>Keeping this record is part of how I remain visible to myself.</p>
+        <p>
+          It is also a way of leaving evidence: that I was here, that I paid attention, that the
+          world occasionally answered, and that I tried to build a life spacious enough to hear it.
+        </p>
+        <p>
+          I do not think freedom is a state you finally reach and then keep forever. I think it is
+          something you construct repeatedly, through decisions both dramatic and very small.
+        </p>
+        <ul class="choices">
+          <li>Leaving.</li>
+          <li>Staying.</li>
+          <li>Making something.</li>
+          <li>Refusing something.</li>
+          <li>Choosing where your hours go.</li>
+          <li>Looking again at what everyone else has agreed not to notice.</li>
+        </ul>
+        <p>Camp Flaneuse is the record of those choices while I am still making them.</p>
+        <p>
+          It is not a completed philosophy presented from a safe distance. It is a moving camp,
+          built in real time, with cats underfoot and tools occasionally missing.
         </p>
       </div>
     </div>
-  </article>
+  </section>
+
+  <section class="section section--deep">
+    <div class="container">
+      <div class="prose">
+        <h2>Stay a while</h2>
+        <p>
+          Read the <a href={routes.fieldNotes.en}>notes</a>. Open a <a href={routes.softFootsteps.en}>letter</a>. Sit near the <a href={routes.stories.en}>fire</a>. Look through the archive and see what has been gathered.
+        </p>
+        <p>Perhaps you will recognize something here.</p>
+        <p>
+          Perhaps you are also trying to make a life that does not require you to disappear in order
+          to maintain it.
+        </p>
+        <p>
+          Perhaps you simply like birds, ghosts, strange stories, old motorhomes, or websites that
+          feel like places rather than products.
+        </p>
+        <p>All of those are acceptable reasons to enter.</p>
+        <p>
+          And if you are building something of your own and need a home for it, the <a href={routes.studio.en}>Studio</a> door is open too.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <CTASection
     overline="Say hello"
     title="The camp receives visitors."
-    text="Questions, letters, bird reports, website projects — the contact page is the camp's mailbox."
-    cta={{ label: 'Go to contact', href: routes.contact.en }}
+    text="Questions, letters, bird reports, peculiar findings, and website projects may all be delivered through the mailbox. There are several desks and only moderate administrative certainty, but messages usually reach the correct person eventually."
+    cta={{ label: 'Go to the mailbox', href: routes.contact.en }}
   />
 </BaseLayout>
 
 <style>
-  .about-body {
-    padding-block: var(--space-block) var(--space-section);
+  /* Every band opens with a smaller top than its bottom, so sections
+     don't start with too much air. */
+  .section {
+    padding-block: 28px var(--space-section);
+  }
+
+  /* Alternating background, matching the homepage's banded sections. */
+  .section--deep {
+    background: color-mix(in srgb, var(--color-paper-deep) 55%, transparent);
+    border-block: 1px solid var(--color-line-soft);
+  }
+
+  /* The repeated small choices — a tight, unbulleted stanza, quieter
+     and smaller than the surrounding prose. */
+  .choices {
+    list-style: none;
+    padding-left: 0;
+    margin-block: 1.4em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--color-ink-faint);
+  }
+</style>
+
+<style is:global>
+  /* About page only. */
+  body:has(.about-intro) .site-footer {
+    /* The closing CTA meets the footer with no gap. */
+    margin-top: 0;
+  }
+
+  body:has(.about-intro) .cta-section {
+    /* Roomier closing block — at least 5rem top and bottom. */
+    padding-block: max(5rem, var(--space-section));
   }
 </style>

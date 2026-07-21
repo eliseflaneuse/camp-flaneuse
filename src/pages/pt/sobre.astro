@@ -1,6 +1,8 @@
 ---
 /**
- * Sobre — quem guarda o acampamento.
+ * Sobre — quem mantém o acampamento.
+ * Cada tópico em sua própria faixa, com fundo alternado como as
+ * seções da página inicial.
  */
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import PageTitle from '../../components/sections/PageTitle.astro';
@@ -11,92 +13,229 @@ import { routes } from '../../lib/i18n';
 
 <BaseLayout
   title="Sobre o Acampamento"
-  description="A pessoa por trás do Camp Flaneuse: Elai, um motorhome chamado Ember, alguns gatos, e a lenta construção de uma vida mais livre na estrada."
+  description="A pessoa por trás do Camp Flaneuse: Elai, um motorhome chamado Ember, dois gatos já velhinhos, e a lenta construção de uma vida mais livre na estrada."
   lang="pt"
   translationUrl={routes.about.en}
 >
-  <PageTitle
-    overline="Quem guarda"
-    title="Sobre o Acampamento"
-    lede="Todo acampamento tem alguém que mantém o fogo aceso e os cadernos secos. Aqui, esse alguém é Elai."
-  />
+  <PageTitle overline="Quem mantém o acampamento" title="Sobre o Acampamento" />
 
-  <article class="section about-body">
+  <section class="section about-intro">
     <div class="container">
       <div class="prose">
         <p>
-          O Camp Flaneuse é mantido por <strong>Elai</strong> — uma pessoa que escreve, desenha,
-          observa pássaros e vive na estrada num motorhome chamado <strong>Ember</strong>, na
-          companhia de gatos que não assinaram nenhum contrato para isso, mas se adaptaram com
-          dignidade.
+          Eu sou Elai. Escrevo, desenho, construo sites, observo pássaros e vivo na estrada em um
+          motorhome chamado <strong>Ember</strong>, acompanhado de dois gatos já velhinhos que não
+          assinaram nenhum termo de consentimento para participar disso tudo, mas se adaptaram com
+          uma dignidade considerável.
         </p>
-
+        <p>O Acampamento Flaneuse começou com uma recusa.</p>
         <p>
-          A versão curta: o Camp Flaneuse começou com uma recusa da versão de vida que colocava o
-          trabalho no centro de tudo — a pressa, a necessidade constante de provar alguma coisa, a
-          sensação de que o descanso precisava ser merecido e a atenção precisava ser útil. Em vez
-          de otimizar essa vida, pareceu melhor construir outra. Menor. Mais lenta. Mais atenta.
-          Com rodas.
+          Eu havia passado tempo demais dentro de uma versão de vida que colocava o trabalho no
+          centro de tudo: a pressa, a necessidade constante de provar alguma coisa, a sensação de
+          que o descanso precisava ser merecido e de que a atenção precisava ser útil.
         </p>
+        <p>
+          Durante muito tempo, achei que a resposta era ficar melhor naquela vida. Mais
+          disciplinado. Mais eficiente. Mais organizado. Talvez equipado com o caderno correto.
+        </p>
+        <p>Até perceber que eu não queria otimizá-la.</p>
+        <p>Eu queria construir outra.</p>
+        <p>
+          Algo menor, mais lento e mais atento. Uma vida com espaço suficiente para fazer coisas,
+          vagar, reparar nos animais, ler livros, mudar de ideia e, de vez em quando, passar tempo
+          demais olhando para um pássaro que não consigo identificar.
+        </p>
+        <p>Aparentemente, ela também precisava ter rodas.</p>
+      </div>
+    </div>
+  </section>
 
+  <section class="section section--deep">
+    <div class="container">
+      <div class="prose">
         <h2>Ember</h2>
         <p>
-          Ember é o motorhome: casa, estúdio, instrumento meteorológico e, ocasionalmente,
-          torradeira. Ela não é glamorosa. É confiável do jeito que barcos velhos são confiáveis,
-          ou seja: quase sempre, e com personalidade. Este site está sendo escrito e construído de
-          dentro dela — entre dias de trabalho, dias de estrada, negociações com os gatos e o que
-          o tempo permitir.
+          Ember é meu motorhome: casa, estúdio, instrumento meteorológico, transporte de gatos e
+          discussão elétrica recorrente.
         </p>
-
-        <h2>Os residentes</h2>
         <p>
-          Os gatos são os residentes permanentes do acampamento e seus críticos mais honestos.
-          Eles avaliam cada lugar de estacionar minutos depois da chegada, e os padrões deles são
-          absurdos. Aparecem nas notas de vez em quando, sempre sem pedir licença.
+          Ela é velha, teimosa, surpreendentemente capaz e confiável da maneira como barcos antigos
+          são confiáveis — ou seja: na maior parte do tempo e com personalidade.
         </p>
-
-        <ImagePlaceholder lang="pt" note="Um desenho do acampamento — Ember, cadeiras, gatos — vai morar aqui." />
-
-        <h2>O que se coleciona aqui</h2>
         <p>
-          Notas de campo de beiras de estrada, rios, cidades, florestas e estacionamentos
-          estranhos. Cartas. Desenhos. Avistamentos de pássaros e outros relatórios de criaturas.
-          O tempo, tanto o meteorológico quanto o emocional. Notas sobre fazer coisas, e sobre
-          ganhar a vida sem perder o fio. O registro lento de uma vida mais livre sendo construída
-          em tempo real, erros inclusos.
+          Ela já me carregou por países, ondas de calor, mistérios mecânicos, erros muito bonitos e
+          lugares para estacionar de qualidade extremamente variável.
         </p>
+        <p>
+          Este site está sendo escrito e construído de dentro dela, entre dias de trabalho, dias de
+          estrada, reparos, negociações felinas e o que quer que o tempo permita.
+        </p>
+        <p>Às vezes, a mesa é realmente uma mesa.</p>
+        <p>Às vezes, é a cama, com o notebook mal equilibrado sobre um dos joelhos.</p>
+        <p>O arquivo aprendeu a não ser exigente demais com as condições de trabalho.</p>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <h2>Os moradores</h2>
+        <p>Thor e Momo são os moradores permanentes do acampamento e seus críticos mais honestos.</p>
+        <p>
+          Eles inspecionam cada novo lugar para estacionar poucos minutos depois da chegada. Seus
+          padrões são absurdos, suas reclamações são imediatas e sua aprovação geralmente depende
+          de sombra, silêncio, temperatura e de eu ter compreendido corretamente a situação dos
+          petiscos.
+        </p>
+        <p>Eles aparecem ao longo das notas sem jamais terem concedido autorização editorial.</p>
+        <p>Isso não me impediu.</p>
+        <ImagePlaceholder
+          lang="pt"
+          icon="cat"
+          note="Um desenho do acampamento — Ember, cadeiras, gatos e tudo aquilo que eu tenha esquecido do lado de fora — vai morar aqui."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--deep">
+    <div class="container">
+      <div class="prose">
+        <h2>O que eu coleciono</h2>
+        <p>
+          Coleciono notas de campo de margens de estrada, rios, cidades, florestas, museus,
+          campings e estacionamentos estranhos.
+        </p>
+        <p>
+          Coleciono cartas, desenhos, avistamentos de pássaros, relatos de criaturas, frases
+          ouvidas por acaso, clima meteorológico e emocional e pequenas coisas que parecem inúteis
+          até se recusarem a sair da minha cabeça.
+        </p>
+        <p>
+          Escrevo sobre fazer coisas e sobre ganhar a vida sem permitir que o trabalho consuma a
+          vida que deveria sustentar.
+        </p>
+        <p>
+          Guardo registros de beleza, desconforto, fracasso, reparo, medo, liberdade e da lenta
+          construção de uma vida que se parece mais comigo.
+        </p>
+        <p>Os erros permanecem no arquivo.</p>
+        <p>Eles também fizeram parte da viagem, e alguns foram extremamente caros.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="prose">
         <h2>Por que isso existe</h2>
         <p>
-          Porque a atenção é uma forma de devoção, e o espanto pode ser uma prática. Porque uma
-          vida pequena, estranha e sincera pode virar uma obra. Porque a internet tem plataformas
-          demais e acampamentos de menos. E porque — tendo se perdido uma vez dentro de uma vida
-          que parecia correta vista de fora — quem guarda este acampamento não pretende se perder
-          de novo. Eu sei como é me perder de mim, e escrever tudo isso faz parte do caminho de
-          volta.
+          Porque a atenção é uma forma de devoção e o encantamento é algo que pode ser praticado.
         </p>
-
+        <p>Porque uma vida pequena, estranha e sincera pode se tornar um corpo de trabalho.</p>
+        <p>Porque a internet já tem plataformas suficientes e acampamentos de menos.</p>
         <p>
-          Se algo disso soa como o seu tipo de lugar: fique um pouco. Leia as
-          <a href={routes.fieldNotes.pt}>notas</a>, abra uma
-          <a href={routes.softFootsteps.pt}>carta</a>, ou — se você está construindo algo seu e
-          precisa de uma casa para isso — bata na porta do
-          <a href={routes.studio.pt}>estúdio</a>.
+          Eu sei o que é desaparecer dentro de uma vida que parecia correta por fora. Não pretendo
+          fazer isso novamente.
+        </p>
+        <p>Manter este registro é parte da maneira como continuo visível para mim mesmo.</p>
+        <p>
+          Também é uma forma de deixar evidências: de que estive aqui, de que prestei atenção, de
+          que o mundo às vezes respondeu e de que tentei construir uma vida espaçosa o bastante para
+          conseguir escutá-lo.
+        </p>
+        <p>
+          Não acho que a liberdade seja um estado ao qual finalmente chegamos e que depois permanece
+          para sempre. Acho que é algo que construímos repetidamente, por meio de decisões
+          dramáticas e decisões muito pequenas.
+        </p>
+        <ul class="choices">
+          <li>Ir embora.</li>
+          <li>Ficar.</li>
+          <li>Fazer alguma coisa.</li>
+          <li>Recusar alguma coisa.</li>
+          <li>Escolher para onde vão as nossas horas.</li>
+          <li>Olhar de novo para aquilo que todo mundo concordou em não perceber.</li>
+        </ul>
+        <p>
+          O Acampamento Flaneuse é o registro dessas escolhas enquanto ainda estou fazendo todas
+          elas.
+        </p>
+        <p>
+          Não é uma filosofia concluída, apresentada de uma distância segura. É um acampamento em
+          movimento, construído em tempo real, com gatos debaixo dos pés e ferramentas
+          ocasionalmente desaparecidas.
         </p>
       </div>
     </div>
-  </article>
+  </section>
+
+  <section class="section section--deep">
+    <div class="container">
+      <div class="prose">
+        <h2>Fique um pouco</h2>
+        <p>
+          Leia as <a href={routes.fieldNotes.pt}>notas</a>. Abra uma <a href={routes.softFootsteps.pt}>carta</a>. Sente-se perto do <a href={routes.stories.pt}>fogo</a>. Olhe pelo arquivo e veja o que foi reunido.
+        </p>
+        <p>Talvez você reconheça alguma coisa aqui.</p>
+        <p>
+          Talvez também esteja tentando construir uma vida que não exija que você desapareça para
+          conseguir mantê-la.
+        </p>
+        <p>
+          Talvez simplesmente goste de pássaros, fantasmas, histórias estranhas, motorhomes antigos
+          ou sites que pareçam lugares em vez de produtos.
+        </p>
+        <p>Todos esses são motivos perfeitamente aceitáveis para entrar.</p>
+        <p>
+          E, caso esteja construindo algo seu e precise de uma casa para isso, a porta do <a href={routes.studio.pt}>Studio</a> também está aberta.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <CTASection
     overline="Diga olá"
     title="O acampamento recebe visitas."
-    text="Perguntas, cartas, relatórios de pássaros, projetos de site — a página de contato é a caixa de correio do acampamento."
-    cta={{ label: 'Ir para o contato', href: routes.contact.pt }}
+    text="Perguntas, cartas, relatos de pássaros, descobertas peculiares e projetos de sites podem ser entregues pela caixa de correio. Há várias mesas e apenas uma certeza administrativa moderada, mas as mensagens geralmente chegam à pessoa certa em algum momento."
+    cta={{ label: 'Ir para a caixa de correio', href: routes.contact.pt }}
   />
 </BaseLayout>
 
 <style>
-  .about-body {
-    padding-block: var(--space-block) var(--space-section);
+  .section {
+    padding-block: 28px var(--space-section);
+  }
+
+  .section--deep {
+    background: color-mix(in srgb, var(--color-paper-deep) 55%, transparent);
+    border-block: 1px solid var(--color-line-soft);
+  }
+
+  .choices {
+    list-style: none;
+    padding-left: 0;
+    margin-block: 1.4em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--text-sm);
+    color: var(--color-ink-faint);
+  }
+</style>
+
+<style is:global>
+  /* Só na página Sobre. */
+  body:has(.about-intro) .site-footer {
+    /* A chamada final encosta no rodapé, sem vão. */
+    margin-top: 0;
+  }
+
+  body:has(.about-intro) .cta-section {
+    /* Bloco de fechamento mais espaçoso — ao menos 5rem em cima e embaixo. */
+    padding-block: max(5rem, var(--space-section));
   }
 </style>
