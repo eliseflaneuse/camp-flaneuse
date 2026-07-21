@@ -85,7 +85,11 @@ const desks: {
           ))
         }
       </div>
+    </div>
+  </section>
 
+  <section class="section contact-notes-section">
+    <div class="container">
       <div class="contact-notes">
         <section class="contact-note">
           <h2 class="contact-note-heading">Not sure where your letter belongs?</h2>
@@ -116,6 +120,7 @@ const desks: {
     </div>
   </section>
 </BaseLayout>
+
 
 <style>
   .contact-body {
@@ -189,15 +194,23 @@ const desks: {
     word-break: normal;
   }
 
+  /* The notes sit in their own soft band, like the homepage's
+     alternating sections. As the last band it grows to meet the
+     footer (no paper strip beneath), with extra bottom room so the
+     content never crowds the footer. */
+  .contact-notes-section {
+    background: color-mix(in srgb, var(--color-paper-deep) 55%, transparent);
+    border-top: 1px solid var(--color-line-soft);
+    flex: 1;
+    padding-bottom: calc(var(--space-section) + 1.5rem);
+  }
+
   /* Two quiet practical notes below the desks — not competing cards. */
   .contact-notes {
-    margin-top: var(--space-section);
     max-width: 40rem;
     display: flex;
     flex-direction: column;
     gap: var(--space-block);
-    border-top: 1px dashed var(--color-line);
-    padding-top: var(--space-block);
   }
 
   .contact-note-heading {
@@ -221,5 +234,19 @@ const desks: {
 
   .contact-note-cta a {
     color: var(--color-clay-deep);
+  }
+</style>
+
+<style is:global>
+  /* Contact page only: let <main> distribute height so the final band
+     fills down to the footer, and drop the footer's usual top gap so
+     the band meets it flush (no mismatched paper strip). */
+  main:has(.contact-notes-section) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  body:has(.contact-notes-section) .site-footer {
+    margin-top: 0;
   }
 </style>

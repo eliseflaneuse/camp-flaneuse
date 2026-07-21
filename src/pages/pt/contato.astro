@@ -85,7 +85,11 @@ const desks: {
           ))
         }
       </div>
+    </div>
+  </section>
 
+  <section class="section contact-notes-section">
+    <div class="container">
       <div class="contact-notes">
         <section class="contact-note">
           <h2 class="contact-note-heading">Não sabe a qual mesa sua carta pertence?</h2>
@@ -190,15 +194,23 @@ const desks: {
     word-break: normal;
   }
 
+  /* Os recados ficam numa faixa suave, como as seções alternadas da
+     página inicial. Sendo a última faixa, cresce até o rodapé (sem
+     tira de papel embaixo), com espaço extra para o conteúdo não
+     encostar no rodapé. */
+  .contact-notes-section {
+    background: color-mix(in srgb, var(--color-paper-deep) 55%, transparent);
+    border-top: 1px solid var(--color-line-soft);
+    flex: 1;
+    padding-bottom: calc(var(--space-section) + 1.5rem);
+  }
+
   /* Dois recados práticos e discretos abaixo das mesas. */
   .contact-notes {
-    margin-top: var(--space-section);
     max-width: 40rem;
     display: flex;
     flex-direction: column;
     gap: var(--space-block);
-    border-top: 1px dashed var(--color-line);
-    padding-top: var(--space-block);
   }
 
   .contact-note-heading {
@@ -222,5 +234,19 @@ const desks: {
 
   .contact-note-cta a {
     color: var(--color-clay-deep);
+  }
+</style>
+
+<style is:global>
+  /* Só na página de contato: o <main> distribui a altura para a última
+     faixa preencher até o rodapé, e o vão de topo do rodapé é removido
+     para a faixa encostar nele (sem tira de papel). */
+  main:has(.contact-notes-section) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  body:has(.contact-notes-section) .site-footer {
+    margin-top: 0;
   }
 </style>
