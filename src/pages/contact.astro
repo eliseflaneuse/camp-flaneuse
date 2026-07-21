@@ -1,18 +1,35 @@
 ---
 /**
- * Contact — the camp mailbox. A mailto link is enough for the MVP.
+ * Contact — the camp mailbox, now genuinely open. Three desks,
+ * three addresses: mailto links are enough for the MVP.
  */
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import PageTitle from '../components/sections/PageTitle.astro';
-import Icon from '../components/decor/Icon.astro';
+import Icon, { type IconName } from '../components/decor/Icon.astro';
 import { routes } from '../lib/i18n';
 
-const topics = [
-  'Camp Flaneuse itself — questions, hellos, bird reports',
-  'Correspondence — letters, replies, future snail mail',
-  'The Soft Footsteps Society — early interest in enrollment',
-  'Flaneuse Studio — website projects, big or tiny',
-  'Collaborations and other kind schemes',
+const desks: { icon: IconName; color: string; name: string; description: string; email: string }[] = [
+  {
+    icon: 'tent',
+    color: 'var(--color-clay)',
+    name: 'Camp Flaneuse',
+    description: 'Questions, hellos, bird reports, and collaborations or other kind schemes.',
+    email: 'hello@campflaneuse.com',
+  },
+  {
+    icon: 'envelope',
+    color: 'var(--color-river)',
+    name: 'The Correspondence Desk',
+    description: 'Letters, replies, and early interest in the Soft Footsteps Society.',
+    email: 'correspondence@campflaneuse.com',
+  },
+  {
+    icon: 'brush',
+    color: 'var(--color-olive)',
+    name: 'Flaneuse Studio',
+    description: 'Website projects, big or tiny.',
+    email: 'studio@campflaneuse.com',
+  },
 ];
 ---
 
@@ -30,24 +47,24 @@ const topics = [
 
   <section class="section contact-body">
     <div class="container">
-      <div class="prose">
-        <p>You are welcome to write about:</p>
-        <ul>
-          {topics.map((topic) => <li>{topic}</li>)}
-        </ul>
-        <p>
-          There is no form, no chatbot, and no funnel. There will be an email address — a real
-          one — as soon as the camp finishes installing its mailbox:
-        </p>
-      </div>
+      <p class="prose desks-intro">
+        There is no form, no chatbot, and no funnel. There are three desks, each with its own
+        address:
+      </p>
 
-      <div class="mailbox-closed panel">
-        <span class="mailbox-icon"><Icon name="envelope" size={26} /></span>
-        <p class="mailbox-line">The mailbox is not open yet.</p>
-        <p class="email-note label">
-          (A real address arrives together with the camp's own domain. Until then, nothing you
-          send can get lost, because nothing can be sent.)
-        </p>
+      <div class="desks">
+        {
+          desks.map((desk) => (
+            <div class="desk panel" style={`--desk-color: ${desk.color}`}>
+              <span class="desk-icon">
+                <Icon name={desk.icon} size={22} />
+              </span>
+              <p class="desk-name">{desk.name}</p>
+              <p class="desk-description">{desk.description}</p>
+              <a class="desk-email" href={`mailto:${desk.email}`}>{desk.email}</a>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -58,28 +75,48 @@ const topics = [
     padding-block: var(--space-block) var(--space-section);
   }
 
-  .mailbox-closed {
+  .desks-intro {
+    color: var(--color-ink-soft);
+  }
+
+  .desks {
     margin-top: 2rem;
-    max-width: 30rem;
-    padding: 1.6rem 1.8rem;
-    border-style: dashed;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.1rem;
+    max-width: 52rem;
+  }
+
+  .desk {
+    padding: 1.5rem 1.6rem;
+    border-top: 3px solid var(--desk-color);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
-  .mailbox-icon {
+  .desk-icon {
     display: inline-flex;
-    color: var(--color-clay);
+    color: var(--desk-color);
+    margin-bottom: 0.2rem;
   }
 
-  .mailbox-line {
+  .desk-name {
     font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+    font-weight: 600;
   }
 
-  .email-note {
-    color: var(--color-ink-faint);
+  .desk-description {
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .desk-email {
+    margin-top: 0.4rem;
+    font-family: var(--font-label);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    word-break: break-all;
   }
 </style>
