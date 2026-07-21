@@ -167,9 +167,15 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
   }
 
   @media (min-width: 721px) {
-    /* Force the links visible regardless of the disclosure's state. */
+    /* On desktop the disclosure is a plain container: the links are
+       always shown, whatever the <details> open state. Two overrides
+       cover both engine behaviours — Chrome hides a closed details via
+       the ::details-content pseudo, others via the child's display. */
     .nav-disclosure > .nav-list {
       display: flex !important;
+    }
+    .nav-disclosure::details-content {
+      content-visibility: visible !important;
     }
   }
 
