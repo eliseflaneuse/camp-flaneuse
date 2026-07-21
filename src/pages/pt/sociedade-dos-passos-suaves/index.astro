@@ -94,7 +94,7 @@ const futureDispatches = [
     </div>
   </section>
 
-  <section class="section section--flush-top">
+  <section id="newsletter" class="section section--flush-top">
     <div class="container">
       <NewsletterSignup locale="pt" variant="full" />
     </div>
@@ -164,6 +164,11 @@ const futureDispatches = [
   /* Puxa o boletim para perto das cartas a que ele pertence. */
   .section--flush-top {
     padding-top: 0;
+  }
+
+  /* Espaço acima da âncora quando chega um link da página de contato. */
+  #newsletter {
+    scroll-margin-top: 1.5rem;
   }
 
   .letters-grid {

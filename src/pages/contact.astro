@@ -50,7 +50,7 @@ const desks: {
   <PageTitle
     overline="The mailbox"
     title="Write to the camp"
-    lede="The camp receives visitors and letters. Both are answered — slowly, sincerely, in order of arrival, weather permitting."
+    lede="The camp receives visitors and letters. Both are welcomed. Letters are answered slowly, sincerely, and in order of arrival, weather permitting."
   />
 
   <section class="section contact-body">
@@ -84,6 +84,34 @@ const desks: {
             </div>
           ))
         }
+      </div>
+
+      <div class="contact-notes">
+        <section class="contact-note">
+          <h2 class="contact-note-heading">Not sure where your letter belongs?</h2>
+          <p>
+            Send it to <a href={mailtoLink('general', 'en')}>{contactAddresses.general.email}</a>.
+            The camp will carry it to the appropriate desk, with varying degrees of administrative
+            competence.
+          </p>
+          <p>
+            Messages are read by Elai. Replies may take a little while during road days, difficult
+            weather, cat emergencies, or periods of excessive attention to birds.
+          </p>
+        </section>
+
+        <section class="contact-note">
+          <h2 class="contact-note-heading">Looking to receive letters?</h2>
+          <p>
+            The Correspondence Desk sends stories, drawings, field notes, maps, misplaced
+            creatures, and reports from Camp Flaneuse.
+          </p>
+          <p class="contact-note-cta">
+            <a href={`${routes.softFootsteps.en}#newsletter`}>
+              Receive correspondence from the Soft Footsteps Society →
+            </a>
+          </p>
+        </section>
       </div>
     </div>
   </section>
@@ -159,5 +187,39 @@ const desks: {
   .desk-aside a {
     overflow-wrap: anywhere;
     word-break: normal;
+  }
+
+  /* Two quiet practical notes below the desks — not competing cards. */
+  .contact-notes {
+    margin-top: var(--space-section);
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-block);
+    border-top: 1px dashed var(--color-line);
+    padding-top: var(--space-block);
+  }
+
+  .contact-note-heading {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-note p {
+    color: var(--color-ink-soft);
+  }
+
+  .contact-note p + p {
+    margin-top: 0.7rem;
+  }
+
+  .contact-note-cta {
+    margin-top: 0.9rem;
+    font-weight: 700;
+  }
+
+  .contact-note-cta a {
+    color: var(--color-clay-deep);
   }
 </style>

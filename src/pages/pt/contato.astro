@@ -50,7 +50,7 @@ const desks: {
   <PageTitle
     overline="A caixa de correio"
     title="Escreva para o acampamento"
-    lede="O acampamento recebe visitas e cartas. As duas coisas são respondidas — devagar, com sinceridade, por ordem de chegada, se o tempo permitir."
+    lede="O acampamento recebe visitas e cartas. As duas coisas são bem-vindas. As cartas são respondidas devagar, com sinceridade e por ordem de chegada, se o tempo permitir."
   />
 
   <section class="section contact-body">
@@ -84,6 +84,35 @@ const desks: {
             </div>
           ))
         }
+      </div>
+
+      <div class="contact-notes">
+        <section class="contact-note">
+          <h2 class="contact-note-heading">Não sabe a qual mesa sua carta pertence?</h2>
+          <p>
+            Envie para <a href={mailtoLink('general', 'pt')}>{contactAddresses.general.email}</a>.
+            O acampamento a levará até a mesa apropriada, com diferentes graus de competência
+            administrativa.
+          </p>
+          <p>
+            As mensagens são lidas por Elai. As respostas podem demorar um pouco durante dias de
+            estrada, tempo difícil, emergências felinas ou períodos de atenção excessiva aos
+            pássaros.
+          </p>
+        </section>
+
+        <section class="contact-note">
+          <h2 class="contact-note-heading">Quer receber cartas?</h2>
+          <p>
+            A Mesa de Correspondência envia histórias, desenhos, notas de campo, mapas, criaturas
+            extraviadas e relatos do Acampamento Flaneuse.
+          </p>
+          <p class="contact-note-cta">
+            <a href={`${routes.softFootsteps.pt}#newsletter`}>
+              Receber correspondências da Sociedade dos Passos Suaves →
+            </a>
+          </p>
+        </section>
       </div>
     </div>
   </section>
@@ -159,5 +188,39 @@ const desks: {
   .desk-aside a {
     overflow-wrap: anywhere;
     word-break: normal;
+  }
+
+  /* Dois recados práticos e discretos abaixo das mesas. */
+  .contact-notes {
+    margin-top: var(--space-section);
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-block);
+    border-top: 1px dashed var(--color-line);
+    padding-top: var(--space-block);
+  }
+
+  .contact-note-heading {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-note p {
+    color: var(--color-ink-soft);
+  }
+
+  .contact-note p + p {
+    margin-top: 0.7rem;
+  }
+
+  .contact-note-cta {
+    margin-top: 0.9rem;
+    font-weight: 700;
+  }
+
+  .contact-note-cta a {
+    color: var(--color-clay-deep);
   }
 </style>
