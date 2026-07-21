@@ -1,72 +1,87 @@
 ---
 /**
  * Sociedade dos Passos Suaves — a sala das cartas do acampamento.
- *
- * Notas de Campo são as coisas que você nota. A Sociedade são as
- * coisas que você envia. A Mesa de Correspondência mora aqui, e as
- * cartas moram sob esta rota: /pt/sociedade-dos-passos-suaves/no-001
  */
 import BaseLayout from '../../../components/layout/BaseLayout.astro';
 import PageTitle from '../../../components/sections/PageTitle.astro';
 import SectionIntro from '../../../components/sections/SectionIntro.astro';
 import LetterCard from '../../../components/content/LetterCard.astro';
 import CTASection from '../../../components/sections/CTASection.astro';
+import NewsletterSignup from '../../../components/sections/NewsletterSignup.astro';
 import { routes } from '../../../lib/i18n';
+import { mailtoLink } from '../../../lib/contact';
 import { getLetters } from '../../../lib/content';
 
 const letters = await getLetters('pt');
 
 const futureDispatches = [
   'Cartas da estrada',
-  'Cartões-postais, ocasionalmente urgentes',
   'Pequenos desenhos',
-  'Tarefas de campo — dever de casa gentil para gente atenta',
+  'Histórias de fantasma e outros anexos',
+  'Tarefas de campo para gente atenta',
   'Despachos sazonais',
-  'Inscrição, para quem quiser pisar suave de propósito',
+  'Cartões-postais, ocasionalmente urgentes',
+  'Relatos sobre pássaros, tempo, criaturas e outras evidências difíceis',
 ];
 ---
 
 <BaseLayout
   title="Sociedade dos Passos Suaves"
-  description="Uma pequena sociedade para quem caminha com atenção, observa devagar, guarda cartas e repara em criaturas. Casa da Mesa de Correspondência e das cartas da estrada. Atualmente em fundação."
+  description="Uma sociedade pequena e pouco organizada para quem caminha com atenção, observa devagar, guarda cartas e repara em criaturas. Casa da Mesa de Correspondência e das cartas da estrada."
   lang="pt"
   translationUrl={routes.softFootsteps.en}
 >
   <PageTitle
     overline="The Soft Footsteps Society"
     title="Sociedade dos Passos Suaves"
-    lede="Uma pequena sociedade para quem caminha com atenção, observa devagar, guarda cartas, repara em criaturas e tenta atravessar o mundo sem fazer tanto barulho."
+    lede="Uma sociedade pequena e pouco organizada para quem caminha com atenção, observa devagar, guarda cartas, repara em criaturas e tenta atravessar o mundo sem fazer tanto barulho."
   />
 
   <section class="section society-intro">
     <div class="container">
       <div class="prose">
         <p>
-          A Sociedade nasceu na mesa de correspondência do Camp Flaneuse: um lugar para cartas da
-          estrada, despachos sazonais, pequenos desenhos, tarefas de campo e outras evidências
-          gentis de que alguém, em algum lugar, ainda está prestando atenção.
+          A Sociedade reúne pessoas que reparam, colecionam, lembram e, de vez em quando, enviam
+          umas às outras provas de que o mundo ainda é estranho, vivo e capaz de responder.
         </p>
-        <p>Algumas notas pertencem ao Arquivo de Campo. Outras precisam de um envelope.</p>
+        <p>Algumas observações pertencem ao Arquivo de Campo.</p>
+        <p>Outras precisam de um envelope.</p>
         <p>
-          Por enquanto, a Sociedade ainda está em fundação. A gaveta está quase vazia. Os selos
-          estão sendo considerados. O veado ainda não aprovou o sinete.
+          A Sociedade mantém atualmente sua Mesa de Correspondência no Camp Flaneuse, um
+          acampamento em movimento de onde cartas, desenhos, histórias, tarefas de campo e outras
+          evidências gentis são enviadas ao mundo.
         </p>
+        <p>
+          Não há sede fixa. A geografia é flexível. A participação começa ao reparar em alguma
+          coisa e se recusar a passar por ela com pressa.
+        </p>
+        <p>A Sociedade ainda está tomando forma, mas já não é apenas teórica.</p>
+        <p>A primeira carta já saiu da mesa.</p>
       </div>
     </div>
   </section>
 
   <section class="section section--deep">
     <div class="container">
-      <SectionIntro
-        overline="A sala dentro da sala"
-        title="A Mesa de Correspondência"
-        lede="É aqui que as cartas ficam guardadas antes de aprenderem a viajar."
-      />
-      <p class="desk-more">
-        Um dia, algumas delas podem sair da tela por completo — dobradas, seladas e enviadas pelo
-        correio. Até lá, elas moram aqui: mais lentas do que posts, mais quietas do que anúncios,
-        endereçadas a quem chegou devagar o bastante para lê-las.
-      </p>
+      <SectionIntro overline="A sala dentro da sala" title="A Mesa de Correspondência" />
+      <div class="prose desk-prose">
+        <p>
+          A Mesa de Correspondência é a parte da Sociedade responsável por garantir que parte do
+          que encontramos chegue a outra pessoa.
+        </p>
+        <p>O Professor Emberroot traz as coisas para dentro.</p>
+        <p>
+          Arquivista etiqueta tudo, corrige as datas e pergunta por que chegou coberto de lama.
+        </p>
+        <p>Os gatos contribuem com pelos.</p>
+        <p>O acampamento continua.</p>
+        <p>
+          É aqui que as cartas ficam guardadas antes de aprenderem a viajar. Algumas podem um dia
+          sair da tela por completo — dobradas, seladas e enviadas pelo correio. Até lá, elas
+          moram aqui: mais lentas que anúncios, mais quietas que um feed, e endereçadas a quem
+          chegou de mansinho o suficiente para lê-las.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -79,21 +94,34 @@ const futureDispatches = [
     </div>
   </section>
 
+  <section class="section section--flush-top">
+    <div class="container">
+      <NewsletterSignup locale="pt" variant="full" />
+    </div>
+  </section>
+
   <section class="section section--deep">
     <div class="container">
-      <SectionIntro overline="Participação" title="Inscrições ainda fechadas" />
+      <SectionIntro overline="Participação" title="Nenhuma inscrição necessária" />
       <div class="prose">
         <p>
-          A escrivaninha está sendo construída, e a escrivaninha insiste em ser bem construída. Se
-          você quiser receber um aviso quando a Sociedade abrir as portas, pode
-          <a href={routes.contact.pt}>escrever para o acampamento</a> dizendo isso — as primeiras
-          cartas serão respondidas por ordem de chegada, se o tempo permitir.
+          A Sociedade não exige, no momento, formulários, referências, exames, uniformes ou
+          qualquer papelada competente.
         </p>
         <p>
-          Enquanto isso, o único requisito para a futura participação já está disponível para você:
-          saia, caminhe mais devagar do que o necessário, e repare em uma coisa que não sirva para
-          nada.
+          Assinar as cartas já inclui você na correspondência. A participação em si é menos formal
+          e talvez já tenha sido concedida sem o seu conhecimento.
         </p>
+        <p>
+          Sinais comuns incluem atenção desnecessária a pássaros, guardar objetos sem valor
+          prático, lembrar de casas abandonadas, escolher o caminho mais longo e desconfiar de que
+          o mundo contém mais sentido do que está disposto a explicar.
+        </p>
+        <p>O único requisito disponível para todo mundo é este:</p>
+        <blockquote>Saia. Caminhe mais devagar do que o necessário. Repare em uma coisa que não sirva para nada.</blockquote>
+        <p>Você pode relatar suas descobertas à Mesa de Correspondência.</p>
+        <p>O Professor Emberroot sugeriu distintivos de participação.</p>
+        <p>Arquivista preferiu não comentar.</p>
       </div>
     </div>
   </section>
@@ -101,21 +129,24 @@ const futureDispatches = [
   <section class="section">
     <div class="container">
       <SectionIntro
-        overline="O que a Sociedade vai enviar"
+        overline="O que pode chegar"
         title="Despachos futuros"
-        lede="Planejados, prometidos, ou pelo menos sinceramente rumorejados:"
+        lede="Dependendo do tempo, da tinta, das condições da estrada e do julgamento da Mesa de Correspondência:"
       />
       <ul class="dispatch-list">
         {futureDispatches.map((thing) => <li>{thing}</li>)}
       </ul>
+      <p class="dispatch-coda">
+        A regularidade não pode ser prometida.<br />A atenção pode.
+      </p>
     </div>
   </section>
 
   <CTASection
-    overline="Enquanto isso"
-    title="O acampamento recebe visitas."
-    text="Perguntas, interesse antecipado em se inscrever, relatórios de pássaros — a caixa de correio está aberta mesmo com a Sociedade ainda fechada."
-    cta={{ label: 'Escrever para o acampamento', href: routes.contact.pt }}
+    overline="A caixa de correio está aberta"
+    title="Escreva para a Mesa de Correspondência"
+    text="Perguntas, respostas, observações, desenhos, relatórios de pássaros e descobertas para a Sociedade podem ser enviados à Mesa de Correspondência."
+    cta={{ label: 'Escrever para a Mesa de Correspondência', href: mailtoLink('correspondence', 'pt') }}
     secondaryCta={{ label: 'Ver as notas de campo', href: routes.fieldNotes.pt }}
   />
 </BaseLayout>
@@ -130,9 +161,13 @@ const futureDispatches = [
     border-block: 1px solid var(--color-line-soft);
   }
 
-  .desk-more {
-    max-width: var(--prose-width);
-    color: var(--color-ink-soft);
+  /* Puxa o boletim para perto das cartas a que ele pertence. */
+  .section--flush-top {
+    padding-top: 0;
+  }
+
+  .desk-prose {
+    margin-top: var(--space-block);
   }
 
   .letters-grid {
@@ -149,5 +184,13 @@ const futureDispatches = [
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .dispatch-coda {
+    margin-top: var(--space-block);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-ink-soft);
   }
 </style>

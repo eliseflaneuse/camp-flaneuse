@@ -9,6 +9,7 @@ import SectionIntro from '../components/sections/SectionIntro.astro';
 import StudioPackageCard from '../components/sections/StudioPackageCard.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { routes } from '../lib/i18n';
+import { mailtoLink } from '../lib/contact';
 
 const whoFor = [
   'Artists who need a portfolio that feels like their work, not like a template wearing their work',
@@ -144,7 +145,7 @@ const packages = [
     overline="Start here"
     title="Tell me about your project."
     text="A few sentences is enough. Tell me what you make, what needs a home, and how you want someone to feel when they enter it."
-    cta={{ label: 'Write to the studio', href: routes.contact.en }}
+    cta={{ label: 'Write to the studio', href: mailtoLink('studio', 'en') }}
   />
 </BaseLayout>
 

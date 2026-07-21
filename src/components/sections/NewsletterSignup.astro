@@ -1,0 +1,229 @@
+---
+/**
+ * NewsletterSignup — the way a reader joins the Soft Footsteps
+ * Society's correspondence. A plain HTML POST to Buttondown's
+ * embed endpoint: no iframe, no API key, no client JS, no framework.
+ *
+ * Styled as a native camp element (dashed paper panel, envelope
+ * glyph), never Buttondown's blue. Two shapes:
+ *   - full:    heading + body + form + confirmation note
+ *   - compact: a quieter invitation for the foot of a page/letter
+ *
+ * IDs are salted with a per-instance uid so several forms can share
+ * one generated page without colliding. The form opens Buttondown's
+ * confirmation in a new tab, leaving the camp where it was.
+ */
+import Icon from '../decor/Icon.astro';
+import { newsletter } from '../../lib/contact';
+import { ui, type Lang } from '../../lib/i18n';
+
+interface Props {
+  locale?: Lang;
+  variant?: 'full' | 'compact';
+}
+
+const { locale = 'en', variant = 'full' } = Astro.props;
+const t = ui[locale].newsletter;
+
+const uid = crypto.randomUUID().slice(0, 8);
+const emailId = `newsletter-email-${uid}`;
+const noteId = `newsletter-note-${uid}`;
+const headingId = `newsletter-heading-${uid}`;
+---
+
+<section
+  class:list={['newsletter panel', `newsletter--${variant}`]}
+  aria-labelledby={headingId}
+>
+  <div class="newsletter-intro">
+    <span class="newsletter-icon" aria-hidden="true"><Icon name="envelope" size={26} /></span>
+    <div>
+      <h2 id={headingId} class="newsletter-heading">{t.heading}</h2>
+      {variant === 'full' && <p class="newsletter-body">{t.body}</p>}
+    </div>
+  </div>
+
+  <div class="newsletter-action">
+    <form
+      action={newsletter.action}
+      method="post"
+      class="newsletter-form"
+      target="_blank"
+      data-newsletter
+      data-done={t.done}
+    >
+      <div class="newsletter-field">
+        <label for={emailId}>{t.emailLabel}</label>
+        <div class="newsletter-row">
+          <input
+            id={emailId}
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder={t.placeholder}
+            required
+            aria-describedby={noteId}
+          />
+          <input type="hidden" name="embed" value="1" />
+          <button type="submit" class="button">{t.button}</button>
+        </div>
+      </div>
+      <p id={noteId} class="newsletter-note label">{t.confirmation}</p>
+    </form>
+
+    <p class="newsletter-done" role="status" aria-live="polite" tabindex="-1" hidden></p>
+  </div>
+</section>
+
+<script>
+  /**
+   * Progressive enhancement: the form works without JS (it posts to
+   * Buttondown in a new tab). With JS, we submit quietly in the
+   * background and show an on-site "check your email" message so the
+   * reader is never taken away from the camp. Bundled once per page
+   * by Astro, so it binds every form even if several are present.
+   */
+  const forms = document.querySelectorAll<HTMLFormElement>('form[data-newsletter]');
+  forms.forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      // The submit event only fires once native validation passes.
+      event.preventDefault();
+      const container = form.closest('.newsletter');
+      const done = container?.querySelector<HTMLElement>('.newsletter-done');
+      const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+      try {
+        await fetch(form.action, { method: 'POST', mode: 'no-cors', body });
+      } catch {
+        // Network refused the request — fall back to the plain
+        // Buttondown page so the reader can still subscribe.
+        form.submit();
+        return;
+      }
+      if (done) {
+        form.hidden = true;
+        done.textContent = form.dataset.done ?? '';
+        done.hidden = false;
+        done.focus();
+      }
+    });
+  });
+</script>
+
+<style>
+  /* A warm signup panel in the camp's yellow + pink tones — ochre
+     wash, blush edge — spanning the full width of its container. */
+  .newsletter {
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+    border: 1px solid color-mix(in srgb, var(--color-ochre) 45%, var(--color-line));
+    border-top: 3px solid var(--color-blush);
+    background: color-mix(in srgb, var(--color-ochre) 13%, var(--color-card));
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.3rem 2.5rem;
+    align-items: center;
+  }
+
+  /* Two columns once there is room: the invitation, then the form. */
+  @media (min-width: 48rem) {
+    .newsletter {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .newsletter-intro {
+    display: flex;
+    gap: 0.9rem;
+    align-items: start;
+  }
+
+  .newsletter-icon {
+    color: var(--color-clay);
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .newsletter-heading {
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+
+  .newsletter-body {
+    margin-top: 0.55rem;
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .newsletter-field label {
+    display: block;
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    margin-bottom: 0.4rem;
+  }
+
+  .newsletter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .newsletter-row input[type='email'] {
+    flex: 1 1 13rem;
+    min-width: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--color-ink);
+    background: var(--color-card);
+    border: 1.5px solid color-mix(in srgb, var(--color-clay) 30%, var(--color-line));
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+  }
+
+  .newsletter-row input[type='email']:focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 2px;
+    border-color: var(--color-clay);
+  }
+
+  .newsletter-row .button {
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .newsletter-note {
+    margin-top: 0.8rem;
+    color: var(--color-ink-faint);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+  }
+
+  /* The on-site confirmation, shown in place of the form after a
+     successful quiet submit. */
+  .newsletter-done {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--color-clay-deep);
+  }
+
+  .newsletter-done:focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Compact: quieter, tighter — a foot-of-the-letter invitation. */
+  .newsletter--compact {
+    padding: clamp(1.3rem, 3vw, 1.8rem);
+  }
+
+  .newsletter--compact .newsletter-heading {
+    font-size: 1.25rem;
+  }
+</style>

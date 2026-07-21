@@ -1,41 +1,49 @@
 ---
 /**
- * Contact — the camp mailbox, now genuinely open. Three desks,
- * three addresses: mailto links are enough for the MVP.
+ * Contact — the camp mailbox, organized into clear destinations.
+ * Addresses come from the central data in lib/contact.ts; the
+ * visible copy lives here (page copy stays in the page).
  */
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import PageTitle from '../components/sections/PageTitle.astro';
 import Icon, { type IconName } from '../components/decor/Icon.astro';
 import { routes } from '../lib/i18n';
+import { contactAddresses, mailtoLink } from '../lib/contact';
 
-const desks: { icon: IconName; color: string; name: string; description: string; email: string }[] = [
+const desks: {
+  key: 'general' | 'correspondence' | 'studio';
+  icon: IconName;
+  color: string;
+  name: string;
+  description: string;
+}[] = [
   {
+    key: 'general',
     icon: 'tent',
     color: 'var(--color-clay)',
-    name: 'Camp Flaneuse',
-    description: 'Questions, hellos, bird reports, and collaborations or other kind schemes.',
-    email: 'hello@campflaneuse.com',
+    name: 'Write to the camp',
+    description: 'For general messages, questions, and notes sent toward Camp Flaneuse.',
   },
   {
+    key: 'correspondence',
     icon: 'envelope',
     color: 'var(--color-river)',
-    name: 'The Correspondence Desk',
-    description: 'Letters, replies, and early interest in the Soft Footsteps Society.',
-    email: 'correspondence@campflaneuse.com',
+    name: 'Correspondence Desk',
+    description: 'For letters, observations, findings, and replies intended for the Soft Footsteps Society.',
   },
   {
+    key: 'studio',
     icon: 'brush',
     color: 'var(--color-olive)',
     name: 'Flaneuse Studio',
-    description: 'Website projects, big or tiny.',
-    email: 'studio@campflaneuse.com',
+    description: 'For commissions, collaborations, and websites for artists.',
   },
 ];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Write to Camp Flaneuse — about the camp, the letters, the Soft Footsteps Society, or a website project for Flaneuse Studio."
+  description="Write to Camp Flaneuse — the camp, the Soft Footsteps Society's Correspondence Desk, or Flaneuse Studio for commissions and collaborations."
   lang="en"
   translationUrl={routes.contact.pt}
 >
@@ -48,7 +56,7 @@ const desks: { icon: IconName; color: string; name: string; description: string;
   <section class="section contact-body">
     <div class="container">
       <p class="prose desks-intro">
-        There is no form, no chatbot, and no funnel. There are three desks, each with its own
+        There is no form, no chatbot, and no funnel. There are a few desks, each with its own
         address:
       </p>
 
@@ -61,7 +69,17 @@ const desks: { icon: IconName; color: string; name: string; description: string;
               </span>
               <p class="desk-name">{desk.name}</p>
               <p class="desk-description">{desk.description}</p>
-              <a class="desk-email" href={`mailto:${desk.email}`}>{desk.email}</a>
+              <a class="desk-email" href={mailtoLink(desk.key, 'en')}>
+                {contactAddresses[desk.key].email}
+              </a>
+
+              {desk.key === 'correspondence' && (
+                <p class="desk-aside">
+                  <span class="desk-aside-icon"><Icon name="notebook" size={15} /></span>
+                  Professor Emberroot also keeps an address, for the Society's stranger business:
+                  <a href={mailtoLink('professor', 'en')}>{contactAddresses.professor.email}</a>
+                </p>
+              )}
             </div>
           ))
         }
@@ -117,6 +135,26 @@ const desks: { icon: IconName; color: string; name: string; description: string;
     font-family: var(--font-label);
     font-size: 0.85rem;
     letter-spacing: 0.02em;
+    word-break: break-all;
+  }
+
+  /* Professor Emberroot: a smaller related contact under the Desk. */
+  .desk-aside {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--color-line);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .desk-aside-icon {
+    display: inline-flex;
+    vertical-align: -2px;
+    margin-right: 0.3rem;
+    color: var(--color-ink-faint);
+  }
+
+  .desk-aside a {
     word-break: break-all;
   }
 </style>

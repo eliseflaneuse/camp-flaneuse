@@ -7,6 +7,7 @@ import Hero from '../components/sections/Hero.astro';
 import SectionIntro from '../components/sections/SectionIntro.astro';
 import ExploreCard from '../components/sections/ExploreCard.astro';
 import CTASection from '../components/sections/CTASection.astro';
+import NewsletterSignup from '../components/sections/NewsletterSignup.astro';
 import FieldNoteCard from '../components/content/FieldNoteCard.astro';
 import { routes } from '../lib/i18n';
 import { getFieldNotes } from '../lib/content';
@@ -137,6 +138,12 @@ const exploreCards = [
         </p>
         <p class="road-note-sign">— E.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <NewsletterSignup locale="en" variant="compact" />
     </div>
   </section>
 

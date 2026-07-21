@@ -7,6 +7,7 @@
 import { render } from 'astro:content';
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import ImagePlaceholder from '../../components/content/ImagePlaceholder.astro';
+import NewsletterSignup from '../../components/sections/NewsletterSignup.astro';
 import { detailPaths, formatDate, routes, ui } from '../../lib/i18n';
 import {
   findLetterTranslation,
@@ -80,6 +81,10 @@ const translationUrl = translation
           </aside>
         )}
       </article>
+
+      <div class="letter-newsletter">
+        <NewsletterSignup locale="en" variant="compact" />
+      </div>
 
       <p class="back-link">
         <a href={routes.softFootsteps.en}>← {t.backToCorrespondence}</a>
@@ -176,6 +181,11 @@ const translationUrl = translation
   .enclosure-link {
     font-size: var(--text-sm);
     font-weight: 700;
+  }
+
+  .letter-newsletter {
+    max-width: 46rem;
+    margin: 2.5rem auto 0;
   }
 
   .back-link {

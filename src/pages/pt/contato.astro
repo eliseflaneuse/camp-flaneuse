@@ -1,41 +1,49 @@
 ---
 /**
- * Contato — a caixa de correio do acampamento, agora aberta de
- * verdade. Três mesas, três endereços.
+ * Contato — a caixa de correio do acampamento, organizada em
+ * destinos claros. Os endereços vêm de lib/contact.ts; o texto
+ * visível mora nesta página.
  */
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import PageTitle from '../../components/sections/PageTitle.astro';
 import Icon, { type IconName } from '../../components/decor/Icon.astro';
 import { routes } from '../../lib/i18n';
+import { contactAddresses, mailtoLink } from '../../lib/contact';
 
-const desks: { icon: IconName; color: string; name: string; description: string; email: string }[] = [
+const desks: {
+  key: 'general' | 'correspondence' | 'studio';
+  icon: IconName;
+  color: string;
+  name: string;
+  description: string;
+}[] = [
   {
+    key: 'general',
     icon: 'tent',
     color: 'var(--color-clay)',
-    name: 'Camp Flaneuse',
-    description: 'Perguntas, olás, relatórios de pássaros, colaborações e outros esquemas gentis.',
-    email: 'hello@campflaneuse.com',
+    name: 'Escreva para o acampamento',
+    description: 'Para perguntas, recados e mensagens enviadas ao Acampamento Flaneuse.',
   },
   {
+    key: 'correspondence',
     icon: 'envelope',
     color: 'var(--color-river)',
-    name: 'A Mesa de Correspondência',
-    description: 'Cartas, respostas e interesse antecipado na Sociedade dos Passos Suaves.',
-    email: 'correspondence@campflaneuse.com',
+    name: 'Mesa de Correspondência',
+    description: 'Para cartas, observações, descobertas e respostas destinadas à Sociedade dos Passos Suaves.',
   },
   {
+    key: 'studio',
     icon: 'brush',
     color: 'var(--color-olive)',
     name: 'Flaneuse Studio',
-    description: 'Projetos de site, grandes ou minúsculos.',
-    email: 'studio@campflaneuse.com',
+    description: 'Para encomendas, colaborações e projetos profissionais.',
   },
 ];
 ---
 
 <BaseLayout
   title="Contato"
-  description="Escreva para o Camp Flaneuse — sobre o acampamento, as cartas, a Sociedade dos Passos Suaves, ou um projeto de site para o Flaneuse Studio."
+  description="Escreva para o Camp Flaneuse — o acampamento, a Mesa de Correspondência da Sociedade dos Passos Suaves, ou o Flaneuse Studio para encomendas e colaborações."
   lang="pt"
   translationUrl={routes.contact.en}
 >
@@ -48,7 +56,7 @@ const desks: { icon: IconName; color: string; name: string; description: string;
   <section class="section contact-body">
     <div class="container">
       <p class="prose desks-intro">
-        Não tem formulário, não tem chatbot, não tem funil. Tem três mesas, cada uma com seu
+        Não tem formulário, não tem chatbot, não tem funil. Tem algumas mesas, cada uma com seu
         próprio endereço:
       </p>
 
@@ -61,7 +69,17 @@ const desks: { icon: IconName; color: string; name: string; description: string;
               </span>
               <p class="desk-name">{desk.name}</p>
               <p class="desk-description">{desk.description}</p>
-              <a class="desk-email" href={`mailto:${desk.email}`}>{desk.email}</a>
+              <a class="desk-email" href={mailtoLink(desk.key, 'pt')}>
+                {contactAddresses[desk.key].email}
+              </a>
+
+              {desk.key === 'correspondence' && (
+                <p class="desk-aside">
+                  <span class="desk-aside-icon"><Icon name="notebook" size={15} /></span>
+                  O Professor Emberroot também mantém um endereço, para os assuntos mais estranhos da Sociedade:
+                  <a href={mailtoLink('professor', 'pt')}>{contactAddresses.professor.email}</a>
+                </p>
+              )}
             </div>
           ))
         }
@@ -117,6 +135,26 @@ const desks: { icon: IconName; color: string; name: string; description: string;
     font-family: var(--font-label);
     font-size: 0.85rem;
     letter-spacing: 0.02em;
+    word-break: break-all;
+  }
+
+  /* Professor Emberroot: um contato menor, relacionado à Mesa. */
+  .desk-aside {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--color-line);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .desk-aside-icon {
+    display: inline-flex;
+    vertical-align: -2px;
+    margin-right: 0.3rem;
+    color: var(--color-ink-faint);
+  }
+
+  .desk-aside a {
     word-break: break-all;
   }
 </style>

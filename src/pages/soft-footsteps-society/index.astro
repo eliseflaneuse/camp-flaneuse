@@ -11,46 +11,58 @@ import PageTitle from '../../components/sections/PageTitle.astro';
 import SectionIntro from '../../components/sections/SectionIntro.astro';
 import LetterCard from '../../components/content/LetterCard.astro';
 import CTASection from '../../components/sections/CTASection.astro';
+import NewsletterSignup from '../../components/sections/NewsletterSignup.astro';
 import { routes } from '../../lib/i18n';
+import { mailtoLink } from '../../lib/contact';
 import { getLetters } from '../../lib/content';
 
 const letters = await getLetters('en');
 
 const futureDispatches = [
   'Letters from the road',
-  'Postcards, occasionally urgent',
   'Small drawings',
-  'Field assignments — gentle homework for the attentive',
+  'Ghost stories and other enclosures',
+  'Field assignments for the attentive',
   'Seasonal dispatches',
-  'Enrollment, for those who wish to walk softly on purpose',
+  'Postcards, occasionally urgent',
+  'Reports concerning birds, weather, creatures, and other difficult evidence',
 ];
 ---
 
 <BaseLayout
   title="The Soft Footsteps Society"
-  description="A small society for attentive walkers, slow observers, letter-keepers, and creature-noticers. Home of the Correspondence Desk and the letters from the road. Currently being founded."
+  description="A small, loosely organized society for attentive walkers, slow observers, letter-keepers, and creature-noticers. Home of the Correspondence Desk and the letters from the road."
   lang="en"
   translationUrl={routes.softFootsteps.pt}
 >
   <PageTitle
     overline="Sociedade dos Passos Suaves"
     title="The Soft Footsteps Society"
-    lede="A small society for attentive walkers, slow observers, letter-keepers, creature-noticers, and people trying to move through the world without making so much noise."
+    lede="A small and loosely organized society for attentive walkers, slow observers, letter-keepers, creature-noticers, and people trying to move through the world without making quite so much noise."
   />
 
   <section class="section society-intro">
     <div class="container">
       <div class="prose">
         <p>
-          The Society began at the correspondence desk of Camp Flaneuse: a place for letters from
-          the road, seasonal dispatches, small drawings, field assignments, and other gentle
-          evidence that someone, somewhere, is still paying attention.
+          The Society gathers people who notice, collect, remember, and occasionally send one
+          another evidence that the world is still strange, alive, and capable of answering back.
         </p>
-        <p>Some notes belong in the Field Archive. Others need an envelope.</p>
+        <p>Some observations belong in the Field Archive.</p>
+        <p>Others require an envelope.</p>
         <p>
-          For now, the Society is still being founded. The drawer is nearly empty. The stamps are
-          being considered. The deer has not yet approved the seal.
+          The Society currently keeps its Correspondence Desk at Camp Flaneuse, a moving camp from
+          which letters, drawings, stories, field assignments, and other gentle evidence are sent
+          into the world.
         </p>
+        <p>
+          There is no fixed headquarters. The geography is flexible. Membership begins by noticing
+          something and refusing to hurry past it.
+        </p>
+        <p>
+          The Society is still taking shape, but it is no longer merely theoretical.
+        </p>
+        <p>The first letter has left the desk.</p>
       </div>
     </div>
   </section>
@@ -60,13 +72,26 @@ const futureDispatches = [
       <SectionIntro
         overline="The room within the room"
         title="The Correspondence Desk"
-        lede="This is where the letters are kept before they learn how to travel."
       />
-      <p class="desk-more">
-        One day, some of them may leave the screen entirely — folded, stamped, and sent through
-        the post. Until then, they live here: slower than posts, quieter than announcements,
-        addressed to whoever has arrived softly enough to read them.
-      </p>
+      <div class="prose desk-prose">
+        <p>
+          The Correspondence Desk is the part of the Society responsible for making sure some of
+          what we find reaches someone else.
+        </p>
+        <p>Professor Emberroot brings things in.</p>
+        <p>
+          The Archivist labels them, repairs their dates, and asks why they were delivered covered
+          in mud.
+        </p>
+        <p>The cats contribute hair.</p>
+        <p>The camp continues.</p>
+        <p>
+          This is where letters are kept before they learn how to travel. Some may eventually
+          leave the screen entirely — folded, stamped, and sent through the post. Until then, they
+          live here: slower than announcements, quieter than a feed, and addressed to whoever has
+          arrived softly enough to read them.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -79,20 +104,34 @@ const futureDispatches = [
     </div>
   </section>
 
+  <section class="section section--flush-top">
+    <div class="container">
+      <NewsletterSignup locale="en" variant="full" />
+    </div>
+  </section>
+
   <section class="section section--deep">
     <div class="container">
-      <SectionIntro overline="Membership" title="Enrollment not yet open" />
+      <SectionIntro overline="Membership" title="No application required" />
       <div class="prose">
         <p>
-          The desk is being built, and the desk insists on being built well. If you would like to
-          be told when the Society opens its doors, you can
-          <a href={routes.contact.en}>write to the camp</a> and say so — early letters will be
-          answered in order of arrival, weather permitting.
+          The Society does not currently require forms, references, examinations, uniforms, or
+          competent paperwork of any kind.
         </p>
         <p>
-          In the meantime, the only requirement for future membership is already available to you:
-          go outside, walk slower than necessary, and notice one thing that has no use to you.
+          Subscribing to the letters makes you a correspondent. Membership itself is less formal
+          and may already have been granted without your knowledge.
         </p>
+        <p>
+          Common signs include unnecessary attention to birds, keeping objects with no practical
+          value, remembering abandoned houses, taking the longer path, and suspecting that the
+          world contains more meaning than it is willing to explain.
+        </p>
+        <p>The only requirement available to everyone is this:</p>
+        <blockquote>Go outside. Walk slower than necessary. Notice one thing that has no use to you.</blockquote>
+        <p>You may report your findings to the Correspondence Desk.</p>
+        <p>Professor Emberroot has suggested membership badges.</p>
+        <p>The Archivist has declined to comment.</p>
       </div>
     </div>
   </section>
@@ -100,21 +139,24 @@ const futureDispatches = [
   <section class="section">
     <div class="container">
       <SectionIntro
-        overline="What the Society will send"
+        overline="What may arrive"
         title="Future dispatches"
-        lede="Planned, promised, or at least sincerely rumored:"
+        lede="Depending on weather, ink, road conditions, and the judgment of the Correspondence Desk:"
       />
       <ul class="dispatch-list">
         {futureDispatches.map((thing) => <li>{thing}</li>)}
       </ul>
+      <p class="dispatch-coda">
+        Regularity cannot be promised.<br />Attention can.
+      </p>
     </div>
   </section>
 
   <CTASection
-    overline="Meanwhile"
-    title="The camp receives visitors."
-    text="Questions, early enrollment interest, bird reports — the mailbox is open even while the Society is not."
-    cta={{ label: 'Write to the camp', href: routes.contact.en }}
+    overline="The mailbox is open"
+    title="Write to the Correspondence Desk"
+    text="Questions, replies, observations, drawings, bird reports, and findings for the Society may be sent to the Archivist."
+    cta={{ label: 'Write to the Correspondence Desk', href: mailtoLink('correspondence', 'en') }}
     secondaryCta={{ label: 'Browse the field notes', href: routes.fieldNotes.en }}
   />
 </BaseLayout>
@@ -129,9 +171,13 @@ const futureDispatches = [
     border-block: 1px solid var(--color-line-soft);
   }
 
-  .desk-more {
-    max-width: var(--prose-width);
-    color: var(--color-ink-soft);
+  /* Pull the newsletter up toward the letters it belongs with. */
+  .section--flush-top {
+    padding-top: 0;
+  }
+
+  .desk-prose {
+    margin-top: var(--space-block);
   }
 
   .letters-grid {
@@ -148,5 +194,13 @@ const futureDispatches = [
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .dispatch-coda {
+    margin-top: var(--space-block);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-ink-soft);
   }
 </style>

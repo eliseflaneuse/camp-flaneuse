@@ -71,6 +71,16 @@ export const ui = {
     allRightsReserved: 'Camp Flaneuse. Some rights reserved, most things shared.',
     drawingPlaceholder: 'Drawing to be added here.',
     photoPlaceholder: 'Photograph to be added here.',
+    newsletter: {
+      heading: 'Receive letters from the Society',
+      body: 'Stories, drawings, field notes, maps, misplaced creatures, and reports sent from Camp Flaneuse.',
+      emailLabel: 'Your email address',
+      placeholder: 'you@example.com',
+      button: 'Join the correspondence',
+      confirmation:
+        'You will be asked to confirm your address. Letters arrive only when there is something worth carrying. Unsubscribe at any time.',
+      done: 'Almost there. A confirmation letter is on its way to your inbox — open it and click the link inside, and the correspondence begins.',
+    },
   },
   pt: {
     siteName: 'Camp Flaneuse',
@@ -105,6 +115,16 @@ export const ui = {
     allRightsReserved: 'Camp Flaneuse. Alguns direitos reservados, quase tudo compartilhado.',
     drawingPlaceholder: 'Um desenho vai morar aqui.',
     photoPlaceholder: 'Uma fotografia vai morar aqui.',
+    newsletter: {
+      heading: 'Receba cartas da Sociedade',
+      body: 'Histórias, desenhos, notas de campo, mapas, criaturas extraviadas e relatos enviados do Acampamento Flaneuse.',
+      emailLabel: 'Seu endereço de e-mail',
+      placeholder: 'voce@exemplo.com',
+      button: 'Entrar para a correspondência',
+      confirmation:
+        'Você receberá um e-mail para confirmar seu endereço. As cartas chegam apenas quando há algo que valha a pena carregar. Cancele quando quiser.',
+      done: 'Quase lá. Uma carta de confirmação está a caminho da sua caixa de entrada — abra e clique no link dentro dela, e a correspondência começa.',
+    },
   },
 } as const;
 
