@@ -11,7 +11,7 @@ Camp Flaneuse is organized into a few small rooms:
 - **Field Notes** — observations from the road: places, weather, birds, museums, books, studio process, and strange parking lots. *Things you notice.*
 - **The Road Atlas** — real geography: motorhome stops, museums, walks, and towns, pinned on a map. *Where things happened.*
 - **Campfire Stories** — myths, ghost stories, fables, fragments, and road folklore. *Things that did not happen exactly, but may still be true.*
-- **The Soft Footsteps Society** — the letters room: the Correspondence Desk, letters from the road, and a future correspondence/art project for attentive walkers. *Things you send.* (A letter can carry a story as an `enclosure` — the Society sends the letter, the fire keeps the story.)
+- **The Soft Footsteps Society** — the letters room: the Correspondence Desk, letters from the road, and a newsletter for attentive walkers. *Things you send.* (A letter can carry a story as an `enclosure` — the Society sends the letter, the fire keeps the story.)
 - **Flaneuse Studio** — small websites with soul for artists, writers, makers, and other sincere people. *Things you make for others.*
 
 ## Commands
@@ -72,6 +72,19 @@ draft: false
 Dear reader, ...
 ```
 
+## Newsletter & contact
+
+The Soft Footsteps Society's newsletter — *Correspondence from the Soft Footsteps Society* — is delivered by [Buttondown](https://buttondown.com/campflaneuse). The site stays static: `src/components/sections/NewsletterSignup.astro` is a plain HTML form posting to Buttondown's embed endpoint (no API key, no backend, no framework; submitting opens Buttondown's confirmation in a new tab). It renders full-width on the Society page and compact at the foot of each letter and low on the homepages, in the camp's ochre + blush tones.
+
+Public email addresses live in one place, `src/lib/contact.ts` — use `mailtoLink(key, lang)` for links with a pre-filled, language-aware subject:
+
+- `hello@campflaneuse.com` — the camp (general)
+- `correspondence@campflaneuse.com` — the Correspondence Desk / the Archivist (the newsletter's public address)
+- `professor@campflaneuse.com` — Professor Emberroot
+- `studio@campflaneuse.com` — Flaneuse Studio
+
+The Buttondown sending address and the private/admin address are intentionally never published on the site.
+
 ## Languages
 
 - English is the default (`/`, `/about`, `/field-notes`, …).
@@ -91,13 +104,15 @@ src/
   content.config.ts   ← content schemas (frontmatter validation)
   pages/              ← one file per page; pt/ mirrors the English pages
   components/
-    layout/           ← BaseLayout, Header, Footer
-    content/          ← FieldNoteCard, LetterCard, MetadataLine, TagList, ImagePlaceholder
-    sections/         ← Hero, SectionIntro, ExploreCard, CTASection, StudioPackageCard, PageTitle
+    layout/           ← BaseLayout, Header (desktop bar + mobile menu), Footer
+    content/          ← FieldNoteCard, LetterCard, StoryCard, AtlasCard, MetadataLine, TagList, ImagePlaceholder
+    sections/         ← Hero, SectionIntro, ExploreCard, CTASection, StudioPackageCard, PageTitle, NewsletterSignup, AtlasMap, CampMap
     decor/            ← the handmade layer: LogoMark, Icon, DecorativeMarks, WelcomeGate
   lib/
-    i18n.ts           ← languages, routes, UI strings, category labels
-    content.ts        ← content collection helpers
+    i18n.ts           ← languages, routes, UI strings, category & story labels
+    content.ts        ← content collection helpers (notes, letters, stories)
+    atlas.ts          ← Road Atlas helpers (place types, ratings, map data)
+    contact.ts        ← public email addresses, mailto helper, newsletter endpoint
   styles/
     tokens.css        ← the design system: colors, fonts, spacing (change the look here)
     global.css        ← base styles, prose, buttons, labels
@@ -111,8 +126,8 @@ All colors, fonts, and spacing are CSS variables in `src/styles/tokens.css` — 
 The handmade layer lives in `src/components/decor/`:
 
 - **LogoMark** — the tent-on-wheels camp sign; scales from header to welcome screen
-- **Icon** — monoline camp glyphs (bird, cat, envelope, notebook, pin, deer, tent, sun, paw)
-- **DecorativeMarks** — colored-pencil marks at the page edges; desktop-first, reduced to almost nothing on phones; `--mark-opacity` in tokens.css controls how loud they are
+- **Icon** — monoline camp glyphs: bird, cat, envelope, notebook, pin, deer, tent, sun, paw, book, brush, fire (Campfire Stories), footstep (the Soft Footsteps Society)
+- **DecorativeMarks** — colored-pencil marks at the page edges; desktop-first, hidden entirely on phones so nothing crowds the menu; `--mark-opacity` in tokens.css controls how loud they are
 - **WelcomeGate** — the once-per-session arrival screen; hidden without JavaScript, skippable by click or key, respects reduced motion, never blocks SEO
 
 Everything decorative is `aria-hidden` and sits behind the content — remove any of these components from `BaseLayout.astro` and the site works fine without them.
@@ -123,7 +138,7 @@ Everything decorative is `aria-hidden` and sits behind the content — remove an
 
 ### The symbols of the camp
 
-![The camp symbols — the tent-on-wheels camp mark, plus nine monoline glyphs: bird, cat, envelope, notebook, pin, deer, tent, sun, and paw, each in its field-note category color](docs/symbols.svg)
+![The camp symbols — the tent-on-wheels camp mark plus the monoline glyph set: bird, cat, envelope, notebook, pin, deer, tent, sun, paw, book, brush, fire, and footstep](docs/symbols.svg)
 
 ## Deploying
 
@@ -133,10 +148,11 @@ The site is **live** at <https://campflaneuse.com> (also reachable at <https://c
 
 - [ ] Real Open Graph image (currently `public/og-placeholder.svg`)
 - [ ] Drawings for the `ImagePlaceholder` boxes, whenever the deer agrees to be drawn
+- [ ] *The Deer Ghost — Part II* (the `series`/`part` fields are ready for it)
 
 ## Later (deliberately not built yet)
 
 - [ ] **Camp map's return** — the hand-drawn clickable map (`src/components/sections/CampMap.astro`) is currently unmounted from both homepages; bring it back when it earns its place.
-- [ ] **Real contact email** — the contact pages show a charming closed mailbox until the domain (and a real address) exist.
+- [ ] **Atlas filters** — filter the Road Atlas by `placeType`; the data is already there.
 
-Also: newsletter, snail-mail subscriptions, shop, member area, full bilingual parity, Obsidian workflow. The structure leaves room for all of it — content collections can grow, routes are language-aware, and nothing here needs to be torn down first.
+Also: snail-mail subscriptions, shop, member area, full bilingual parity, Obsidian workflow. The structure leaves room for all of it — content collections can grow, routes are language-aware, and nothing here needs to be torn down first.
