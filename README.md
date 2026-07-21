@@ -127,11 +127,10 @@ Everything decorative is `aria-hidden` and sits behind the content — remove an
 
 ## Deploying
 
-The site is **live** at <https://camp-flaneuse.eliseflaneuse.workers.dev>, hosted on Cloudflare Workers (static assets only — see `wrangler.jsonc`). Every push to `main` triggers an automatic build and deploy via Cloudflare Workers Builds; it's live about 90 seconds after `git push`. Run `npm run validate` before pushing when you've touched components or config.
+The site is **live** at <https://campflaneuse.com> (also reachable at <https://camp-flaneuse.eliseflaneuse.workers.dev>), hosted on Cloudflare Workers (static assets only — see `wrangler.jsonc`). Every push to `main` triggers an automatic build and deploy via Cloudflare Workers Builds; it's live about 90 seconds after `git push`. Run `npm run validate` before pushing when you've touched components or config.
 
 ## Remaining placeholders
 
-- [ ] Custom domain — attach it to the Worker in the Cloudflare dashboard, then update `site` in `astro.config.mjs`
 - [ ] Real Open Graph image (currently `public/og-placeholder.svg`)
 - [ ] Drawings for the `ImagePlaceholder` boxes, whenever the deer agrees to be drawn
 

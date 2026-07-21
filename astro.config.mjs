@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // Live at Cloudflare Workers — swap for a custom domain when there is one.
-  site: 'https://camp-flaneuse.eliseflaneuse.workers.dev',
+  // The camp's own address.
+  site: 'https://campflaneuse.com',
   trailingSlash: 'ignore',
   i18n: {
     defaultLocale: 'en',
