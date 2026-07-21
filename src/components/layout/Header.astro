@@ -2,7 +2,11 @@
 /**
  * Header — camp signpost.
  * Site name, main navigation, language switcher.
- * No JavaScript: on small screens the nav simply wraps.
+ *
+ * The nav is a native <details> disclosure: a plain horizontal bar
+ * on desktop, and on small screens a compact "Menu" button that
+ * expands the links vertically — no JavaScript, keyboard-accessible
+ * out of the box.
  */
 import LogoMark from '../decor/LogoMark.astro';
 import { routes, ui, type Lang } from '../../lib/i18n';
@@ -17,6 +21,7 @@ const t = ui[lang];
 const other: Lang = lang === 'en' ? 'pt' : 'en';
 const otherHome = routes.home[other];
 const switchUrl = translationUrl ?? otherHome;
+const menuLabel = lang === 'pt' ? 'Menu' : 'Menu';
 
 const navItems = [
   { href: routes.fieldNotes[lang], label: t.nav.fieldNotes },
@@ -39,18 +44,21 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
       <span class="brand-name">Camp Flaneuse</span>
     </a>
 
-    <nav aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'}>
-      <ul class="nav-list">
-        {
-          navItems.map((item) => (
-            <li>
-              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+    <nav class="site-nav" aria-label={lang === 'pt' ? 'Navegação principal' : 'Main navigation'}>
+      <details class="nav-disclosure">
+        <summary class="nav-toggle">{menuLabel}</summary>
+        <ul class="nav-list">
+          {
+            navItems.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
     </nav>
 
     <div class="lang-switch" aria-label={t.languageSwitch}>
@@ -132,6 +140,7 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
     gap: 0.25rem 1.35rem;
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   .nav-list a {
@@ -149,6 +158,19 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
   .nav-list a[aria-current='page'] {
     color: var(--color-ink);
     border-bottom: 2px solid var(--color-clay);
+  }
+
+  /* The "Menu" toggle is hidden on desktop; the disclosure behaves
+     like a plain container there. */
+  .nav-toggle {
+    display: none;
+  }
+
+  @media (min-width: 721px) {
+    /* Force the links visible regardless of the disclosure's state. */
+    .nav-disclosure > .nav-list {
+      display: flex !important;
+    }
   }
 
   .lang-switch {
@@ -185,12 +207,69 @@ const isCurrent = (href: string) => currentPath === href || (href !== routes.hom
     .brand {
       margin-right: 0;
     }
-    nav {
+    .site-nav {
       order: 3;
       width: 100%;
     }
+
+    /* A tappable "Menu ⌄" button that expands the links. */
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      list-style: none;
+      font-family: var(--font-label);
+      font-size: var(--text-label);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-ink-soft);
+      padding: 0.5rem 0;
+    }
+
+    .nav-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-toggle::after {
+      content: '';
+      width: 0.42rem;
+      height: 0.42rem;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-2px) rotate(45deg);
+      transition: transform 150ms ease;
+    }
+
+    .nav-disclosure[open] .nav-toggle::after {
+      transform: translateY(1px) rotate(-135deg);
+    }
+
+    .nav-disclosure[open] .nav-toggle {
+      color: var(--color-ink);
+    }
+
     .nav-list {
-      gap: 0.25rem 1.1rem;
+      flex-direction: column;
+      gap: 0;
+      padding: 0.3rem 0 0.6rem;
+    }
+
+    .nav-list a {
+      display: block;
+      padding-block: 0.55rem;
+      font-size: 1rem;
+    }
+
+    .nav-list a[aria-current='page'] {
+      border-bottom: none;
+      color: var(--color-clay-deep);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-toggle::after {
+      transition: none;
     }
   }
 </style>

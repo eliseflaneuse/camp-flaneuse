@@ -102,14 +102,12 @@
     }
   }
 
-  /* Phones: one quiet mark, top corner, and nothing else. */
+  /* Phones: no edge marks — the top corner would collide with the
+     full-width menu, so the margins stay clear. */
   @media (max-width: 720px) {
-    .mark-tr {
-      display: none;
-    }
+    .mark-tr,
     .mark-tl {
-      transform: scale(0.55);
-      opacity: calc(var(--mark-opacity) * 0.8);
+      display: none;
     }
   }
 </style>

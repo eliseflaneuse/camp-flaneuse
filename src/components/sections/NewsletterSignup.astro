@@ -44,14 +44,7 @@ const headingId = `newsletter-heading-${uid}`;
   </div>
 
   <div class="newsletter-action">
-    <form
-      action={newsletter.action}
-      method="post"
-      class="newsletter-form"
-      target="_blank"
-      data-newsletter
-      data-done={t.done}
-    >
+    <form action={newsletter.action} method="post" class="newsletter-form" target="_blank">
       <div class="newsletter-field">
         <label for={emailId}>{t.emailLabel}</label>
         <div class="newsletter-row">
@@ -70,44 +63,8 @@ const headingId = `newsletter-heading-${uid}`;
       </div>
       <p id={noteId} class="newsletter-note label">{t.confirmation}</p>
     </form>
-
-    <p class="newsletter-done" role="status" aria-live="polite" tabindex="-1" hidden></p>
   </div>
 </section>
-
-<script>
-  /**
-   * Progressive enhancement: the form works without JS (it posts to
-   * Buttondown in a new tab). With JS, we submit quietly in the
-   * background and show an on-site "check your email" message so the
-   * reader is never taken away from the camp. Bundled once per page
-   * by Astro, so it binds every form even if several are present.
-   */
-  const forms = document.querySelectorAll<HTMLFormElement>('form[data-newsletter]');
-  forms.forEach((form) => {
-    form.addEventListener('submit', async (event) => {
-      // The submit event only fires once native validation passes.
-      event.preventDefault();
-      const container = form.closest('.newsletter');
-      const done = container?.querySelector<HTMLElement>('.newsletter-done');
-      const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
-      try {
-        await fetch(form.action, { method: 'POST', mode: 'no-cors', body });
-      } catch {
-        // Network refused the request — fall back to the plain
-        // Buttondown page so the reader can still subscribe.
-        form.submit();
-        return;
-      }
-      if (done) {
-        form.hidden = true;
-        done.textContent = form.dataset.done ?? '';
-        done.hidden = false;
-        done.focus();
-      }
-    });
-  });
-</script>
 
 <style>
   /* A warm signup panel in the camp's yellow + pink tones — ochre
@@ -199,23 +156,6 @@ const headingId = `newsletter-heading-${uid}`;
     text-transform: none;
     letter-spacing: 0.01em;
     line-height: 1.5;
-  }
-
-  /* The on-site confirmation, shown in place of the form after a
-     successful quiet submit. */
-  .newsletter-done {
-    margin: 0;
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.55;
-    color: var(--color-clay-deep);
-  }
-
-  .newsletter-done:focus-visible {
-    outline: 2px solid var(--color-clay);
-    outline-offset: 4px;
-    border-radius: var(--radius-sm);
   }
 
   /* Compact: quieter, tighter — a foot-of-the-letter invitation. */

@@ -48,7 +48,7 @@ const futureDispatches = [
           The Society gathers people who notice, collect, remember, and occasionally send one
           another evidence that the world is still strange, alive, and capable of answering back.
         </p>
-        <p>Some observations belong in the Field Archive.</p>
+        <p>Some observations belong in the Field Notes.</p>
         <p>Others require an envelope.</p>
         <p>
           The Society currently keeps its Correspondence Desk at Camp Flaneuse, a moving camp from
@@ -73,7 +73,7 @@ const futureDispatches = [
         overline="The room within the room"
         title="The Correspondence Desk"
       />
-      <div class="prose desk-prose">
+      <div class="prose">
         <p>
           The Correspondence Desk is the part of the Society responsible for making sure some of
           what we find reaches someone else.
@@ -176,13 +176,9 @@ const futureDispatches = [
     padding-top: 0;
   }
 
-  .desk-prose {
-    margin-top: var(--space-block);
-  }
-
   .letters-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
     gap: 1.2rem;
     max-width: 44rem;
   }

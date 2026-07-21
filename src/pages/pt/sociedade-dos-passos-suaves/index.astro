@@ -44,7 +44,7 @@ const futureDispatches = [
           A Sociedade reúne pessoas que reparam, colecionam, lembram e, de vez em quando, enviam
           umas às outras provas de que o mundo ainda é estranho, vivo e capaz de responder.
         </p>
-        <p>Algumas observações pertencem ao Arquivo de Campo.</p>
+        <p>Algumas observações pertencem às Notas de Campo.</p>
         <p>Outras precisam de um envelope.</p>
         <p>
           A Sociedade mantém atualmente sua Mesa de Correspondência no Camp Flaneuse, um
@@ -52,8 +52,8 @@ const futureDispatches = [
           evidências gentis são enviadas ao mundo.
         </p>
         <p>
-          Não há sede fixa. A geografia é flexível. A participação começa ao reparar em alguma
-          coisa e se recusar a passar por ela com pressa.
+          Não há sede fixa. A geografia é flexível. Fazer parte começa quando alguém repara em
+          alguma coisa e se recusa a passar por ela com pressa.
         </p>
         <p>A Sociedade ainda está tomando forma, mas já não é apenas teórica.</p>
         <p>A primeira carta já saiu da mesa.</p>
@@ -64,12 +64,12 @@ const futureDispatches = [
   <section class="section section--deep">
     <div class="container">
       <SectionIntro overline="A sala dentro da sala" title="A Mesa de Correspondência" />
-      <div class="prose desk-prose">
+      <div class="prose">
         <p>
           A Mesa de Correspondência é a parte da Sociedade responsável por garantir que parte do
           que encontramos chegue a outra pessoa.
         </p>
-        <p>O Professor Emberroot traz as coisas para dentro.</p>
+        <p>Professor Emberroot traz as coisas até a mesa.</p>
         <p>
           Arquivista etiqueta tudo, corrige as datas e pergunta por que chegou coberto de lama.
         </p>
@@ -78,8 +78,8 @@ const futureDispatches = [
         <p>
           É aqui que as cartas ficam guardadas antes de aprenderem a viajar. Algumas podem um dia
           sair da tela por completo — dobradas, seladas e enviadas pelo correio. Até lá, elas
-          moram aqui: mais lentas que anúncios, mais quietas que um feed, e endereçadas a quem
-          chegou de mansinho o suficiente para lê-las.
+          moram aqui: mais lentas do que anúncios, mais quietas do que um feed e endereçadas a
+          quem chegou devagar o bastante para lê-las.
         </p>
       </div>
     </div>
@@ -102,15 +102,15 @@ const futureDispatches = [
 
   <section class="section section--deep">
     <div class="container">
-      <SectionIntro overline="Participação" title="Nenhuma inscrição necessária" />
+      <SectionIntro overline="Participação" title="Não é preciso se candidatar" />
       <div class="prose">
         <p>
           A Sociedade não exige, no momento, formulários, referências, exames, uniformes ou
           qualquer papelada competente.
         </p>
         <p>
-          Assinar as cartas já inclui você na correspondência. A participação em si é menos formal
-          e talvez já tenha sido concedida sem o seu conhecimento.
+          Assinar as cartas faz de você uma pessoa correspondente. Fazer parte da Sociedade é
+          menos formal e talvez isso já tenha sido concedido sem o seu conhecimento.
         </p>
         <p>
           Sinais comuns incluem atenção desnecessária a pássaros, guardar objetos sem valor
@@ -166,13 +166,9 @@ const futureDispatches = [
     padding-top: 0;
   }
 
-  .desk-prose {
-    margin-top: var(--space-block);
-  }
-
   .letters-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
     gap: 1.2rem;
     max-width: 44rem;
   }

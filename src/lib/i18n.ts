@@ -79,7 +79,6 @@ export const ui = {
       button: 'Join the correspondence',
       confirmation:
         'You will be asked to confirm your address. Letters arrive only when there is something worth carrying. Unsubscribe at any time.',
-      done: 'Almost there. A confirmation letter is on its way to your inbox — open it and click the link inside, and the correspondence begins.',
     },
   },
   pt: {
@@ -123,7 +122,6 @@ export const ui = {
       button: 'Entrar para a correspondência',
       confirmation:
         'Você receberá um e-mail para confirmar seu endereço. As cartas chegam apenas quando há algo que valha a pena carregar. Cancele quando quiser.',
-      done: 'Quase lá. Uma carta de confirmação está a caminho da sua caixa de entrada — abra e clique no link dentro dela, e a correspondência começa.',
     },
   },
 } as const;
