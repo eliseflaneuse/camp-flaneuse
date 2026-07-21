@@ -229,6 +229,12 @@ a:hover {
   margin-block: 2.5em;
 }
 
+/* A call-to-action button dropped into an otherwise plain-prose
+   letter or note — extra breathing room on both sides. */
+.prose p.letter-cta {
+  margin-block: 1.6em;
+}
+
 /* Photos in notes sit like prints taped into the field notebook:
    smaller than the text column, mounted on card, dashed frame. */
 .prose img {
