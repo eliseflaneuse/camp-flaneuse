@@ -16,7 +16,8 @@ export type IconName =
   | 'paw'
   | 'book'
   | 'brush'
-  | 'fire';
+  | 'fire'
+  | 'footstep';
 
 interface Props {
   name: IconName;
@@ -122,6 +123,16 @@ const { name, size = 22, color = 'currentColor', label } = Astro.props;
       <path d="M19.5 4.5 C17 6.6 14.7 8.9 12.6 11.4" />
       <path d="M12.6 11.4 L10.4 13.8" stroke-width="1.9" />
       <path d="M10.4 13.8 C8 13.4 6 15 5.4 17.4 C5.1 18.5 4.7 19.2 4 19.9 C6.8 20.3 9.3 19.7 10.5 18.4 C11.7 17.2 11.8 15.3 10.4 13.8 Z" />
+    </>
+  )}
+  {name === 'footstep' && (
+    <>
+      <path d="M12 20 C9.5 19 8 16.8 8.3 14 C8.6 11.5 7.6 10 8.3 8.5 C9 7 10.6 6.5 12 6.5 C13.4 6.5 15 7 15.7 8.5 C16.4 10 15.4 11.5 15.7 14 C16 16.8 14.5 19 12 20 Z" />
+      <ellipse cx="9.3" cy="5.5" rx="1.15" ry="1.15" fill={color} stroke="none" />
+      <ellipse cx="11.1" cy="4.4" rx="1" ry="1" fill={color} stroke="none" />
+      <ellipse cx="13" cy="4.1" rx="0.9" ry="0.9" fill={color} stroke="none" />
+      <ellipse cx="14.7" cy="4.6" rx="0.8" ry="0.8" fill={color} stroke="none" />
+      <ellipse cx="16.1" cy="5.8" rx="0.65" ry="0.65" fill={color} stroke="none" />
     </>
   )}
   {name === 'fire' && (
