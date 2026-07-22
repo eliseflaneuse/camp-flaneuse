@@ -27,7 +27,12 @@ import { routes } from '../lib/i18n';
           motorhome named <strong>Ember</strong> with two elderly cats who did not sign the consent
           forms for any of this but have adapted with considerable dignity.
         </p>
-        <p>Camp Flaneuse began with a refusal.</p>
+        <p>
+          Camp Flaneuse is a moving archive of field notes, drawings, stories, letters, and small
+          discoveries gathered along the way. It is also home to my studio, where I build
+          thoughtful websites for people making things of their own.
+        </p>
+        <p>The camp began with a refusal.</p>
         <p>
           I had spent too much of my life inside a version of living that placed work at the center
           of everything: the speed, the constant proving, the feeling that rest had to be earned
@@ -67,11 +72,11 @@ import { routes } from '../lib/i18n';
           mistakes, and parking places of wildly inconsistent quality.
         </p>
         <p>
-          This site is being written and built from inside her, between workdays, road days,
-          repairs, cat negotiations, and whatever the weather permits.
+          This site is written and built from inside her, between workdays, road days, repairs,
+          cat negotiations, and whatever the weather permits.
         </p>
         <p>Sometimes the desk is a desk.</p>
-        <p>Sometimes it is the bed with a laptop balanced badly on one knee.</p>
+        <p>Sometimes it is the bed, with a laptop balanced badly on one knee.</p>
         <p>The archive has learned not to be precious about its working conditions.</p>
       </div>
     </div>
@@ -112,8 +117,8 @@ import { routes } from '../lib/i18n';
           refuse to leave me alone.
         </p>
         <p>
-          I write about making things and about making a living without allowing work to consume
-          the life it is supposed to support.
+          I write about making things, living on the road, and earning a living without allowing
+          work to consume the life it is supposed to support.
         </p>
         <p>
           I keep records of beauty, discomfort, failure, repair, fear, freedom, and the slow
@@ -144,7 +149,7 @@ import { routes } from '../lib/i18n';
           world occasionally answered, and that I tried to build a life spacious enough to hear it.
         </p>
         <p>
-          I do not think freedom is a state you finally reach and then keep forever. I think it is
+          I do not think freedom is a state you finally reach and keep forever. I think it is
           something you construct repeatedly, through decisions both dramatic and very small.
         </p>
         <ul class="choices">
@@ -191,7 +196,10 @@ import { routes } from '../lib/i18n';
   <CTASection
     overline="Say hello"
     title="The camp receives visitors."
-    text="Questions, letters, bird reports, peculiar findings, and website projects may all be delivered through the mailbox. There are several desks and only moderate administrative certainty, but messages usually reach the correct person eventually."
+    text={[
+      'Questions, letters, bird reports, peculiar findings, and website projects may all be delivered through the mailbox.',
+      'There are several desks and only moderate administrative certainty, but messages usually reach the correct person eventually.',
+    ]}
     cta={{ label: 'Go to the mailbox', href: routes.contact.en }}
   />
 </BaseLayout>

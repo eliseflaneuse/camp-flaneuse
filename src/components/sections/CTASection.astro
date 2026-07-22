@@ -5,12 +5,14 @@
 interface Props {
   overline?: string;
   title: string;
-  text?: string;
+  /** A single paragraph, or several. */
+  text?: string | string[];
   cta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
 }
 
 const { overline, title, text, cta, secondaryCta } = Astro.props;
+const paragraphs = text === undefined ? [] : Array.isArray(text) ? text : [text];
 ---
 
 <section class="cta-section">
@@ -18,7 +20,7 @@ const { overline, title, text, cta, secondaryCta } = Astro.props;
     <div class="panel cta-panel">
       {overline && <p class="label cta-overline">{overline}</p>}
       <h2>{title}</h2>
-      {text && <p class="cta-text">{text}</p>}
+      {paragraphs.map((p) => <p class="cta-text">{p}</p>)}
       <div class="cta-actions">
         <a class="button" href={cta.href}>{cta.label}</a>
         {secondaryCta && (
